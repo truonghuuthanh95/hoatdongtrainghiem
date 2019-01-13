@@ -1,0 +1,131 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div>
+        <div class=" col-sm-4 col-sm-offset-4">
+            <div class="panel panel-default">
+                <form id="login" onsubmit="requestLogin(event);">
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <img src="/Content/images/logo_so.png" class="logo-login">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Đơn vị quản lý</label>
+                            <select class="form-control" id="dvql">
+                                @{
+                                    foreach (var item in ViewBag.PGDs)
+                                    {
+                                        <option value="@item.PGDID">@item.TenPGD</option>
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Tên trường</label>
+                            <select class="form-control" id="tentruong">
+                                @{
+                                    foreach (var item in ViewBag.Schools)
+                                    {
+                                        <option value="@item.SchoolID">@item.TenTruong</option>
+                                    }
+                                }
+
+
+                            </select>
+                        </div>
+                        <div class="form-group has-feedback" id="errorInputUserName">
+                            <span class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                </span>
+                                <input placeholder="Tên đăng nhập" id="Username" name="Username" type="text" class="form-control" value="">
+                            </span>
+                            <span class="help-block help-block-true" id="errorUsername"></span>
+                        </div>
+                        <div class="form-group has-feedback" id="errorInputPassword">
+                            <span class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                </span>
+                                <input placeholder="Mật khẩu" id="Password" name="Password" type="password" class="form-control" value="">
+                            </span>
+                            <span class="help-block help-block-true" id="errorPassword"></span>
+                        </div>
+                        <p class="text-center text-danger" id="errorLogin"></p>
+                    </div>
+                    <div class="panel-footer">
+                        <p class="text-center"><a href="/quanlylogin">Cán bộ quản lý đăng nhập</a></p>
+                        <button type="submit" class="btn btn-lg btn-success btn-block" onclick="requestLogin(event);" id="loginButton">ĐĂNG NHẬP</button>
+                        <span class="loader" hidden="" id="loader"></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('#dvql').change(function () {
+            $.get('/getTruongByPGDId/' + $(this).val(), function (data, status) {
+                var schools = JSON.parse(data.Results);
+                $('#tentruong').children().remove().end();
+                for (var i = 0; i < schools.length; i++) {
+                    $('#tentruong').append('<option value=' + schools[i].SchoolID + '>' + schools[i].TenTruong + '</option>')
+                }
+            })
+        })
+        function requestLogin(event) {
+            event.preventDefault();
+            if ($('#Username').val() == '') {
+                $('#errorInputUserName').addClass('has-error');
+                $('#errorUsername').text('Vui lòng nhập');
+            }
+            else {
+                $('#errorInputUserName').removeClass('has-error');
+                $('#errorUsername').text('');
+            }
+            if ($("#Password").val() == '') {
+                $('#errorInputPassword').addClass('has-error');
+                $('#errorPassword').text('Vui lòng nhập');
+
+            }
+            else {
+                $('#errorInputPassword').removeClass('has-error');
+                $('#errorPassword').text('');
+            }
+            if ($('#Username').val() !== '' && $("#Password").val() !== '') {
+                $('#loginButton').hide();
+                $('#loader').show();
+                $.post("/login", {
+                    schoolId: $('#tentruong').val(),
+                    password: $("#Password").val(),
+                    username: $("#Username").val()
+                }, function (data, status) {
+                    if (data.StatusCode == 200) {
+                        window.location.href = "/truong/index"
+                    }
+                    else {
+                        $('#loginButton').show();
+                        $('#loader').hide();
+                        $('#errorLogin').text(data.Message)
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

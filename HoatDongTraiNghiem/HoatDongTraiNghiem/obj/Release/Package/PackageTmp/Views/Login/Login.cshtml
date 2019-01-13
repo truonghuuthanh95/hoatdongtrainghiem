@@ -1,0 +1,297 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div>
+        <div class=" col-sm-4 col-sm-offset-4">
+            <div class="panel panel-default">
+                <form id="Login">
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <img src="/Content/images/logo_so.png" class="logo-login">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Đơn vị quản lý</label>
+                            <select class="form-control" id="dvql">
+                                <option value="4838">TRỰC THUỘC SỞ</option>
+                                <option value="4877">PHÒNG GDĐT QUẬN 1</option>
+                                <option value="4888">PHÒNG GDĐT QUẬN 12</option>
+                                <option value="4898">PHÒNG GDĐT THỦ ĐỨC</option>
+                                <option value="4907">PHÒNG GDĐT QUẬN 9</option>
+                                <option value="4916">PHÒNG GDĐT GÒ VẤP</option>
+                                <option value="4926">PHÒNG GDĐT BÌNH THẠNH</option>
+                                <option value="4935">PHÒNG GDĐT TÂN BÌNH</option>
+                                <option value="4945">PHÒNG GDĐT TÂN PHÚ</option>
+                                <option value="4955">PHÒNG GDĐT PHÚ NHUẬN</option>
+                                <option value="4965">PHÒNG GDĐT QUẬN 2</option>
+                                <option value="4975">PHÒNG GDĐT QUẬN 3</option>
+                                <option value="4986">PHÒNG GDĐT QUẬN 10</option>
+                                <option value="4996">PHÒNG GDĐT QUẬN 11</option>
+                                <option value="5005">PHÒNG GDĐT QUẬN 4</option>
+                                <option value="5015">PHÒNG GDĐT QUẬN 5</option>
+                                <option value="5024">PHÒNG GDĐT QUẬN 6</option>
+                                <option value="5034">PHÒNG GDĐT QUẬN 8</option>
+                                <option value="5045">PHÒNG GDĐT BÌNH TÂN</option>
+                                <option value="5054">PHÒNG GDĐT QUẬN 7</option>
+                                <option value="5063">PHÒNG GDĐT CỦ CHI</option>
+                                <option value="5073">PHÒNG GDĐT HÓC MÔN</option>
+                                <option value="5082">PHÒNG GDĐT BÌNH CHÁNH</option>
+                                <option value="5092">PHÒNG GDĐT NHÀ BÈ</option>
+                                <option value="5101">PHÒNG GDĐT CẦN GIỜ</option>
+
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Tên trường</label>
+                            <select class="form-control" id="tentruong">
+                                <option value="79000704">THPT Nguyễn Thị Minh Khai</option>
+                                <option value="79000871">THPT Năng Khiếu TDTT</option>
+                                <option value="79000872">THCS - THPT Việt Anh</option>
+                                <option value="79000873">THCS - THPT Hoa Sen</option>
+                                <option value="79000874">TH, THCS &amp; THPT Vinschool</option>
+                                <option value="79000875">THPT Phạm Phú Thứ</option>
+                                <option value="790008A5">THCS và THPT Khai Trí</option>
+                                <option value="79000C01">THPT Hermann Gmeiner</option>
+                                <option value="79000713">THPT Ngô Gia Tự</option>
+                                <option value="79000C02">TH - THCS và THPT Đại Việt</option>
+                                <option value="79000796">THPT Nguyễn Thị Diệu</option>
+                                <option value="79000C03">TH - THCS - THPT Việt Úc</option>
+                                <option value="79000C04">Song ngữ Quốc tế Horizon</option>
+                                <option value="79000C05">TH - THCS - THPT Quốc tế Canada</option>
+                                <option value="79000C06">TH, THCS-THPT Quốc tế Bắc Mỹ</option>
+                                <option value="79000C07">TH - THCS - THPT Thái Bình Dương</option>
+                                <option value="79000C09">THCS - THPT Nguyễn Tri Phương</option>
+                                <option value="79000C12">TiH THCS THPT Mỹ Việt</option>
+                                <option value="79000C19">TH,THCS va THPT Albert Einstein</option>
+                                <option value="79000714">THPT Tạ Quang Bửu</option>
+                                <option value="79000797">THPT Quốc Trí</option>
+                                <option value="79000F01">THPT chuyên Lê Hồng Phong</option>
+                                <option value="79000F02">THPT chuyên Trần Đại Nghĩa</option>
+                                <option value="79000F03">THPT chuyên năng khiếu TDTT Nguyễn Thị Định</option>
+                                <option value="79000798">THPT Vĩnh Viễn</option>
+                                <option value="79000715">THPT Nguyễn Huệ</option>
+                                <option value="79000799">THPT Trần Cao Vân</option>
+                                <option value="79000716">THPT Nguyễn Khuyến</option>
+                                <option value="79760419">TH, THCS VÀ THPT QUỐC TẾ Á CHÂU</option>
+                                <option value="79760423">TH, THCS VÀ THPT ÚC CHÂU</option>
+                                <option value="790007A0">THPT Trần Quốc Toản</option>
+                                <option value="79000717">THPT Nguyễn Du</option>
+                                <option value="790007A1">THPT Bách Việt</option>
+                                <option value="79000718">THPT Nguyễn Hiền</option>
+                                <option value="790007A2">THPT Việt Mỹ Anh</option>
+                                <option value="79000719">THPT Võ Trường Toản</option>
+                                <option value="790007A3">THPT Hàm Nghi</option>
+                                <option value="79000720">THPT Thanh Đa</option>
+                                <option value="790007A4">THCS, THPT Nam Việt</option>
+                                <option value="79000721">THPT Võ Thị Sáu</option>
+                                <option value="79000795">TTGDKTTH-HN_Phân hiệu THPT Lê Thị Hồng Gấm</option>
+                                <option value="79000705">THPT Lê Quý Đôn</option>
+                                <option value="79000722">THPT Gia Định</option>
+                                <option value="790007A5">TH, THCS và THPT Văn Lang</option>
+                                <option value="79000723">THPT Phan Đăng Lưu</option>
+                                <option value="790007A6">THPT Bình Hưng Hòa</option>
+                                <option value="79000724">THPT Gò Vấp</option>
+                                <option value="790007A7">THPT Bình Tân</option>
+                                <option value="790007A8">THPT Nguyễn Tất Thành</option>
+                                <option value="79000725">THPT Nguyễn Công Trứ</option>
+                                <option value="79762520">Phổ thông Năng khiếu Thể thao Olympic</option>
+                                <option value="790007A9">THPT Nguyễn Văn Tăng</option>
+                                <option value="79000726">THPT Phú Nhuận</option>
+                                <option value="790007B0">THPT Trần Văn Giàu</option>
+                                <option value="79000727">THPT Tân Bình</option>
+                                <option value="790007B1">THPT Phạm Văn Sáng</option>
+                                <option value="79000728">THPT Nguyễn Chí Thanh</option>
+                                <option value="790007B2">THPT Đào Sơn Tây</option>
+                                <option value="79000729">THPT Trần Phú</option>
+                                <option value="790007B3">THPT Tân Túc</option>
+                                <option value="79000730">THPT Nguyễn Thượng Hiền</option>
+                                <option value="790007B4">THPT Hai Bà Trưng</option>
+                                <option value="79000731">THPT Thủ Đức</option>
+                                <option value="79000706">THPT Nguyễn Trãi</option>
+                                <option value="79000732">THPT Nguyễn Hữu Huân</option>
+                                <option value="790007B5">THPT Thủ Khoa Huân</option>
+                                <option value="79000733">THPT Tam Phú</option>
+                                <option value="790007B6">THPT Vĩnh Lộc B</option>
+                                <option value="79000734">THPT Củ Chi</option>
+                                <option value="790007B7">THPT Dương Văn Dương</option>
+                                <option value="790007B8">THPT Võ Văn Kiệt</option>
+                                <option value="79000735">THPT Quang Trung</option>
+                                <option value="790007B9">THPT Mùa Xuân</option>
+                                <option value="79000736">THPT An Nhơn Tây</option>
+                                <option value="790007C2">THPT Lê Trọng Tấn</option>
+                                <option value="79000737">THPT Trung Phú</option>
+                                <option value="79000802">THPT Thủ Thiêm</option>
+                                <option value="79000738">THPT Trung Lập</option>
+                                <option value="79000803">THPT Ngô Quyền</option>
+                                <option value="79000739">THPT Nguyễn Hữu Cầu</option>
+                                <option value="79000804">THPT Thạnh Lộc</option>
+                                <option value="79000740">THPT Lý Thường Kiệt</option>
+                                <option value="79000805">THPT An Lạc</option>
+                                <option value="79000741">THPT Bình Chánh</option>
+                                <option value="79000707">PT Năng khiếu Thể thao Olympic – ĐH TDTT TP.HCM</option>
+                                <option value="79000742">THPT Ten Lơ Man</option>
+                                <option value="79000806">THPT Lê Minh Xuân</option>
+                                <option value="79000743">THPT Marie Curie</option>
+                                <option value="79000807">THPT Đa Phước</option>
+                                <option value="79767601">TH - THCS - THPT Hòa Bình</option>
+                                <option value="79000744">THPT Trần Khai Nguyên</option>
+                                <option value="79000809">THCS-THPT Đăng Khoa</option>
+                                <option value="79000745">THPT Nguyễn An Ninh</option>
+                                <option value="79000810">THCS-THPT Hồng Hà</option>
+                                <option value="79000746">THPT Nam Kỳ Khởi Nghĩa</option>
+                                <option value="79000811">TH - THCS - THPT Tuệ Đức</option>
+                                <option value="79000747">THPT Nguyễn Thái Bình</option>
+                                <option value="79000812">THCS - THPT Nguyễn Bỉnh Khiêm</option>
+                                <option value="79000748">THPT Nguyễn Trung Trực</option>
+                                <option value="79000813">TH, THCS và THPT Ngô Thời Nhiệm</option>
+                                <option value="79000749">THPT Hàn Thuyên</option>
+                                <option value="79000814">THPT An Đông</option>
+                                <option value="79000750">THPT Hoàng Hoa Thám</option>
+                                <option value="79000815">THCS - THPT Ngôi Sao</option>
+                                <option value="79770601">TiH - THCS - THPT Tây Úc</option>
+                                <option value="79000751">THPT Thăng Long</option>
+                                <option value="79000708">THPT Hùng Vương</option>
+                                <option value="79000752">THPT Phước Long</option>
+                                <option value="79000816">THCS-THPT Phan Bội Châu</option>
+                                <option value="79000753">THPT Bà Điểm</option>
+                                <option value="79000818">TH - THCS - THPT Vạn Hạnh</option>
+                                <option value="79000754">THPT Tân Phong</option>
+                                <option value="79000820">THPT Nam Sài Gòn</option>
+                                <option value="79000822">THCS-THPT Hồng Đức</option>
+                                <option value="79000755">THPT Trường Chinh</option>
+                                <option value="79000824">THCS - THPT Bắc Sơn</option>
+                                <option value="79000756">THPT Phú Hòa</option>
+                                <option value="79000825">THCS và THPT Phạm Ngũ Lão</option>
+                                <option value="79000757">THPT Tân Thông Hội</option>
+                                <option value="79000826">THCS- THPT Bạch Đằng</option>
+                                <option value="79000758">THPT Tây Thạnh</option>
+                                <option value="79000827">THPT Đông Đô</option>
+                                <option value="79000759">THPT Long Trường</option>
+                                <option value="79000828">TH - THCS - THPT Quốc Tế</option>
+                                <option value="79000760">THPT Nguyễn Văn Cừ</option>
+                                <option value="79000829">THCS và THPT  Việt Thanh</option>
+                                <option value="79000761">THPT Nguyễn Hữu Tiến</option>
+                                <option value="79774507">THPT Trần Hữu Trang</option>
+                                <option value="79000709">THPT Mạc Đĩnh Chi</option>
+                                <option value="79000762">THPT Bình Khánh</option>
+                                <option value="79000830">THCS-THPT TRÍ ĐỨC</option>
+                                <option value="79000763">THPT Cần Thạnh</option>
+                                <option value="79000831">THCS - THPT Thái Bình</option>
+                                <option value="79000701">THPT Bùi Thị Xuân</option>
+                                <option value="79000832">TH, THCS và THPT Thanh Bình</option>
+                                <option value="79000764">THPT Trần Hưng Đạo</option>
+                                <option value="79000834">THCS - THPT Nhân Văn</option>
+                                <option value="79000765">THPT Hiệp Bình</option>
+                                <option value="79000835">THCS - THPT Nguyễn Khuyến</option>
+                                <option value="79000836">TH, THCS và THPT Trương Vĩnh Ký</option>
+                                <option value="79000767">TH-THCS-THPT QUỐC VĂN SÀI GÒN</option>
+                                <option value="79000838">Trường THCS, THPT Phan Châu Trinh</option>
+                                <option value="79000768">THPT Trần Quang Khải</option>
+                                <option value="79000841">THCS - THPT Duy Tân</option>
+                                <option value="79000769">THPT Vĩnh Lộc</option>
+                                <option value="79000842">THPT Nguyễn Hữu Thọ</option>
+                                <option value="79777418">TH - THCS - THPT Ngôi Sao Nhỏ</option>
+                                <option value="79000770">THPT TT Đông Du</option>
+                                <option value="79000846">THCS-THPT Châu Á Thái Bình Dương</option>
+                                <option value="79000771">THPT Việt Âu</option>
+                                <option value="79000710">THPT Bình Phú</option>
+                                <option value="79000772">THPT Việt Nhật</option>
+                                <option value="79000848">THCS - THPT Việt Mỹ</option>
+                                <option value="79000773">THPT Hưng Đạo</option>
+                                <option value="79000849">THCS - THPT Đức Trí</option>
+                                <option value="79000850">THCS-THPT Đinh Thiện Lý</option>
+                                <option value="79000702">THPT Trưng Vương</option>
+                                <option value="79000774">TiH, THCS và THPT Chu Văn An</option>
+                                <option value="79000851">THCS - THPT Sao Việt</option>
+                                <option value="79000775">Trung học thực hành ĐHSP</option>
+                                <option value="79000852">TiH,THCS - THPT Nam Mỹ</option>
+                                <option value="79000776">THPT chuyên Năng Khiếu</option>
+                                <option value="79000853">Trung học thực hành Sài Gòn</option>
+                                <option value="79000777">THPT Lý Thái Tổ</option>
+                                <option value="79000854">THCS - THPT Lạc Hồng</option>
+                                <option value="79000855">THCS, THPT Quang Trung Nguyễn Huệ</option>
+                                <option value="79000779">THPT Trần Quốc Tuấn</option>
+                                <option value="79000856">THCS - THPT Khai Minh</option>
+                                <option value="79000780">THPT An Dương Vương</option>
+                                <option value="79000857">THCS và THPT Ngọc Viễn Đông</option>
+                                <option value="79000781">THPT Trần Nhân Tông</option>
+                                <option value="79000711">THPT Lê Thánh Tôn</option>
+                                <option value="79000782">THPT Lam Sơn</option>
+                                <option value="79000858">THCS-THPT Tân Phú</option>
+                                <option value="79000859">THCS - THPT Bác Ái</option>
+                                <option value="79000783">THPT Đông Dương</option>
+                                <option value="79000860">THPT Sương Nguyệt Anh</option>
+                                <option value="79000703">THPT Giồng Ông Tố</option>
+                                <option value="79000784">THPT Phước Kiển</option>
+                                <option value="79000861">THCS-THPT Diên Hồng</option>
+                                <option value="79000785">THPT Nhân Việt</option>
+                                <option value="79000862">THPT Minh Đức</option>
+                                <option value="79000786">THPT An Nghĩa</option>
+                                <option value="79000863">THPT Thành Nhân</option>
+                                <option value="79000787">THPT Việt Nhật</option>
+                                <option value="79000865">THCS - THPT Hoa Lư</option>
+                                <option value="79000788">THPT Phú Lâm</option>
+                                <option value="79000866">THCS - THPT Đào Duy Anh</option>
+                                <option value="79000789">THPT Đào Duy Từ</option>
+                                <option value="79000791">THPT Phùng Hưng</option>
+                                <option value="79000868">THCS - THPT Đinh Tiên Hoàng</option>
+                                <option value="79000712">THPT Lương Văn Can</option>
+                                <option value="79786701">THPT Long Thới</option>
+                                <option value="79000869">THPT Lương Thế Vinh</option>
+                                <option value="79000793">THPT Nguyễn Hữu Cảnh</option>
+                                <option value="79000870">THCS - THPT Âu Lạc</option>
+                                <option value="79000794">THPT Nguyễn Văn Linh</option>
+                                <option value="18FA06">THPT Năng Khiếu Huyện Bình Chánh</option>
+                                <option value="790007C3">THPT Linh Trung</option>
+                                <option value="79000876">THCS và THPT Thạnh An</option>
+
+
+
+                            </select>
+                        </div>
+                        <div class="form-group has-feedback" id="errorInputUserName">
+                            <span class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                </span>
+                                <input placeholder="Tên đăng nhập" id="Username" name="Username" type="text" class="form-control" value="">
+                            </span>
+                            <span class="help-block help-block-true" id="errorUsername"></span>
+                        </div>
+                        <div class="form-group has-feedback" id="errorInputPassword">
+                            <span class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                </span>
+                                <input placeholder="Mật khẩu" id="Password" name="Password" type="password" class="form-control" value="">
+                            </span>
+                            <span class="help-block help-block-true" id="errorPassword"></span>
+                        </div>
+                        <p class="text-center text-danger" id="errorLogin"></p>
+                    </div>
+                    <div class="panel-footer">
+                        <p class="text-center"><a href="/quanlylogin">Cán bộ quản lý đăng nhập</a></p>
+                        <button type="button" class="btn btn-lg btn-success btn-block" onclick="requestLogin();" id="loginButton">ĐĂNG NHẬP</button>
+                        <span class="loader" hidden="" id="loader"></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+</body>
+</html>

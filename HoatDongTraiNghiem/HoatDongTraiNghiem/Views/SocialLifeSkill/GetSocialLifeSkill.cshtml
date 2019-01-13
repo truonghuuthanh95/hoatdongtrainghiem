@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "GetSocialLifeSkill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">Danh sách đăng kí kỹ năng xã hội kỹ năng sống</div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>STT</th>                     
+                        <th>Lớp</th>
+                        <th>Ngày bắt đầu</th>
+                        <th>Ngày kết thúc</th>
+                        <th>Tên người phụ trách</th>
+                        <th>Số điện thoại</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>                     
+                        <td>12</td>
+                        <td>21/1/2019</td>
+                        <td>23/1/2019</td>
+                        <td>Lưu Minh Tú</td>
+                        <td>0983354404</td>
+                        <td><button type="button" value="13" onclick="viewDetail(this);" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

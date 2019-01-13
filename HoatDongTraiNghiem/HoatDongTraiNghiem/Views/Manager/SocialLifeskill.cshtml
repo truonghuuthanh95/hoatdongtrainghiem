@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "SocialLifeskill";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Kỹ năng xã hội kỹ năng sống</li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Kỹ năng xã hội kỹ năng sống</h1>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-inline text-center">
+
+            <div class="form-group">
+                <label for="exampleInputName2">Từ</label>
+                <input type="text" class="form-control datepicker" id="dateFrom" value="13-01-2019">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputName2">Đến</label>
+                <input type="text" class="form-control datepicker" id="dateTo" value="13-02-2019">
+            </div>
+            <button type="button" class="btn btn-success" onclick="getDateDetail();"><span class="glyphicon glyphicon-search"></span></button>
+        </form>
+        <p style="padding-top: 15px;"><button class="btn btn-primary" onclick="downloadExcel();"><span class="glyphicon glyphicon-download-alt"></span>  XUẤT EXCEL</button></p>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên trường</th>
+                        <th>Lớp</th>
+                        <th>Ngày bắt đầu</th>
+                        <th>Ngày kết thúc</th>
+                        <th>Tên người phụ trách</th>
+                        <th>Số điện thoại</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>THPT Phú Hòa</td>
+                        <td>12</td>
+                        <td>21/1/2019</td>
+                        <td>23/1/2019</td>
+                        <td>Lưu Minh Tú</td>
+                        <td>0983354404</td>
+                        <td><button type="button" value="13" onclick="viewDetail(this);" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

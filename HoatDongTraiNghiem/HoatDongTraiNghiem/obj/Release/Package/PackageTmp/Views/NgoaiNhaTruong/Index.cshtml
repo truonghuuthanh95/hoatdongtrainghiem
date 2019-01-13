@@ -1,0 +1,175 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>Tiết học ngoài nhà trường</h4>
+        </div><div class="panel-body">
+            <p class="text-waring text-warning">Lưu ý! Vui lòng điền thông tin theo thứ tự</p>
+            <form>
+                <input name="__RequestVerificationToken" type="hidden" value="3MH_esusPFpsjoNr1CNCbD4r0tG-zBV0nywpoGPFYFTzdQr1u1C_gUD0lbl-3u6310i9MsDnbqy9m43KujYGth-PR9BTVOvF5l5Nty20PCA1">
+                <div class="form-group">
+                    <label for="formControlsSelect" class="control-label">
+                        1.Nội dung đăng kí
+                        <span class="text-danger text-danger-default"><span class="glyphicon glyphicon-star"></span></span>
+                    </label>
+                    <select placeholder="select" name="activityIdSelected" id="activityIdSelected" class="form-control">
+                        @{
+        foreach (var item in ViewBag.Programs)
+        {
+                    <option value="@item.Id">@item.Name</option>
+}
+                        }
+
+                   
+
+
+                    </select>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="formBasicText" class="control-label">
+                                5.Khối lớp <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </span>
+                            </label>
+                            <select name="gradeSlected" id="gradeSlected" class="form-control">
+                                <option value="1">Lớp 1</option>
+                                <option value="2">Lớp 2</option>
+                                <option value="3">Lớp 3</option>
+                                <option value="4">Lớp 4</option>
+                                <option value="5">Lớp 5</option>
+                                <option value="5">Lớp 6</option>
+                                <option value="5">Lớp 7</option>
+                                <option value="5">Lớp 8</option>
+                                <option value="5">Lớp 9</option>
+                                <option value="5">Lớp 10</option>
+                                <option value="5">Lớp 11</option>
+                                <option value="5">Lớp 12</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="formControlsSelect" class="control-label">
+                                6.Tham gia vào buổi <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star">
+
+                                    </span>
+                                </span>
+                            </label>
+                            <select placeholder="select" name="sectionADaySlected" id="sectionADaySlected" class="form-control">
+                                <option value="1">Buổi sáng</option>
+                                <option value="2">Buổi chiều</option>
+                                <option value="3">Cả ngày</option>
+                            </select>
+                        </div>
+                    </div><div class="col-sm-4">
+                        <div class="form-group has-feedback" id="errorDateGo">
+                            <label for="exampleInputEmail1" class="control-label">
+                                7.Ngày tham gia <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star">
+
+                                    </span>
+                                </span>
+                            </label>
+                            <input type="text" class="form-control datepicker" id="dateGo">
+                            <span class="help-block" id="errorDateGoMessage"></span>
+                        </div>
+                    </div>
+                </div><div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group has-feedback" id="errorValidStudentQuantity">
+                            <label for="formBasicText" class="control-label">
+                                8.Số lượng hoc sinh tham gia <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </span>
+                            </label>
+                            <input type="number" placeholder="Số lượng" name="studentQuantity" value="" id="studentQuantity" class="form-control">
+                            <span class="text-warning" id="validStudentQuantity"> </span><span class="help-block" id="errorValidStudentQuantityMessage"></span>
+                        </div>
+                    </div>
+                </div><div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group has-feedback" id="errorTeacherName">
+                            <label for="formBasicText" class="control-label">
+                                9.Người phụ trách <i>(Ghi rõ họ và tên)</i>
+                                <span class="text-danger text-danger-default"><span class="glyphicon glyphicon-star"></span></span>
+                            </label><input type="text" placeholder="Người phụ trách" name="teacherName" value="" id="teacherName" class="form-control">
+                            <span class="help-block help-block-true" id="errorTeacherNameMessage"></span>
+                        </div>
+                    </div><div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="formBasicText" class="control-label">
+                                10.Chức vụ <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star">
+                                    </span>
+                                </span>
+                            </label><select name="jobTitleSelected" id="jobTitleSelected" class="form-control">
+    @{
+        foreach (var item in ViewBag.JobTitles)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    }
+
+</select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group has-feedback" id="errorEmail">
+                            <label for="formBasicText" class="control-label">
+                                11.Email <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </span>
+                            </label>
+                            <input type="email" placeholder="Email" value="" name="emailEntered" id="emailEntered" class="form-control">
+                            <span class="help-block help-block-true" id="errorEmailMessage"></span>
+                        </div>
+                    </div><div class="col-md-6">
+                        <div class="form-group has-feedback" id="errorPhoneNumber">
+                            <label for="formBasicText" class="control-label">
+                                12.Số điện thoại <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </span>
+                            </label>
+                            <input type="number" placeholder="Số điện thoại" name="phoneNumber" value="" id="phoneNumber" class="form-control">
+                            <span class="help-block help-block-true" id="errorPhoneNumberMessage"></span>
+                        </div>
+                    </div>
+                </div><div class="form-group has-feedback" id="errorActivityTitle">
+                    <label for="formBasicText" class="control-label">
+                        13.Tên chủ đề đăng kí <span class="text-danger text-danger-default">
+                            <span class="glyphicon glyphicon-star"></span>
+                        </span>
+                    </label>
+                    <input type="text" placeholder="Tên chủ đề đăng kí" name="activityTitle" value="" id="activityTitle" class="form-control"><span class="help-block help-block-true" id="errorActivityTitleMessage"></span>
+                </div>
+            </form>
+        </div><div class="panel-footer"><button type="button" class="btn btn-success btn-block" id="submitCreativeExp" onclick="submitCreativeExp()">Đăng kí</button></div>
+    </div>
+    <span hidden="" class="loader" id="loader"></span>
+
+</div>
+<script>
+    $(document).ready(function () {
+        $('#dateGo').datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+
+        }).on('changeDate', function (ev) {
+            var date = moment($(this).val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+            $.get('/getValidStudentQuantityToRegist/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + date, function (data, status) {
+                $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
+            })
+        });
+
+    })
+</script>

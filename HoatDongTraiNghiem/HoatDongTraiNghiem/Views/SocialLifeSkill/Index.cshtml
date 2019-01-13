@@ -1,0 +1,311 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>Kĩ năng sống</h4>
+    </div><div class="panel-body">
+        <p class="text-waring text-warning">Lưu ý! Vui lòng điền thông tin theo thứ tự</p>
+        <form id="socialLifeSkill">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="formBasicText" class="control-label">
+                            1.Khối lớp
+                        </label>
+                        <select name="gradeSlected" id="gradeSlected" class="form-control">
+                            <option value="1">Lớp 1</option>
+                            <option value="2">Lớp 2</option>
+                            <option value="3">Lớp 3</option>
+                            <option value="4">Lớp 4</option>
+                            <option value="5">Lớp 5</option>
+                            <option value="5">Lớp 6</option>
+                            <option value="5">Lớp 7</option>
+                            <option value="5">Lớp 8</option>
+                            <option value="5">Lớp 9</option>
+                            <option value="5">Lớp 10</option>
+                            <option value="5">Lớp 11</option>
+                            <option value="5">Lớp 12</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group has-feedback">
+                        <label for="formControlsSelect" class="control-label">
+                            2.Nội dung thực hiện hoạt động
+                        </label>
+                        <input type="text" name="activityTitle" value="" id="activityTitle" class="form-control">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group has-feedback">
+                        <label for="exampleInputEmail1" class="control-label">
+                            3.Ngày bắt đầu
+                        </label>
+                        <input type="text" class="form-control datepicker" name="dateGo" id="dateGo">
+                      
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group has-feedback">
+                        <label for="exampleInputEmail1" class="control-label">
+                            4.Ngày kết thúc
+                        </label>
+                        <input type="text" class="form-control datepicker" name="dateEnd" id="dateEnd">                       
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group has-feedback">
+                        <label for="comment" class="control-label">5.Tóm tắt nôi dung thực hiện</label>
+                        <textarea class="form-control" rows="5" id="sumaryContent" name="sumaryContent"></textarea>                      
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="formBasicText" class="control-label">
+                            6.Kỹ năng
+                        </label>
+                        <select name="IsKyNangThucHanhXH" id="IsKyNangThucHanhXH" class="form-control">
+                            <option value="true">Kỹ năng thực hành</option>
+                            <option value="false">Kỹ năng khác</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="formBasicText" class="control-label">
+                            7.Đơn vị phối hợp
+                        </label>
+                        <select name="contactWithCompany" id="contactWithCompany" class="form-control">
+                            <option value="false">Không</option>
+                            <option value="true">Có</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="showCompany" hidden="">
+                <div class="col-sm-8">
+                    <div class="form-group has-feedback">
+                        <label for="formControlsSelect" class="control-label">
+                            7.1.Tên công ty phối hợp
+                        </label>
+                        <input type="text" name="CompanyContact" value="" id="CompanyContact" class="form-control">                       
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group has-feedback">
+                        <label for="formControlsSelect" class="control-label">
+                            7.2.Giấy phép hoạt động
+                        </label>
+                        <input type="text" name="License" value="" id="License" class="form-control">                    
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group has-feedback">
+                        <label for="exampleInputFile" class="control-label">8.File kế hoạch (chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB)</label>
+                        <input type="file" id="filekehoach" name="filekehoach">                     
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group has-feedback">
+                        <label for="formBasicText" class="control-label">
+                            9.Người phụ trách <i>(Ghi rõ họ và tên)</i>
+                        </label>
+                        <input type="text" placeholder="Người phụ trách" name="teacherName" value="" id="teacherName" class="form-control">                        
+                    </div>
+                </div><div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label for="formBasicText" class="control-label">
+                            10.Chức vụ
+                        </label><select name="jobTitleSelected" id="jobTitleSelected" class="form-control">
+                            @{
+                        foreach (var item in ViewBag.JobTitles)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group has-feedback">
+                        <label for="formBasicText" class="control-label">
+                            11.Email
+                        </label>
+                        <input type="email" placeholder="Email" value="" name="email" id="email" class="form-control">
+
+                    </div>
+                </div><div class="col-md-6">
+                    <div class="form-group has-feedback">
+                        <label for="formBasicText" class="control-label">
+                            12.Số điện thoại
+                        </label>
+                        <input type="number" placeholder="Số điện thoại" name="phoneNumber" value="" id="phoneNumber" class="form-control">                     
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer"><button type="submit" class="btn btn-success btn-block" id="submitCreativeExp">Đăng kí</button></div>
+        </form>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.datepicker').datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+        });
+        $.validator.addMethod('filesize', function (value, element, param) {
+            return this.optional(element) || (element.files[0].size <= param)
+        }, 'File size must be less than {0}');
+        $('#socialLifeSkill').validate({
+            rules: {
+                activityTitle: {
+                    required: true
+                },
+                dateGo: {
+                    required: true,                  
+                },
+                dateEnd: 'required',
+                sumaryContent: 'required',
+                filekehoach: {
+                    required: true,
+                    extension: "pdf",
+                    filesize: 1024 * 1024,
+                    },
+                teacherName: 'required',
+                email: {
+                    required: true,
+                    email: true,
+                    maxlength: 100,
+                },
+                phoneNumber: {
+                    required: true,
+                    maxlength: 50,
+                },               
+                CompanyContact: 'required',
+                License: 'required',
+            },
+            messages: {
+                activityTitle: {
+                    required: 'Vui lòng nhập',
+                },
+                dateGo: {
+                    required: 'Vui lòng nhập'
+                },
+                dateEnd: { required: 'Vui lòng nhập'},
+                sumaryContent: { required: 'Vui lòng nhập' },
+                filekehoach: {
+                    required: 'Vui lòng chọn file',
+                    extension: "Chỉ chấp nhận file pdf",
+                    filesize: 'Chọn file nhỏ 2 MB'
+                },
+                teacherName: { required: 'Vui lòng nhập' },
+                email: {
+                    required: 'Vui lòng nhập',
+                    email: 'Vui lòng nhập email',
+                    maxlength: 'Tối đa 100 kí tự',
+                },
+                phoneNumber: {
+                    required: 'Vui lòng nhập',
+                    maxlength: 'Tối đa 100 kí tự',
+                },
+                CompanyContact: {
+                    required: 'Vui lòng nhập'
+                },
+                License: {
+                    required: 'Vui lòng nhập'
+                },                
+            },
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                // Add the `help-block` class to the error element
+                error.addClass("help-block");
+
+                // Add `has-feedback` class to the parent div.form-group
+                // in order to add icons to inputs
+                element.parent().addClass("has-error");
+
+                if (element.prop("type") === "checkbox") {
+                    error.insertAfter(element.parent("label"));
+                } else {
+                    error.insertAfter(element);
+                }
+
+                // Add the span element, if doesn't exists, and apply the icon classes to it.
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parent().addClass("has-error");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parent().removeClass("has-error");
+            },
+            submitHandler: function (form) {
+                $.post('/taomoikynangsong', {
+                    Id: data,
+                    ProgramName: $('#activityTitle').val(),
+                    SchoolDegreeId: $('#schoolDegreeSlected').val(),
+                    SchoolId: $('#schoolNameSelected').val(),
+                    ClassId: $('#gradeSlected').val(),
+                    IsKyNangThucHanhXH: $('#IsKyNangThucHanhXH').val(),
+                    SumaryContent: $('#sumaryContent').val(),
+                    Creatot: $('#teacherName').val(),
+                    JobTitleId: $('#jobTitleSelected').val(),
+                    CompanyContact: $('#CompanyContact').val(),
+                    License: $('#License').val(),
+                    DateFrom: moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD'),
+                    DateTo: moment($('#dateEnd').val(), 'DD-MM-YYYY').format('YYYY-MM-DD'),
+                    Email: $('#emailEntered').val(),
+                    PhoneNumber: $('#phoneNumber').val(),
+                    __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
+                }, function (data, status) {
+                    if (status == 'success' && data.Status == 200) {
+                        $.confirm({
+                            title: 'Thành công!',
+                            content: 'Đăng kí thành công!',
+                            type: 'green',
+                            typeAnimated: true,
+                            buttons: {
+                                OK: function () {
+                                    window.location.replace('/kynangxahoikynangsong/danhsach');
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        $.confirm({
+                            title: 'Thất bại. Có lỗi xảy ra',
+                            content: data.Message,
+                            type: 'red',
+                            typeAnimated: true,
+                            buttons: {
+                                OK: function () {
+
+                                }
+                            }
+                        });
+                    }
+                })            
+            }
+        })
+
+    })
+</script>

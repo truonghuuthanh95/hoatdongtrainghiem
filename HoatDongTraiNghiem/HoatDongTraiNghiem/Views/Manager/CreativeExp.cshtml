@@ -1,0 +1,241 @@
+﻿
+@{
+                /**/
+
+                ViewBag.Title = "CreativeExp";
+                Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">TIẾT HỌC NGOÀI NHÀ TRƯỜNG</li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">TIẾT HỌC NGOÀI NHÀ TRƯỜNG</h1>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-inline text-center">
+
+            <div class="form-group">
+                <label for="exampleInputName2">Từ</label>
+                <input type="text" class="form-control datepicker" id="dateFrom" value="09-01-2019">
+            </div><div class="form-group">
+                <label for="exampleInputName2">Đến</label>
+                <input type="text" class="form-control datepicker" id="dateTo" value="09-02-2019">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail2">Địa điểm</label>
+                <select class="form-control" id="programId">
+                    @{ 
+                        foreach (var item in ViewBag.Programs)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+
+                </select>
+            </div>
+            <button type="button" class="btn btn-success" onclick="getDataRegistrationCreative();"><span class="glyphicon glyphicon-search"></span></button>
+        </form>
+        <p style="padding-top: 15px"><button class="btn btn-primary" onclick="downloadExcel();"><span class="glyphicon glyphicon-download-alt"></span>  XUẤT EXCEL</button></p>
+
+
+        <div class="panel panel-default table-responsive">
+            <div class="panel-body">
+                <table class="table table-hover" id="registrationCreativeExp">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên trường</th>
+                            <th>Lớp</th>
+                            <th>Số lượng</th>
+                            <th>Ngày tham gia</th>
+                            <th>Buổi</th>
+                            <th>Tên người phụ trách</th>
+                            <th>Số điện thoại</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>TH - THCS - THPT Quốc Tế</td>
+                            <td>11</td>
+                            <td>14</td>
+                            <td>11/1/2019</td>
+                            <td>Buổi sáng</td>
+                            <td>Nguyễn Thị Hào</td>
+                            <td>0984432978</td>
+                            <td><button class="btn btn-sm btn-success" value="251" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
+                        </tr>                       
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="modal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Chi tiết
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Tên trường</label>
+                                    <div class="col-sm-9">
+                                        <p class="form-control-static" id="schoolName"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Lớp</label>
+                                    <div class="col-sm-9">
+                                        <p class="form-control-static" id="class"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Số lượng</label>
+                                    <div class="col-sm-9">
+                                        <p class="form-control-static" id="studentQuantity"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Ngày tham gia</label>
+                                    <div class="col-sm-9">
+                                        <p class="form-control-static" id="dateGo"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Buổi tham gia</label>
+                                    <div class="col-sm-9">
+                                        <p class="form-control-static" id="sessionDay"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Địa điểm</label>
+                                    <div class="col-sm-9">
+                                        <p class="form-control-static" id="location"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Tên chủ đề</label>
+                                    <div class="col-sm-9">
+                                        <p class="form-control-static" id="activityName"></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Ngày tạo</label>
+                                    <div class="col-sm-9">
+                                        <p class="form-control-static" id="createdAt"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Ngày cập nhật cuối</label>
+                                    <div class="col-sm-9">
+                                        <p class="form-control-static" id="updateAt"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Tên người phụ trách</label>
+                                    <div class="col-sm-9">
+                                        <p class="form-control-static" id="teacherName"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Chức vụ</label>
+                                    <div class="col-sm-9">
+                                        <p class="form-control-static" id="jobTitle"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Số điện thoại</label>
+                                    <div class="col-sm-9">
+                                        <p class="form-control-static" id="phoneNumber"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Email</label>
+                                    <div class="col-sm-9">
+                                        <p class="form-control-static" id="email"></p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-6">
+                                    <p class="text-left">
+                                        <span class="text-left"><button class="btn btn-danger">XÓA</button></span>
+                                    </p>
+                                </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <p class="text-right">
+                                        <span class="text-right"><button type="button" class="btn btn-primary" onclick="closeModal();">ĐÓNG</button></span>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('.datepicker').datepicker(
+            {
+                format: 'dd-mm-yyyy',
+                autoclose: true,
+            }
+        );
+        function getDataRegistrationCreative() {
+            var dateFrom = moment($('#dateFrom').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+            var dateTo = moment($('#dateTo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+            window.location.replace('/quanly/trainghiemsangtao/' + dateFrom + '/' + dateTo + '/' + $('#programId').val());
+        }
+
+        function closeModal() {
+            $('#modal').modal('toggle');
+        }
+        function getDetail(id) {
+            console.log(id);
+            $.get('/quanly/chitiettrainghiemsangtao/' + id.value, function (data, status) {
+                var registration = JSON.parse(data);
+                console.log(registration)
+                $('#schoolName').text(registration.School.Name);
+                $('#class').text(registration.Class.Name);
+                $('#studentQuantity').text(registration.StudentQuantity);
+                $('#dateGo').text(moment(registration.DateRegisted, 'YYYY/MM/DD').format('DD/MM/YYYY'));
+                $('#activityName').text(registration.ActivitiTitle);
+                $('#sessionDay').text(registration.SessionADay.Name);
+                $('#location').text(registration.Program.Name);
+                $('#createdAt').text(moment(registration.CreatedAt, 'YYYY/MM/DD').format('DD/MM/YYYY'));
+                if (registration.UpdatedAt != null) {
+                    $('#updateAt').text(moment(registration.UpdatedAt, 'YYYY/MM/DD').format('DD/MM/YYYY'));
+                }
+                $('#teacherName').text(registration.Creator);
+                $('#jobTitle').text(registration.Jobtitle.Name);
+                $('#phoneNumber').text(registration.PhoneNumber);
+                $('#email').text(registration.Email);
+            })
+        }
+        function downloadExcel() {
+            window.location.href = '/quanly/xuatexceltrainghiemsangtao/' + moment($('#dateFrom').val(), 'DD-MM-YYYY').format('YYYY-MM-DD') + '/' + moment($('#dateTo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD') + '/' + $('#programId').val();
+
+        }
+    </script>
+
+
+
+</div>
