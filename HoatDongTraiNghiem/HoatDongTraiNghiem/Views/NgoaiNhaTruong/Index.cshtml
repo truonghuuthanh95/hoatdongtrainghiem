@@ -161,9 +161,29 @@
         }).on('changeDate', function (ev) {
             var date = moment($(this).val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
             $.get('/ngoainhatruong/getValidStudentQuantity/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + date, function (data, status) {
-                $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
+                if (data <= 0) {
+                    $('#validStudentQuantity').text('Không thể đăng kí thêm');
+                }
+                else {
+                    $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
+                }
+                
             })
-        });
+            });
+        $('#sectionADaySlected').change(function () {
+            if ($('#dateGo').val() != '') {
+                var dateGo = moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+                $.get('/ngoainhatruong/getValidStudentQuantity/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + dateGo, function (data, status) {
+                    if (data <= 0) {
+                        $('#validStudentQuantity').text('Không thể đăng kí thêm');
+                    }
+                    else {
+                        $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
+                    }
+                })
+            }
+        })
+
         $('#creative').validate({
             rules: {
                 dateGo: {
@@ -249,13 +269,13 @@
                             SchoolDegreeId: $('#schoolDegreeSlected').val(),
                             ClassId: $('#gradeSlected').val(),
                             DaySessionId: $('#sectionADaySlected').val(),
-                            Email: $('#emailEntered').val(),
+                            Email: $('#email').val(),
                             PhoneNumber: $('#phoneNumber').val(),
                             ActivitiTitle: $('#activityTitle').val(),
                             __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
                         }, function (data, status) {
-                            var registrationCreative = JSON.parse(data);
-                            if (status == 'success' && data.Status == 200) {
+                          
+                            if (status == 'success' && data.StatusCode == 200) {
                                 $.confirm({
                                     title: 'Thành công!',
                                     content: 'Đăng kí thành công!',

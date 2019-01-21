@@ -181,6 +181,7 @@
     <Compile Include="Models\DAO\Jobtitle.cs" />
     <Compile Include="Models\DAO\Permission.cs" />
     <Compile Include="Models\DAO\Program.cs" />
+    <Compile Include="Models\DAO\ProgramPermission.cs" />
     <Compile Include="Models\DAO\Province.cs" />
     <Compile Include="Models\DAO\Registration.cs" />
     <Compile Include="Models\DAO\RegistrationCreativeExp.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Services\T_DM_TruongService.cs" />
     <Compile Include="Services\T_UserService.cs" />
     <Compile Include="Utils\Constant.cs" />
+    <Compile Include="Utils\ExportExcel.cs" />
     <Compile Include="Utils\ReturnFormat.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -300,9 +302,13 @@
     <Content Include="Views\SocialLifeSkill\Index.cshtml" />
     <Content Include="Views\SocialLifeSkill\GetSocialLifeSkill.cshtml" />
     <Content Include="Views\Manager\SocialLifeskill.cshtml" />
+    <Content Include="Utils\Files\ds-kynangsong.xlsx" />
+    <Content Include="Utils\Files\ds-noidungkhac.xlsx" />
+    <Content Include="Utils\Files\ds-trainghiemsangtao.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadedFiles\SocialSkill\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

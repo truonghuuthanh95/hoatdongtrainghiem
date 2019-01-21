@@ -12,6 +12,7 @@ namespace HoatDongTraiNghiem.Models.DAO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Account()
         {
+            ProgramPermissions = new HashSet<ProgramPermission>();
             UserPermissions = new HashSet<UserPermission>();
         }
 
@@ -44,6 +45,9 @@ namespace HoatDongTraiNghiem.Models.DAO
         public DateTime? LastedLogin { get; set; }
 
         public int? CreatedBy { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProgramPermission> ProgramPermissions { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserPermission> UserPermissions { get; set; }

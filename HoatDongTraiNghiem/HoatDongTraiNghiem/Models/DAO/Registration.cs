@@ -68,6 +68,9 @@ namespace HoatDongTraiNghiem.Models.DAO
 
         public string TomTatNoiDungCT { get; set; }
 
+        [StringLength(200)]
+        public string SchoolName { get; set; }
+
         public virtual Jobtitle Jobtitle { get; set; }
 
         public virtual Province Province { get; set; }

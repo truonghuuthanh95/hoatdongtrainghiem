@@ -23,9 +23,7 @@ namespace HoatDongTraiNghiem.Models.DTO
 
         [StringLength(100)]
         public string License { get; set; }
-
-        [StringLength(100)]
-        public string FileKeHoach { get; set; }        
+              
         public DateTime DateFrom { get; set; }
       
         public DateTime DateTo { get; set; }

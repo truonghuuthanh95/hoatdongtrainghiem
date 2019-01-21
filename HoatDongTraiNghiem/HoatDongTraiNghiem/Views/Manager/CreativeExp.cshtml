@@ -1,8 +1,6 @@
 ﻿
 @{
-                /**/
-
-                ViewBag.Title = "CreativeExp";
+                ViewBag.Title = "Danh sách tiết học ngoài nhà trường";
                 Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
 <div class="row">
@@ -34,11 +32,19 @@
             <div class="form-group">
                 <label for="exampleInputEmail2">Địa điểm</label>
                 <select class="form-control" id="programId">
-                    @{ 
-                        foreach (var item in ViewBag.Programs)
-                        {
-                            <option value="@item.Id">@item.Name</option>
-                        }
+                    @{
+        foreach (var item in ViewBag.Programs)
+        {
+            if (item.Id == ViewBag.ProgramId)
+            {
+                <option value="@item.Id" selected>@item.Name</option>
+}
+else
+{
+                <option value="@item.Id">@item.Name</option>
+}
+
+}
                     }
 
                 </select>
@@ -65,17 +71,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>TH - THCS - THPT Quốc Tế</td>
-                            <td>11</td>
-                            <td>14</td>
-                            <td>11/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Nguyễn Thị Hào</td>
-                            <td>0984432978</td>
-                            <td><button class="btn btn-sm btn-success" value="251" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>                       
+                        @{
+        int index = 1;
+        foreach (var item in ViewBag.Creatives)
+        {
+                    <tr>
+                        <td>@index</td>
+                        <td>@item.SchoolName</td>
+                        <td>Lớp @item.ClassId</td>
+                        <td>@item.StudentQuantity</td>
+                        <td>@item.DateRegisted.ToString("dd/MM/yyyy")</td>
+                        <td>@item.SessionADay.Name</td>
+                        <td>@item.Creator</td>
+                        <td>@item.PhoneNumber</td>
+                        <td><button class="btn btn-sm btn-success" value="@item.Id" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
+                    </tr>
+}
+                            index++;
+                        }
+
 
                     </tbody>
                 </table>
@@ -202,19 +216,17 @@
         function getDataRegistrationCreative() {
             var dateFrom = moment($('#dateFrom').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
             var dateTo = moment($('#dateTo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
-            window.location.replace('/quanly/trainghiemsangtao/' + dateFrom + '/' + dateTo + '/' + $('#programId').val());
+            window.location.replace('/quanly/hoatdongtrainghiem/' + $('#programId').val() + '/' + dateFrom + '/' + dateTo );
         }
 
         function closeModal() {
             $('#modal').modal('toggle');
         }
-        function getDetail(id) {
-            console.log(id);
-            $.get('/quanly/chitiettrainghiemsangtao/' + id.value, function (data, status) {
-                var registration = JSON.parse(data);
-                console.log(registration)
-                $('#schoolName').text(registration.School.Name);
-                $('#class').text(registration.Class.Name);
+        function getDetail(id) {            
+            $.get('/ngoainhatruong/chitiet/' + id.value, function (data, status) {
+                var registration = JSON.parse(data.Results);                
+                $('#schoolName').text(registration.SchoolName);
+                $('#class').text(registration.ClassId);
                 $('#studentQuantity').text(registration.StudentQuantity);
                 $('#dateGo').text(moment(registration.DateRegisted, 'YYYY/MM/DD').format('DD/MM/YYYY'));
                 $('#activityName').text(registration.ActivitiTitle);

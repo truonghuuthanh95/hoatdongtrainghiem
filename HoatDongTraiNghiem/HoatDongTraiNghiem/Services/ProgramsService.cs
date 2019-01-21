@@ -21,6 +21,23 @@ namespace HoatDongTraiNghiem.Services
                 return programs;
             }
         }
+        public List<Program> GetProgramsAll()
+        {
+            using (var _db = new HoatDongTraiNghiemDB())
+            {
+                var programs = _db.Programs.ToList();
+                return programs;
+            }
+        }
+        public List<Program> GetProgramsByAccountId(int accountId)
+        {
+            using (var _db = new HoatDongTraiNghiemDB())
+            {
+                var listProgramPermission = _db.ProgramPermissions.Where(s => s.AccountId == accountId).Select(s => s.ProgramId).ToList();
+                var listProgarm = _db.Programs.Where(s => listProgramPermission.Contains(s.Id)).ToList();
+                return listProgarm;
+            }
+        }
 
     }
 }

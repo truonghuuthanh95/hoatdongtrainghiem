@@ -94,3 +94,9 @@ C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\hoatdongtrainghiem\HoatDongTraiN
 C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\hoatdongtrainghiem\HoatDongTraiNghiem\HoatDongTraiNghiem\obj\Release\HoatDongTraiNghiem.csproj.CopyComplete
 C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\hoatdongtrainghiem\HoatDongTraiNghiem\HoatDongTraiNghiem\obj\Release\HoatDongTraiNghiem.dll
 C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\hoatdongtrainghiem\HoatDongTraiNghiem\HoatDongTraiNghiem\obj\Release\HoatDongTraiNghiem.pdb
+C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\hoatdongtrainghiem\HoatDongTraiNghiem\HoatDongTraiNghiem\bin\AutoMapper.dll
+C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\hoatdongtrainghiem\HoatDongTraiNghiem\HoatDongTraiNghiem\bin\System.ValueTuple.dll
+C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\hoatdongtrainghiem\HoatDongTraiNghiem\HoatDongTraiNghiem\bin\AutoMapper.pdb
+C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\hoatdongtrainghiem\HoatDongTraiNghiem\HoatDongTraiNghiem\bin\AutoMapper.xml
+C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\hoatdongtrainghiem\HoatDongTraiNghiem\HoatDongTraiNghiem\bin\System.ValueTuple.xml
+C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\hoatdongtrainghiem\HoatDongTraiNghiem\HoatDongTraiNghiem\obj\Release\HoatDongTraiNghiem.csprojResolveAssemblyReference.cache

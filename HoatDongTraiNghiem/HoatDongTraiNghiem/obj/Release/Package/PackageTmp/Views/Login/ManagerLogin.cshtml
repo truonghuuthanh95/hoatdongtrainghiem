@@ -8,7 +8,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>ManagerLogin</title>
+    <title>Login</title>
+    <link rel="shortcut icon" href="~/Content/images/logo_so.png">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -19,7 +20,7 @@
                 <div class="panel-heading">Đăng nhập</div>
                 <div class="panel-body">
                     <form role="form" id="login">
-                        <input name="__RequestVerificationToken" type="hidden" value="HKgtjctX5Qyn4xay7JmUFybzoI1TpCVBKHo4AR8ojBUWa5hhZISRjuayvmboQ9KvyefKnSL_IazdTlaSqdFEND0ccI4l101Q3-HAFvcuqco1" />
+                        @Html.AntiForgeryToken()
                         <fieldset>
                             <div class="form-group has-feedback">
                                 <input class="form-control" placeholder="Tên đăng nhập" id="username" name="username" type="text" autofocus="">
@@ -78,7 +79,7 @@
                 submitHandler: function (form) {
                     $('#submit').addClass('disabled');
                     $('#preloader').show();
-                    $.post('/requestLogin', {
+                    $.post('/quanlylogin', {
                         username: $('#username').val(),
                         password: $('#password').val(),
                         __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
@@ -87,7 +88,7 @@
                         $('#submit').removeClass('disabled');
                         $('#preloader').hide();
                         if (status == 'success' && data.StatusCode == 200) {
-                            window.location.replace('/quanly');
+                            window.location.href = '/quanly/index';
                         }
                         else if (status == 'success' && data.StatusCode != 200) {
                             $('#error').text(data.Message);

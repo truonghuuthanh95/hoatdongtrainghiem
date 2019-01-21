@@ -36,7 +36,7 @@ namespace HoatDongTraiNghiem.Services
         {
             using (var _db = new HoatDongTraiNghiemDB())
             {
-                var list = _db.SocialLifeSkills.Where(s => s.SchoolId == schoolId).OrderBy(s => s.DateFrom).ToList();
+                var list = _db.SocialLifeSkills.Include("Jobtitle").Where(s => s.SchoolId == schoolId).OrderBy(s => s.DateFrom).ToList();
                 return list;
             }
         }
@@ -44,7 +44,7 @@ namespace HoatDongTraiNghiem.Services
         {
             using (var _db = new HoatDongTraiNghiemDB())
             {
-                var list = _db.SocialLifeSkills.Where(s => s.DateFrom >= dateFrom && s.DateFrom <= dateTo).OrderBy(s => s.DateFrom).ToList();
+                var list = _db.SocialLifeSkills.Include("Jobtitle").Where(s => s.DateFrom >= dateFrom && s.DateFrom <= dateTo && s.SchoolId != null).OrderBy(s => s.DateFrom).ToList();
                 return list;
             }
         }
@@ -52,9 +52,22 @@ namespace HoatDongTraiNghiem.Services
         {
             using (var _db = new HoatDongTraiNghiemDB())
             {
-               var social = _db.SocialLifeSkills.Where(s => s.Id == id).SingleOrDefault();              
+               var social = _db.SocialLifeSkills.Include("Jobtitle").Where(s => s.Id == id).SingleOrDefault();              
                 return social;
             }
+        }
+        public bool CheckExistedFileKeHoach(string fileKeHoach)
+        {
+            using (var _db = new HoatDongTraiNghiemDB())
+            {
+                SocialLifeSkill socialLifeSkill = _db.SocialLifeSkills.Where(s => s.FileKeHoach == fileKeHoach).FirstOrDefault();
+                if (socialLifeSkill == null)
+                {
+                    return false;
+                }
+                return true;
+            }
+            
         }
     }
 }

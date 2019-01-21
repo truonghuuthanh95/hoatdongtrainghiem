@@ -9,8 +9,8 @@
             <h4>Tiết học ngoài nhà trường</h4>
         </div><div class="panel-body">
             <p class="text-waring text-warning">Lưu ý! Vui lòng điền thông tin theo thứ tự</p>
-            <form>
-                <input name="__RequestVerificationToken" type="hidden" value="3MH_esusPFpsjoNr1CNCbD4r0tG-zBV0nywpoGPFYFTzdQr1u1C_gUD0lbl-3u6310i9MsDnbqy9m43KujYGth-PR9BTVOvF5l5Nty20PCA1">
+            <form id="creative">
+                @Html.AntiForgeryToken()
                 <div class="form-group">
                     <label for="formControlsSelect" class="control-label">
                         1.Nội dung đăng kí
@@ -18,14 +18,11 @@
                     </label>
                     <select placeholder="select" name="activityIdSelected" id="activityIdSelected" class="form-control">
                         @{
-        foreach (var item in ViewBag.Programs)
-        {
-                    <option value="@item.Id">@item.Name</option>
-}
+                            foreach (var item in ViewBag.Programs)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
                         }
-
-                   
-
 
                     </select>
                 </div>
@@ -59,7 +56,6 @@
                             <label for="formControlsSelect" class="control-label">
                                 6.Tham gia vào buổi <span class="text-danger text-danger-default">
                                     <span class="glyphicon glyphicon-star">
-
                                     </span>
                                 </span>
                             </label>
@@ -70,16 +66,14 @@
                             </select>
                         </div>
                     </div><div class="col-sm-4">
-                        <div class="form-group has-feedback" id="errorDateGo">
+                        <div class="form-group has-feedback">
                             <label for="exampleInputEmail1" class="control-label">
                                 7.Ngày tham gia <span class="text-danger text-danger-default">
                                     <span class="glyphicon glyphicon-star">
-
                                     </span>
                                 </span>
                             </label>
-                            <input type="text" class="form-control datepicker" id="dateGo">
-                            <span class="help-block" id="errorDateGoMessage"></span>
+                            <input type="text" class="form-control datepicker" name="dateGo" id="dateGo">
                         </div>
                     </div>
                 </div><div class="row">
@@ -96,12 +90,12 @@
                     </div>
                 </div><div class="row">
                     <div class="col-md-6 col-sm-6">
-                        <div class="form-group has-feedback" id="errorTeacherName">
+                        <div class="form-group has-feedback">
                             <label for="formBasicText" class="control-label">
                                 9.Người phụ trách <i>(Ghi rõ họ và tên)</i>
                                 <span class="text-danger text-danger-default"><span class="glyphicon glyphicon-star"></span></span>
                             </label><input type="text" placeholder="Người phụ trách" name="teacherName" value="" id="teacherName" class="form-control">
-                            <span class="help-block help-block-true" id="errorTeacherNameMessage"></span>
+
                         </div>
                     </div><div class="col-md-6 col-sm-6">
                         <div class="form-group">
@@ -111,27 +105,26 @@
                                     </span>
                                 </span>
                             </label><select name="jobTitleSelected" id="jobTitleSelected" class="form-control">
-    @{
-        foreach (var item in ViewBag.JobTitles)
-        {
-            <option value="@item.Id">@item.Name</option>
-        }
-    }
+                                @{
+                                    foreach (var item in ViewBag.JobTitles)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
 
-</select>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group has-feedback" id="errorEmail">
+                        <div class="form-group has-feedback">
                             <label for="formBasicText" class="control-label">
                                 11.Email <span class="text-danger text-danger-default">
                                     <span class="glyphicon glyphicon-star"></span>
                                 </span>
                             </label>
-                            <input type="email" placeholder="Email" value="" name="emailEntered" id="emailEntered" class="form-control">
-                            <span class="help-block help-block-true" id="errorEmailMessage"></span>
+                            <input type="email" placeholder="Email" value="" name="email" id="email" class="form-control">
                         </div>
                     </div><div class="col-md-6">
                         <div class="form-group has-feedback" id="errorPhoneNumber">
@@ -141,7 +134,7 @@
                                 </span>
                             </label>
                             <input type="number" placeholder="Số điện thoại" name="phoneNumber" value="" id="phoneNumber" class="form-control">
-                            <span class="help-block help-block-true" id="errorPhoneNumberMessage"></span>
+
                         </div>
                     </div>
                 </div><div class="form-group has-feedback" id="errorActivityTitle">
@@ -152,8 +145,9 @@
                     </label>
                     <input type="text" placeholder="Tên chủ đề đăng kí" name="activityTitle" value="" id="activityTitle" class="form-control"><span class="help-block help-block-true" id="errorActivityTitleMessage"></span>
                 </div>
+                <div class="panel-footer"><button type="submit" class="btn btn-success btn-block" id="submitCreativeExp">Đăng kí</button></div>
             </form>
-        </div><div class="panel-footer"><button type="button" class="btn btn-success btn-block" id="submitCreativeExp" onclick="submitCreativeExp()">Đăng kí</button></div>
+        </div>
     </div>
     <span hidden="" class="loader" id="loader"></span>
 
@@ -166,10 +160,154 @@
 
         }).on('changeDate', function (ev) {
             var date = moment($(this).val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
-            $.get('/getValidStudentQuantityToRegist/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + date, function (data, status) {
-                $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
+            $.get('/ngoainhatruong/getValidStudentQuantity/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + date, function (data, status) {
+                if (data <= 0) {
+                    $('#validStudentQuantity').text('Không thể đăng kí thêm');
+                }
+                else {
+                    $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
+                }
+                
             })
-        });
+            });
+        $('#sectionADaySlected').change(function () {
+            if ($('#dateGo').val() != '') {
+                var dateGo = moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+                $.get('/ngoainhatruong/getValidStudentQuantity/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + dateGo, function (data, status) {
+                    if (data <= 0) {
+                        $('#validStudentQuantity').text('Không thể đăng kí thêm');
+                    }
+                    else {
+                        $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
+                    }
+                })
+            }
+        })
 
-    })
+        $('#creative').validate({
+            rules: {
+                dateGo: {
+                    required: true
+                },
+                studentQuantity: {
+                    required: true,
+                    number: true
+                },
+                teacherName: 'required',
+                email: {
+                    required: true,
+                    email: true,
+                    maxlength: 100,
+                },
+                phoneNumber: {
+                    required: true,
+                    maxlength: 50,
+                },
+                activityTitle: 'required',
+
+            },
+            messages: {
+                dateGo: {
+                    required: 'Vui lòng nhập'
+                },
+                studentQuantity: {
+                    required: 'Vui lòng nhập',
+                    number: "Nhập kiểu số"
+                },
+                teacherName: 'Vui lòng nhập',
+                email: {
+                    required: 'Vui lòng nhập',
+                    email: 'Mail không hợp lệ',
+                },
+                phoneNumber: {
+                    required: 'Vui lòng nhập',
+                    maxlength: 'Tối đa 50 kí tự',
+                },
+                activityTitle: 'Vui lòng nhập',
+            },
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                // Add the `help-block` class to the error element
+                error.addClass("help-block");
+
+                // Add `has-feedback` class to the parent div.form-group
+                // in order to add icons to inputs
+                element.parent().addClass("has-error");
+
+                if (element.prop("type") === "checkbox") {
+                    error.insertAfter(element.parent("label"));
+                } else {
+                    error.insertAfter(element);
+                }
+
+                // Add the span element, if doesn't exists, and apply the icon classes to it.
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parent().addClass("has-error");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parent().removeClass("has-error");
+            },
+            submitHandler: function (form) {
+                var date = moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+                $.get('/ngoainhatruong/getValidStudentQuantity/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + date, function (data, status) {
+                    if (parseInt($('#studentQuantity').val()) > parseInt(data) || $('#studentQuantity').val() == '' || $('#studentQuantity').val() < 1) {
+                        $('#errorValidStudentQuantity').addClass('has-error');
+                        $('#errorValidStudentQuantityMessage').text('Số lượng hoc sinh tham gia không hợp lệ');
+                        $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
+                    }
+                    else {
+                        $('#errorValidStudentQuantity').removeClass('has-error');
+                        $('#loader').show();
+                        $('#submitCreativeExp').addClass('disabled');
+                        $.post('/ngoainhatruong/dangkitrainghiemsangtao', {
+                            StudentQuantity: $('#studentQuantity').val(),
+                            Creator: $('#teacherName').val(),
+                            JobTiteId: $('#jobTitleSelected').val(),
+                            ProgramId: $('#activityIdSelected').val(),
+                            DateRegisted: moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD'),
+                            SchoolDegreeId: $('#schoolDegreeSlected').val(),
+                            ClassId: $('#gradeSlected').val(),
+                            DaySessionId: $('#sectionADaySlected').val(),
+                            Email: $('#email').val(),
+                            PhoneNumber: $('#phoneNumber').val(),
+                            ActivitiTitle: $('#activityTitle').val(),
+                            __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
+                        }, function (data, status) {
+                          
+                            if (status == 'success' && data.StatusCode == 200) {
+                                $.confirm({
+                                    title: 'Thành công!',
+                                    content: 'Đăng kí thành công!',
+                                    type: 'green',
+                                    typeAnimated: true,
+                                    buttons: {
+                                        OK: function () {
+                                            window.location.replace('/ngoainhatruong/danhsach/' + $('#activityIdSelected').val());
+                                        }
+                                    }
+                                });
+                            }
+                            else {
+                                $.confirm({
+                                    title: 'Thất bại. Có lỗi xảy ra',
+                                    content: data.Message,
+                                    type: 'red',
+                                    typeAnimated: true,
+                                    buttons: {
+                                        OK: function () {
+
+                                        }
+                                    }
+                                });
+                            }
+                        });
+
+                    }
+
+                })                   
+                }           
+        })
+    })
+
 </script>

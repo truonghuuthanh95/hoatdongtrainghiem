@@ -12,6 +12,7 @@ namespace HoatDongTraiNghiem.Models.DAO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Program()
         {
+            ProgramPermissions = new HashSet<ProgramPermission>();
             RegistrationCreativeExps = new HashSet<RegistrationCreativeExp>();
         }
 
@@ -34,6 +35,9 @@ namespace HoatDongTraiNghiem.Models.DAO
         public string Latittude { get; set; }
 
         public int? DayTypeEnableSelectId { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProgramPermission> ProgramPermissions { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RegistrationCreativeExp> RegistrationCreativeExps { get; set; }

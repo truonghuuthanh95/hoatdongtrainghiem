@@ -53,7 +53,7 @@ namespace HoatDongTraiNghiem.Controllers
             {
                 return Json(new ReturnFormat(400, "failed", null), JsonRequestBehavior.AllowGet);
             }
-            var school = (T_User)Session[Constant.SCHOOL_SESSION];
+            var school = (T_DM_Truong)Session[Constant.SCHOOL_SESSION];
             if (school == null)
             {
                 return Json(new ReturnFormat(403, "access denied", null), JsonRequestBehavior.AllowGet);
@@ -61,7 +61,8 @@ namespace HoatDongTraiNghiem.Controllers
             RegistrationCreativeExp registrationCreativeExp = new RegistrationCreativeExp();
             Mapper.Map(creativeExpDTO, registrationCreativeExp);
             registrationCreativeExp.CreatedAt = DateTime.Now;
-            registrationCreativeExp.SchoolId = school.DonViID;
+            registrationCreativeExp.SchoolId = school.SchoolID;
+            registrationCreativeExp.SchoolName = school.TenTruong;
             using (var creative = new RegistrationReativeExpService())
             {
                 RegistrationCreativeExp registrationCreativeExpInserted = creative.SaveRegistrationCreativeExp(registrationCreativeExp);
@@ -74,20 +75,42 @@ namespace HoatDongTraiNghiem.Controllers
         [HttpGet]
         public ActionResult GetRegisted(int programId)
         {
-            var school = (T_User)Session[Constant.SCHOOL_SESSION];
+            var school = (T_DM_Truong)Session[Constant.SCHOOL_SESSION];
             if (school == null)
             {
                 return RedirectToRoute("login");
             }
             using (var program = new ProgramsService())
             {
-                ViewBag.Programs = program.GetPrograms();
+                ViewBag.Programs = program.GetProgramsAll();
             }
             using (var creative = new RegistrationReativeExpService())
             {
-                ViewBag.Creatives = creative.GetRegistrationCreativeExpsBySchoolIdAndProgramId("123213", programId);
+                ViewBag.Creatives = creative.GetRegistrationCreativeExpsBySchoolIdAndProgramId(school.SchoolID, programId);
             }
+            ViewBag.ProgramId = programId;
             return View();
+        }
+
+        [Route("chitiet/{id}")]
+        [HttpGet]
+        public ActionResult GetDetail(int id)
+        {
+            
+            
+            using (var creative = new RegistrationReativeExpService())
+            {
+                var creativeExp = creative.GetRegistrationCreativeExpById(id);
+                var creativeExpJson = JsonConvert.SerializeObject(creativeExp,
+           Formatting.None,
+           new JsonSerializerSettings()
+           {
+               ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+           });
+                return Json(new ReturnFormat(200, "success", creativeExpJson), JsonRequestBehavior.AllowGet);
+            }
+            
+           
         }
     }
 }

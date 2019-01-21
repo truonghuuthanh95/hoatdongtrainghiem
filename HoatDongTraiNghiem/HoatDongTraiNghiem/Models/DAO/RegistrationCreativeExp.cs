@@ -45,6 +45,9 @@ namespace HoatDongTraiNghiem.Models.DAO
         [StringLength(500)]
         public string ActivitiTitle { get; set; }
 
+        [StringLength(200)]
+        public string SchoolName { get; set; }
+
         public virtual Jobtitle Jobtitle { get; set; }
 
         public virtual Program Program { get; set; }

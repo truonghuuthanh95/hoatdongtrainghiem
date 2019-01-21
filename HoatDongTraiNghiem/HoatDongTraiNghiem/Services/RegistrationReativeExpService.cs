@@ -87,7 +87,10 @@ namespace HoatDongTraiNghiem.Services
         {
             using (var _db = new HoatDongTraiNghiemDB())
             {
-                var list = _db.RegistrationCreativeExps.Where(s => s.SchoolId == schoolId && s.ProgramId == programId).OrderBy(s => s.DateRegisted).ToList();
+                var list = _db.RegistrationCreativeExps
+                    .Include("SessionADay")
+                    .Include("Program")
+                    .Include("Jobtitle").Where(s => s.SchoolId == schoolId && s.ProgramId == programId).OrderBy(s => s.DateRegisted).ToList();
                 return list;
             }
             
@@ -106,6 +109,20 @@ namespace HoatDongTraiNghiem.Services
                 return list;
             }
         }
+        public RegistrationCreativeExp GetRegistrationCreativeExpById(int id)
+        {
+            using (var _db = new HoatDongTraiNghiemDB())
+            {
+                var registrationCreativeExp = _db.RegistrationCreativeExps
+               .Include("SessionADay")
+               .Include("Program")
+               .Include("Jobtitle")
+               .Where(s => s.Id == id)
+               .SingleOrDefault();
+                return registrationCreativeExp;
+            }
+        }
+
 
     }
 }

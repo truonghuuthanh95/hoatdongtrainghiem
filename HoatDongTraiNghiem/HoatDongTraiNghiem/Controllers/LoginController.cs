@@ -84,7 +84,41 @@ namespace HoatDongTraiNghiem.Controllers
                 string isValid = _db.Database.SqlQuery<string>("SELECT [HCM_EDU_DATA].[dbo].[F_Password]('" + user.PasswordSalt + "','" + password + "')").FirstOrDefault();
                 if (isValid == user.Password)
                 {
-                    Session.Add(Constant.SCHOOL_SESSION, user);
+                    var school = _db.Database.SqlQuery<T_DM_Truong>(@"SELECT [ID]
+      ,[SchoolID]
+      ,[TenTruong]
+      ,[LoaiHinhTruongID]
+      ,[LoaiTruongID]
+      ,[HieuTruong]
+      ,[DT_HieuTruong]
+      ,[DiaChi]
+      ,[XaID]
+      ,[SDT]
+      ,[Fax]
+      ,[Email]
+      ,[Website]
+      ,[KhuVucID]
+      ,[ChinhSachVungID]
+      ,[ThuocVungKinhTeKK]
+      ,[DatChuanQG]
+      ,[CoChiBoDang]
+      ,[CoLopHoc2Buoi]
+      ,[CoHSBanTru]
+      ,[CoHSNoiTru]
+      ,[TruongQuocTe]
+      ,[CoHSKhuyetTat]
+      ,[CoDayNghePT]
+      ,[CoPhoBien_HIV_SKSS]
+      ,[PhanMemID]
+      ,[upDotDiemID]
+      ,[PGDID]
+      ,[PGDID_C12]
+      ,[Cap1]
+      ,[Cap2]
+      ,[Cap3]
+      ,[IsTestOnly]
+  FROM [Server_VS].[CSDL].[dbo].[T_DM_Truong] WHERE [SchoolID] = @SchoolId", new SqlParameter("@SchoolId", schoolId)).SingleOrDefault();
+                    Session.Add(Constant.SCHOOL_SESSION, school);
                     return Json(new ReturnFormat(200, "success", null), JsonRequestBehavior.AllowGet);
                 }
             }
@@ -109,8 +143,16 @@ namespace HoatDongTraiNghiem.Controllers
                 Session.Add(Constant.MANAGER_SESSION, manager);
                 var managerPermission = _db.UserPermissions.Where(s => s.AccountId == manager.Id).ToList();
                 Session.Add(Constant.MANAGER_PERMISSION_SESSION, managerPermission);
+                return Json(new ReturnFormat(200, "success", null), JsonRequestBehavior.AllowGet);
             }
-            return View();
+            
+        }
+        [Route("logout")]
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            Session.RemoveAll();
+            return RedirectToRoute("login");
         }
     }
 }

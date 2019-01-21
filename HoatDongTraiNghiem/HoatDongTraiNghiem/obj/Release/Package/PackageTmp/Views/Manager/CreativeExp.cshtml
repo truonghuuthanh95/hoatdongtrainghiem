@@ -1,8 +1,6 @@
 ﻿
 @{
-                /**/
-
-                ViewBag.Title = "CreativeExp";
+                ViewBag.Title = "Danh sách tiết học ngoài nhà trường";
                 Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
 <div class="row">
@@ -34,15 +32,26 @@
             <div class="form-group">
                 <label for="exampleInputEmail2">Địa điểm</label>
                 <select class="form-control" id="programId">
-                    <option value="1" selected="">Tiết học ngoài trời tại Thảo Cầm Viên + hành trình bảo tàng</option>
-                    <option value="4">Tiết học ngoài nhà trường tại khu Nông Nghiệp Công Nghệ Cao</option>
-                    <option value="6">Tiết học trải nghiệm ở Củ Chi (khu sinh thái Về Quê)</option>
+                    @{
+        foreach (var item in ViewBag.Programs)
+        {
+            if (item.Id == ViewBag.ProgramId)
+            {
+                <option value="@item.Id" selected>@item.Name</option>
+}
+else
+{
+                <option value="@item.Id">@item.Name</option>
+}
+
+}
+                    }
 
                 </select>
             </div>
             <button type="button" class="btn btn-success" onclick="getDataRegistrationCreative();"><span class="glyphicon glyphicon-search"></span></button>
         </form>
-        <p><button class="btn btn-primary" onclick="downloadExcel();"><span class="glyphicon glyphicon-download-alt"></span>  XUẤT EXCEL</button></p>
+        <p style="padding-top: 15px"><button class="btn btn-primary" onclick="downloadExcel();"><span class="glyphicon glyphicon-download-alt"></span>  XUẤT EXCEL</button></p>
 
 
         <div class="panel panel-default table-responsive">
@@ -62,259 +71,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>TH - THCS - THPT Quốc Tế</td>
-                            <td>11</td>
-                            <td>14</td>
-                            <td>11/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Nguyễn Thị Hào</td>
-                            <td>0984432978</td>
-                            <td><button class="btn btn-sm btn-success" value="251" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>THCS Lê Quý Đôn</td>
-                            <td>6</td>
-                            <td>200</td>
-                            <td>12/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Cô Loan</td>
-                            <td>0903022371</td>
-                            <td><button class="btn btn-sm btn-success" value="248" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>THCS Lê Quý Đôn</td>
-                            <td>7</td>
-                            <td>200</td>
-                            <td>12/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Cô Loan</td>
-                            <td>0903022371</td>
-                            <td><button class="btn btn-sm btn-success" value="250" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>THPT chuyên Trần Đại Nghĩa</td>
-                            <td>7</td>
-                            <td>300</td>
-                            <td>13/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Trần Hoàng Đương</td>
-                            <td>0934029376</td>
-                            <td><button class="btn btn-sm btn-success" value="270" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>THPT chuyên Trần Đại Nghĩa</td>
-                            <td>9</td>
-                            <td>100</td>
-                            <td>13/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Trần Hoàng Đương</td>
-                            <td>0934029376</td>
-                            <td><button class="btn btn-sm btn-success" value="271" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>THPT chuyên Trần Đại Nghĩa</td>
-                            <td>7</td>
-                            <td>300</td>
-                            <td>13/1/2019</td>
-                            <td>Buổi chiều</td>
-                            <td>Trần Hoàng Đương </td>
-                            <td>0934029376</td>
-                            <td><button class="btn btn-sm btn-success" value="278" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>THPT chuyên Trần Đại Nghĩa</td>
-                            <td>9</td>
-                            <td>100</td>
-                            <td>13/1/2019</td>
-                            <td>Buổi chiều</td>
-                            <td>Trần Hoàng Đương </td>
-                            <td>0934029376</td>
-                            <td><button class="btn btn-sm btn-success" value="279" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>THCS Sương Nguyệt Anh</td>
-                            <td>7</td>
-                            <td>250</td>
-                            <td>16/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Văn Thị Diễm Trang </td>
-                            <td>0933880157</td>
-                            <td><button class="btn btn-sm btn-success" value="264" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>THCS Trần Danh Ninh</td>
-                            <td>9</td>
-                            <td>100</td>
-                            <td>16/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Lê Thị Tùng Anh </td>
-                            <td>0386902997</td>
-                            <td><button class="btn btn-sm btn-success" value="230" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>THCS Sương Nguyệt Anh</td>
-                            <td>6</td>
-                            <td>280</td>
-                            <td>17/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Văn Thị Diễm Trang </td>
-                            <td>0933880157</td>
-                            <td><button class="btn btn-sm btn-success" value="262" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td>THCS Sương Nguyệt Anh</td>
-                            <td>7</td>
-                            <td>250</td>
-                            <td>18/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Văn Thị Diễm Trang </td>
-                            <td>0933880157</td>
-                            <td><button class="btn btn-sm btn-success" value="263" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>THCS Tân Phú Trung</td>
-                            <td>9</td>
-                            <td>150</td>
-                            <td>18/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Le thi phuong dai</td>
-                            <td>0389334276</td>
-                            <td><button class="btn btn-sm btn-success" value="280" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>13</td>
-                            <td>THCS Lê Quý Đôn</td>
-                            <td>6</td>
-                            <td>129</td>
-                            <td>19/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Cô Loan</td>
-                            <td>0903022371</td>
-                            <td><button class="btn btn-sm btn-success" value="249" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>14</td>
-                            <td>THPT Củ Chi</td>
-                            <td>11</td>
-                            <td>250</td>
-                            <td>19/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Nguyễn Thị Bích Trâm</td>
-                            <td>0988919970</td>
-                            <td><button class="btn btn-sm btn-success" value="222" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>15</td>
-                            <td>THPT Củ Chi</td>
-                            <td>11</td>
-                            <td>260</td>
-                            <td>19/1/2019</td>
-                            <td>Buổi chiều</td>
-                            <td>Nguyễn Thị Bích Trâm</td>
-                            <td>0988919970</td>
-                            <td><button class="btn btn-sm btn-success" value="223" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>16</td>
-                            <td>THCS - THPT Việt Anh</td>
-                            <td>7</td>
-                            <td>21</td>
-                            <td>19/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Nguyễn Thị Diệu</td>
-                            <td>0973114912</td>
-                            <td><button class="btn btn-sm btn-success" value="224" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>17</td>
-                            <td>THCS Tăng Nhơn Phú B</td>
-                            <td>9</td>
-                            <td>140</td>
-                            <td>19/1/2019</td>
-                            <td>Buổi chiều</td>
-                            <td>Lê Mậu Thành</td>
-                            <td>0907063863</td>
-                            <td><button class="btn btn-sm btn-success" value="287" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>18</td>
-                            <td>THPT An Nghĩa</td>
-                            <td>11</td>
-                            <td>110</td>
-                            <td>20/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>võ thị thùy trang</td>
-                            <td>0395193837</td>
-                            <td><button class="btn btn-sm btn-success" value="289" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>19</td>
-                            <td>THCS Phong Phú</td>
-                            <td>6</td>
-                            <td>150</td>
-                            <td>20/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Cô Bình</td>
-                            <td>0932361201</td>
-                            <td><button class="btn btn-sm btn-success" value="227" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>20</td>
-                            <td>THPT Thạnh Lộc</td>
-                            <td>11</td>
-                            <td>135</td>
-                            <td>20/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>chung thị phuong thủy</td>
-                            <td>0363081037</td>
-                            <td><button class="btn btn-sm btn-success" value="286" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>21</td>
-                            <td>THCS Mạch Kiếm Hùng</td>
-                            <td>7</td>
-                            <td>350</td>
-                            <td>22/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Lê Hoàng Kiểng</td>
-                            <td>0988273775</td>
-                            <td><button class="btn btn-sm btn-success" value="288" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>22</td>
-                            <td>THPT Nguyễn Văn Cừ</td>
-                            <td>11</td>
-                            <td>100</td>
-                            <td>26/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>CÔ THU</td>
-                            <td>0916398551</td>
-                            <td><button class="btn btn-sm btn-success" value="281" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
-                        <tr>
-                            <td>23</td>
-                            <td>THCS Hà Huy Tập</td>
-                            <td>7</td>
-                            <td>400</td>
-                            <td>27/1/2019</td>
-                            <td>Buổi sáng</td>
-                            <td>Nguyễn Mạnh Cường</td>
-                            <td>0918408303</td>
-                            <td><button class="btn btn-sm btn-success" value="291" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
-                        </tr>
+                        @{
+        int index = 1;
+        foreach (var item in ViewBag.Creatives)
+        {
+                    <tr>
+                        <td>@index</td>
+                        <td>@item.SchoolName</td>
+                        <td>Lớp @item.ClassId</td>
+                        <td>@item.StudentQuantity</td>
+                        <td>@item.DateRegisted.ToString("dd/MM/yyyy")</td>
+                        <td>@item.SessionADay.Name</td>
+                        <td>@item.Creator</td>
+                        <td>@item.PhoneNumber</td>
+                        <td><button class="btn btn-sm btn-success" value="@item.Id" onclick="getDetail(this);" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
+                    </tr>
+}
+                            index++;
+                        }
 
 
                     </tbody>
@@ -442,19 +216,17 @@
         function getDataRegistrationCreative() {
             var dateFrom = moment($('#dateFrom').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
             var dateTo = moment($('#dateTo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
-            window.location.replace('/quanly/trainghiemsangtao/' + dateFrom + '/' + dateTo + '/' + $('#programId').val());
+            window.location.replace('/quanly/hoatdongtrainghiem/' + $('#programId').val() + '/' + dateFrom + '/' + dateTo );
         }
 
         function closeModal() {
             $('#modal').modal('toggle');
         }
-        function getDetail(id) {
-            console.log(id);
-            $.get('/quanly/chitiettrainghiemsangtao/' + id.value, function (data, status) {
-                var registration = JSON.parse(data);
-                console.log(registration)
-                $('#schoolName').text(registration.School.Name);
-                $('#class').text(registration.Class.Name);
+        function getDetail(id) {            
+            $.get('/ngoainhatruong/chitiet/' + id.value, function (data, status) {
+                var registration = JSON.parse(data.Results);                
+                $('#schoolName').text(registration.SchoolName);
+                $('#class').text(registration.ClassId);
                 $('#studentQuantity').text(registration.StudentQuantity);
                 $('#dateGo').text(moment(registration.DateRegisted, 'YYYY/MM/DD').format('DD/MM/YYYY'));
                 $('#activityName').text(registration.ActivitiTitle);
