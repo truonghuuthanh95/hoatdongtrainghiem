@@ -1,0 +1,248 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách hoạt động học tập trải nghiệm";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<h3 class="text-center text-primary">DANH SÁCH NỘI DUNG KHÁC</h3>
+<form class="form-inline text-center">
+
+    <div class="form-group">
+        <label for="exampleInputName2">Từ</label>
+        <input type="text" class="form-control datepicker" id="dateFrom" value="@Model.DateFrom.ToString("dd-MM-yyyy")">
+    </div><div class="form-group">
+        <label for="exampleInputName2">Đến</label>
+        <input type="text" class="form-control datepicker" id="dateTo" value="@Model.DateTo.ToString("dd-MM-yyyy")">
+    </div>
+    <button type="button" class="btn btn-success" onclick="getDateDetail();">TÌM KIẾM</button>
+</form>
+@{
+    if (Model.Registrations.Count > 0)
+    {
+        <p><button class="btn btn-primary" onclick="downloadExcel();"><span class="glyphicon glyphicon-download-alt"></span>  XUẤT EXCEL</button></p>
+    }
+    else
+    {
+        <p><button class="btn btn-primary disabled" onclick="downloadExcel();"><span class="glyphicon glyphicon-download-alt"></span>  XUẤT EXCEL</button></p>
+    }
+}
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên trường</th>
+                        <th>Lớp</th>
+                        <th>Số lượng</th>
+                        <th>Ngày tham gia</th>
+                        <th>Địa điểm</th>
+                        <th>Tên người phụ trách</th>
+                        <th>Số điện thoại</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int index = 1;
+                        foreach (var item in Model.Registrations)
+                        {
+                            <tr>
+                                <td>@index</td>
+                                <td>@item.SchoolName</td>
+                                <td>@item.ClassId</td>
+                                <td>@item.StudentQuantity</td>
+                                <td>@item.DateRegisted.ToString("dd-MM-yyyy")</td>
+                                <td>@item.Province.Type @item.Province.Name</td>
+                                <td>@item.Creator</td>
+                                <td>@item.PhoneNumber</td>
+                                <td><button type="button" value="@item.Id" onclick="viewDetail(this);" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
+                            </tr>
+                            index++;
+                        }
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Chi tiết
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Tên trường</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="schoolName"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Lớp</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="class"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Số lượng</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="studentQuantity"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Ngày tham gia</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="dateGo"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Nội dung thực hiện hoạt động</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="activityName"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Vi trí kiến thức</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="vitrikienthuc"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Tóm tắt nội dung</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="tomtatnoidung"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Môn đăng kí</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="subjectRegisted"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Địa điểm</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="location"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">File fế hoach</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="filekehoach"></a></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">File bài kiểm tra</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="filebaikiemtra"></a></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">File tài liệu</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="filetailieu"></a></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Tên người phụ trách</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="teacherName"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Chức vụ</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="jobTitle"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Số điện thoại</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="phoneNumber"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Email</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="email"></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-6">
+                            <p class="text-left">
+                                <span class="text-left"><button class="btn btn-danger">XÓA</button></span>
+                            </p>
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <p class="text-right">
+                                <span class="text-right"><button type="button" class="btn btn-primary" onclick="closeModal();">ĐÓNG</button></span>
+                            </p>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.datepicker').datepicker(
+        {
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+        }
+    );
+    function viewDetail(data) {
+        $.get('/quanly/getNoiDungKhacById/' + data.value, function (data, status) {
+            var registration = JSON.parse(data);
+            $('#schoolName').text(registration.Registration.School.Name);
+            $('#class').text(registration.Registration.Class.Name);
+            $('#studentQuantity').text(registration.Registration.StudentQuantity);
+            $('#dateGo').text(moment(registration.Registration.DateRegisted, 'YYYY/MM/DD').format('DD/MM/YYYY'));
+            $('#activityName').text(registration.Registration.ProgramName);
+            $('#vitrikienthuc').text(registration.Registration.ViTriKienThuc);
+            $('#tomtatnoidung').text(registration.Registration.TomTatNoiDungCT);
+            $('#location').text(registration.Registration.Province.Type + ' ' + registration.Registration.Province.Name);
+            $('#filekehoach').text(registration.Registration.FileKeHoach);
+            $('#filebaikiemtra').text(registration.Registration.FileBaiKiemTra);
+            $('#filetailieu').text(registration.Registration.FileTaiLieuChoHS);
+            $('#teacherName').text(registration.Registration.Creator);
+            $('#jobTitle').text(registration.Registration.Jobtitle.Name);
+            $('#phoneNumber').text(registration.Registration.PhoneNumber);
+            $('#email').text(registration.Registration.Email);
+            $('#subjectRegisted').text(registration.SubjectRegisted);
+
+        })
+    }
+    function closeModal() {
+        $('#modal').modal('toggle');
+    }
+    function getDateDetail() {
+        var dateFrom = moment($('#dateFrom').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+        var dateTo = moment($('#dateTo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+        window.location.replace('/quanly/noidungkhac/' + dateFrom + '/' + dateTo);
+    }
+    function downloadPDF(data) {
+        var fileName = data.text.split('.').shift();
+            window.location.href = '@System.Configuration.ConfigurationManager.AppSettings["BASE_URL"]/quanly/downloadPDF/' + fileName;
+    }
+    function downloadExcel() {
+        window.location.href = '@System.Configuration.ConfigurationManager.AppSettings["BASE_URL"]/quanly/xuatexcelnoidungkhac/' + moment($('#dateFrom').val(), 'DD-MM-YYYY').format('YYYY-MM-DD') + '/' + moment($('#dateTo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+
+        }
+</script>

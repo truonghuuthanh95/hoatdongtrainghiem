@@ -16,6 +16,8 @@ namespace HoatDongTraiNghiem.App_Start
             CreateMap<CreativeExpDTO, RegistrationCreativeExp>();
             CreateMap<SocialLifeSkill, SocialLifeSkillDTO>();
             CreateMap<SocialLifeSkillDTO, SocialLifeSkill>();
+            CreateMap<RegistrationDTO, Registration>();
+            CreateMap<Registration, RegistrationDTO>();
         }
     }
 }

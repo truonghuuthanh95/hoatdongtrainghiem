@@ -266,8 +266,7 @@
             unhighlight: function (element, errorClass, validClass) {
                 $(element).parent().removeClass("has-error");
             },
-            submitHandler: function (form) {
-                debugger
+            submitHandler: function (form) {               
                 var formData = new FormData();
                 var filekehoach = $('#filekehoach')[0];
                 formData.append('filekehoach', filekehoach.files[0]);

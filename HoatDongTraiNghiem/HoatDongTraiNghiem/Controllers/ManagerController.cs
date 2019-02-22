@@ -81,6 +81,31 @@ namespace HoatDongTraiNghiem.Controllers
             ViewBag.DateTo = dateTo.ToString("dd-MM-yyyy");
             return View();
         }
+        [Route("hoatdonghoctaptrainghiem/{dateFrom}/{dateTo}")]
+        [HttpGet]
+        public ActionResult HDHocTaoTraiNghiem(DateTime dateFrom, DateTime dateTo)
+        {
+            var manager = (Account)Session[Constant.MANAGER_SESSION];
+            if (manager == null)
+            {
+                return RedirectToRoute("quanlylogin");
+            }
+
+            var managerPersmission = (List<UserPermission>)Session[Constant.MANAGER_PERMISSION_SESSION];
+            //var permission = 4;
+            if (managerPersmission.Where(s => s.PermissionId == 4).FirstOrDefault() == null)
+            {
+                return RedirectToRoute("quanlylogin");
+            }
+            using (var registration = new HDHocTapTraiNghiemService())
+            {
+                ViewBag.Registrations = registration.GetRegistrations(dateFrom, dateTo);
+            }
+            ViewBag.DateFrom = dateFrom.ToString("dd-MM-yyyy");
+            ViewBag.DateTo = dateTo.ToString("dd-MM-yyyy");
+            return View();
+        }
+
         [Route("xuatexceltrainghiemsangtao/{dateFrom}/{dateTo}/{programId}")]
         [HttpGet]
         public async Task<ActionResult> ExportExcelCreativeExp(DateTime dateFrom, DateTime dateTo, int programId)

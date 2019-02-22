@@ -6,13 +6,18 @@ using System.Web;
 
 namespace HoatDongTraiNghiem.Services
 {
-    public class SubjectService
+    public class SubjectService : IDisposable
     {
-        public IQueryable<Subject> GetSubjects()
+        public void Dispose()
+        {
+            
+        }
+
+        public List<Subject> GetSubjects()
         {
             using (HoatDongTraiNghiemDB _db = new HoatDongTraiNghiemDB())
             {
-                var subjects = _db.Subjects.Where(s => s.IsActive == true);
+                var subjects = _db.Subjects.Where(s => s.IsActive == true).ToList();
                 return subjects;
             }
            
