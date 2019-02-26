@@ -122,7 +122,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">File fế hoach</label>
+                            <label class="col-sm-3 control-label">File kế hoach</label>
                             <div class="col-sm-9">
                                 <p class="form-control-static"><a onclick="downloadPDF(this);" id="filekehoach"></a></p>
                             </div>
@@ -196,25 +196,34 @@
         }
     );
     function viewDetail(data) {
-        $.get('/quanly/getNoiDungKhacById/' + data.value, function (data, status) {
-            var registration = JSON.parse(data);
-            $('#schoolName').text(registration.Registration.School.Name);
-            $('#class').text(registration.Registration.Class.Name);
-            $('#studentQuantity').text(registration.Registration.StudentQuantity);
-            $('#dateGo').text(moment(registration.Registration.DateRegisted, 'YYYY/MM/DD').format('DD/MM/YYYY'));
-            $('#activityName').text(registration.Registration.ProgramName);
-            $('#vitrikienthuc').text(registration.Registration.ViTriKienThuc);
-            $('#tomtatnoidung').text(registration.Registration.TomTatNoiDungCT);
-            $('#location').text(registration.Registration.Province.Type + ' ' + registration.Registration.Province.Name);
-            $('#filekehoach').text(registration.Registration.FileKeHoach);
-            $('#filebaikiemtra').text(registration.Registration.FileBaiKiemTra);
-            $('#filetailieu').text(registration.Registration.FileTaiLieuChoHS);
-            $('#teacherName').text(registration.Registration.Creator);
-            $('#jobTitle').text(registration.Registration.Jobtitle.Name);
-            $('#phoneNumber').text(registration.Registration.PhoneNumber);
-            $('#email').text(registration.Registration.Email);
-            $('#subjectRegisted').text(registration.SubjectRegisted);
+        $.get('/hoatdonghoctaptrainghiem/chitiet/' + data.value, function (data, status) {           
+            var registration = JSON.parse(data.Results);
+            console.log(registration)
+            $('#schoolName').text(registration.SchoolName);
+            $('#class').text(registration.ClassId);
+            $('#studentQuantity').text(registration.StudentQuantity);
+            $('#dateGo').text(moment(registration.DateRegisted, 'YYYY/MM/DD').format('DD/MM/YYYY'));
+            $('#activityName').text(registration.ProgramName);
+            $('#vitrikienthuc').text(registration.ViTriKienThuc);
+            $('#tomtatnoidung').text(registration.TomTatNoiDungCT);
+            $('#location').text(registration.Province.Type + ' ' + registration.Province.Name);
+            $('#filekehoach').text(registration.FileKeHoach);
+            $('#filebaikiemtra').text(registration.FileBaiKiemTra);
+            $('#filetailieu').text(registration.FileTaiLieuChoHS);
+            $('#teacherName').text(registration.Creator);
+            $('#jobTitle').text(registration.Jobtitle.Name);
+            $('#phoneNumber').text(registration.PhoneNumber);
+            $('#email').text(registration.Email);
+           
+        })
+        $.get('/hoatdonghoctaptrainghiem/getSubjectRegistedByRegistrationId/' + data.value, function (data, status) {
+            var subject = JSON.parse(data.Results);
+            var subjectJoin = '';
+            for (var i = 0; i < subject.length; i++) {
+                subjectJoin += subject[i].Subject.Name + " ,";
+            }
 
+            $('#subjectRegisted').text(subjectJoin.slice(0, -1));
         })
     }
     function closeModal() {
@@ -222,7 +231,7 @@
     }
     function getDateDetail() {
         var dateFrom = moment($('#dateFrom').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
-        var dateTo = moment($('#dateTo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+        var dateTo = moment($('#dateTo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD'); 
         window.location.replace('/quanly/noidungkhac/' + dateFrom + '/' + dateTo);
     }
     function downloadPDF(data) {

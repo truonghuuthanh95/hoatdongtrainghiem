@@ -12,6 +12,7 @@ namespace HoatDongTraiNghiem.Models.DAO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Jobtitle()
         {
+            HoatDongNgoaiKhoas = new HashSet<HoatDongNgoaiKhoa>();
             Registrations = new HashSet<Registration>();
             RegistrationCreativeExps = new HashSet<RegistrationCreativeExp>();
             SocialLifeSkills = new HashSet<SocialLifeSkill>();
@@ -26,6 +27,9 @@ namespace HoatDongTraiNghiem.Models.DAO
         public string Notation { get; set; }
 
         public bool? IsActive { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HoatDongNgoaiKhoa> HoatDongNgoaiKhoas { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Registration> Registrations { get; set; }

@@ -95,9 +95,7 @@ namespace HoatDongTraiNghiem.Controllers
         [Route("chitiet/{id}")]
         [HttpGet]
         public ActionResult GetDetail(int id)
-        {
-            
-            
+        {         
             using (var creative = new RegistrationReativeExpService())
             {
                 var creativeExp = creative.GetRegistrationCreativeExpById(id);

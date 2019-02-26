@@ -1,23 +1,13 @@
 ﻿
 @{
-    ViewBag.Title = "Danh sách hoạt động học tập trải nghiệm";
-    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+    ViewBag.Title = "Danh sách hoạt dộng ngoại khóa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3 class="text-center text-primary">DANH SÁCH NỘI DUNG KHÁC</h3>
-<form class="form-inline text-center">
+<h3 class="text-center text-primary">DANH SÁCH HOẠT ĐỘNG NGOẠI KHÓA</h3>
 
-    <div class="form-group">
-        <label for="exampleInputName2">Từ</label>
-        <input type="text" class="form-control datepicker" id="dateFrom" value="@Model.DateFrom.ToString("dd-MM-yyyy")">
-    </div><div class="form-group">
-        <label for="exampleInputName2">Đến</label>
-        <input type="text" class="form-control datepicker" id="dateTo" value="@Model.DateTo.ToString("dd-MM-yyyy")">
-    </div>
-    <button type="button" class="btn btn-success" onclick="getDateDetail();">TÌM KIẾM</button>
-</form>
 @{
-    if (Model.Registrations.Count > 0)
+    if (ViewBag.Registrations.Count > 0)
     {
         <p><button class="btn btn-primary" onclick="downloadExcel();"><span class="glyphicon glyphicon-download-alt"></span>  XUẤT EXCEL</button></p>
     }
@@ -34,7 +24,6 @@
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Tên trường</th>
                         <th>Lớp</th>
                         <th>Số lượng</th>
                         <th>Ngày tham gia</th>
@@ -47,14 +36,13 @@
                 <tbody>
                     @{
                         int index = 1;
-                        foreach (var item in Model.Registrations)
+                        foreach (var item in ViewBag.Registrations)
                         {
                             <tr>
                                 <td>@index</td>
-                                <td>@item.SchoolName</td>
                                 <td>@item.ClassId</td>
                                 <td>@item.StudentQuantity</td>
-                                <td>@item.DateRegisted.ToString("dd-MM-yyyy")</td>
+                                <td>@item.DateRegisted.ToString("dd/MM/yyyy")</td>
                                 <td>@item.Province.Type @item.Province.Name</td>
                                 <td>@item.Creator</td>
                                 <td>@item.PhoneNumber</td>
@@ -109,24 +97,14 @@
                                 <p class="form-control-static" id="activityName"></p>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Vi trí kiến thức</label>
-                            <div class="col-sm-9">
-                                <p class="form-control-static" id="vitrikienthuc"></p>
-                            </div>
-                        </div>
+                       
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tóm tắt nội dung</label>
                             <div class="col-sm-9">
                                 <p class="form-control-static" id="tomtatnoidung"></p>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Môn đăng kí</label>
-                            <div class="col-sm-9">
-                                <p class="form-control-static" id="subjectRegisted"></p>
-                            </div>
-                        </div>
+                       
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Địa điểm</label>
                             <div class="col-sm-9">
@@ -134,21 +112,57 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">File fế hoach</label>
+                            <label class="col-sm-3 control-label">File bảo hiểm chuyến đi</label>
                             <div class="col-sm-9">
-                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="filekehoach"></a></p>
+                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="FileBaoHiemChuyenDi"></a></p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">File bài kiểm tra</label>
+                            <label class="col-sm-3 control-label">File danh sách phân xe</label>
                             <div class="col-sm-9">
-                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="filebaikiemtra"></a></p>
+                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="FileDanhSachPhanXeVaGV"></a></p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">File tài liệu</label>
+                            <label class="col-sm-3 control-label">File Hợp đồng kí kết phối hợp</label>
                             <div class="col-sm-9">
-                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="filetailieu"></a></p>
+                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="FileHDKKPhoiHopToChuc"></a></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">File kế hoạch tổ chức</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="FileKeHoachToChuc"></a></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">File lịch trình hoạt động</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="FileLichTrinhHoatDong"></a></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">File nội quy chuyến đi</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="FileNoiQuyChuyenDi"></a></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">File phương án chi tiết an toàn</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="FilePhuongAnChiTietAnToan"></a></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">File QĐ thành lập ban tổ chức</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="FileQDThanhLapBanToChuc"></a></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">File Thư báo cho cha mẹ</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="FileThuBaoChoChaMe"></a></p>
                             </div>
                         </div>
                         <div class="form-group">
@@ -208,25 +222,31 @@
         }
     );
     function viewDetail(data) {
-        $.get('/quanly/getNoiDungKhacById/' + data.value, function (data, status) {
-            var registration = JSON.parse(data);
-            $('#schoolName').text(registration.Registration.School.Name);
-            $('#class').text(registration.Registration.Class.Name);
-            $('#studentQuantity').text(registration.Registration.StudentQuantity);
-            $('#dateGo').text(moment(registration.Registration.DateRegisted, 'YYYY/MM/DD').format('DD/MM/YYYY'));
-            $('#activityName').text(registration.Registration.ProgramName);
-            $('#vitrikienthuc').text(registration.Registration.ViTriKienThuc);
-            $('#tomtatnoidung').text(registration.Registration.TomTatNoiDungCT);
-            $('#location').text(registration.Registration.Province.Type + ' ' + registration.Registration.Province.Name);
-            $('#filekehoach').text(registration.Registration.FileKeHoach);
-            $('#filebaikiemtra').text(registration.Registration.FileBaiKiemTra);
-            $('#filetailieu').text(registration.Registration.FileTaiLieuChoHS);
-            $('#teacherName').text(registration.Registration.Creator);
-            $('#jobTitle').text(registration.Registration.Jobtitle.Name);
-            $('#phoneNumber').text(registration.Registration.PhoneNumber);
-            $('#email').text(registration.Registration.Email);
-            $('#subjectRegisted').text(registration.SubjectRegisted);
-
+        $.get('/hoatdongngoaikhoa/chitiet/' + data.value, function (data, status) {
+            var registration = JSON.parse(data.Results);
+            console.log(registration);
+            $('#schoolName').text(registration.SchoolName);
+            $('#class').text(registration.ClassId);
+            $('#studentQuantity').text(registration.StudentQuantity);
+            $('#dateGo').text(moment(registration.DateRegisted, 'YYYY/MM/DD').format('DD/MM/YYYY'));
+            $('#activityName').text(registration.ActivityName);
+            
+            $('#tomtatnoidung').text(registration.Summary);
+            $('#location').text(registration.Province.Type + ' ' + registration.Province.Name);
+            $('#FileBaoHiemChuyenDi').text(registration.FileBaoHiemChuyenDi);
+            $('#FileDanhSachPhanXeVaGV').text(registration.FileDanhSachPhanXeVaGV);
+            $('#FileHDKKPhoiHopToChuc').text(registration.FileHDKKPhoiHopToChuc);
+            $('#FileKeHoachToChuc').text(registration.FileKeHoachToChuc);
+            $('#FileLichTrinhHoatDong').text(registration.FileLichTrinhHoatDong);
+            $('#FileNoiQuyChuyenDi').text(registration.FileNoiQuyChuyenDi);
+            $('#FilePhuongAnChiTietAnToan').text(registration.FilePhuongAnChiTietAnToan);
+            $('#FileQDThanhLapBanToChuc').text(registration.FileQDThanhLapBanToChuc);
+            $('#FileThuBaoChoChaMe').text(registration.FileThuBaoChoChaMe);
+            $('#teacherName').text(registration.Creator);
+            $('#jobTitle').text(registration.Jobtitle.Name);
+            $('#phoneNumber').text(registration.PhoneNumber);
+            $('#email').text(registration.Email);
+            
         })
     }
     function closeModal() {

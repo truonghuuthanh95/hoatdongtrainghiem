@@ -56,7 +56,13 @@ namespace HoatDongTraiNghiem.Models.DAO
         public string FileTaiLieuChoHS { get; set; }
 
         [StringLength(100)]
-        public string FileBaiKiemTra { get; set; }      
+        public string FileBaiKiemTra { get; set; }
+
+        [StringLength(100)]
+        public string Fee { get; set; }
+
+        [StringLength(500)]
+        public string PhuongAnChoHsThamGia { get; set; }
 
         public string ViTriKienThuc { get; set; }
 

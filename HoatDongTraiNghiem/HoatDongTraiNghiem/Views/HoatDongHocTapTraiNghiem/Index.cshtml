@@ -150,9 +150,14 @@
                             <label for="formBasicText" class="control-label">
                                 13.Chức vụ
                             </label><select name="jobTitleSelected" id="jobTitleSelected" class="form-control">
-                                <option value="1">Hiệu Trưởng</option>
+    @{
+        foreach (var item in ViewBag.JobTitles)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    }
 
-                            </select>
+</select>
                         </div>
                     </div>
                 </div>
@@ -297,11 +302,11 @@
             submitHandler: function (form) {
                 var formData = new FormData();
                 var filekehoach = $('#filekehoach')[0];
-                var filekehoach = $('#filebaikiemtra')[0];
-                var filekehoach = $('#filetailieuchohocsinh')[0];
+                var filebaikiemtra = $('#filebaikiemtra')[0];
+                var filetailieuchohocsinh = $('#filetailieuchohocsinh')[0];
                 formData.append('filekehoach', filekehoach.files[0]);
-                formData.append('filebaikiemtra', filekehoach.files[0]);
-                formData.append('filetailieuchohocsinh', filekehoach.files[0]);
+                formData.append('filebaikiemtra', filebaikiemtra.files[0]);
+                formData.append('filetailieuchohocsinh', filetailieuchohocsinh.files[0]);
                 var selectedSubject = [];
                 $('#subject input:checked').each(function () {
                     selectedSubject.push($(this).attr('value'));
@@ -338,7 +343,7 @@
                                 DateRegisted: moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD'),                                
                                 ClassId: $('#gradeSlected').val(),
                                 ProvinceId: $('#province').val(),
-                                Email: $('#emailEntered').val(),
+                                Email: $('#email').val(),
                                 PhoneNumber: $('#phoneNumber').val(),
                                 //PhuongAnChoHsThamGia: $('#PhuongAnChoHsThamGia').val(),
                                 ViTriKienThuc: $('#vitrikienthuc').val(),
@@ -354,7 +359,7 @@
                                         typeAnimated: true,
                                         buttons: {
                                             OK: function () {
-                                                window.location.href = '/kynangxahoikynangsong/danhsach';
+                                                window.location.href = '/hoatdonghoctaptrainghiem/danhsach';
                                             }
                                         }
                                     });
