@@ -21,11 +21,9 @@ namespace HoatDongTraiNghiem.Services
       ,[STT]
       ,[TenTat]
       ,[TenPGD]
-      ,[HuyenID]
       ,[ID_Parent]
       ,[TenPGD_rep]
-  FROM [Server_VS].[CSDL].[dbo].[T_DM_PGD]
-GO").ToList();
+  FROM [Server_VS].[CSDL].[dbo].[T_DM_PGD]").ToList();
                 return PGDs;
             }
         }

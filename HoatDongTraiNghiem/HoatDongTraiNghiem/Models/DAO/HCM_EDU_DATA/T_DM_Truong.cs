@@ -19,11 +19,7 @@ namespace HoatDongTraiNghiem.Models.DAO.HCM_EDU_DATA
         public string SchoolID { get; set; }
 
         [StringLength(100)]
-        public string TenTruong { get; set; }
-
-        public byte? LoaiHinhTruongID { get; set; }
-
-        public byte? LoaiTruongID { get; set; }
+        public string TenTruong { get; set; }      
 
         [StringLength(50)]
         public string HieuTruong { get; set; }

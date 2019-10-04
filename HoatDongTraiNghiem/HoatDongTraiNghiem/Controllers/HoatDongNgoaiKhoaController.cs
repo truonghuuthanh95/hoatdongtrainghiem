@@ -21,7 +21,11 @@ namespace HoatDongTraiNghiem.Controllers
         // GET: HoatDongNgoaiKhoa
         public ActionResult Index()
         {
-
+            var school = (T_DM_Truong)Session[Constant.SCHOOL_SESSION];
+            if (school == null)
+            {
+                return RedirectToRoute("login");
+            }
             using (var province = new ProvinceSerivce())
             {
                 ViewBag.Provinces = province.GetProvinces();
@@ -180,6 +184,10 @@ namespace HoatDongTraiNghiem.Controllers
                 return Json(new ReturnFormat(400, "failed", null), JsonRequestBehavior.AllowGet);
             }
             var school = (T_DM_Truong)Session[Constant.SCHOOL_SESSION];
+            if (school == null)
+            {
+                return Json(new ReturnFormat(400, "failed", null), JsonRequestBehavior.AllowGet);
+            }
             using (var ngoaiKhoa = new HoatDongNgoaiKhoaService())
             {
                 HoatDongNgoaiKhoa registration = ngoaiKhoa.GetHoatDongNgoaiKhoaById(hoatDongNgoaiKhoaDTO.Id);

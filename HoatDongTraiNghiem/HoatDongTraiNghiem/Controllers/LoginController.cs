@@ -75,8 +75,8 @@ namespace HoatDongTraiNghiem.Controllers
       ,[ForceChangePass]
       ,[InitialPassword]
   FROM [Server_VS].[CSDL].[dbo].[T_User]
-  WHERE [DonViID] = @DonViID
-",new SqlParameter("@DonViID", schoolId)).SingleOrDefault();
+  WHERE [DonViID] = @DonViID AND [AccountType] = 'Trg'
+", new SqlParameter("@DonViID", schoolId)).SingleOrDefault();
                 if (user == null)
                 {
                     return Json(new ReturnFormat(400, "Không tồn tại trường", null), JsonRequestBehavior.AllowGet);
@@ -86,29 +86,7 @@ namespace HoatDongTraiNghiem.Controllers
                 {
                     var school = _db.Database.SqlQuery<T_DM_Truong>(@"SELECT [ID]
       ,[SchoolID]
-      ,[TenTruong]
-      ,[LoaiHinhTruongID]
-      ,[LoaiTruongID]
-      ,[HieuTruong]
-      ,[DT_HieuTruong]
-      ,[DiaChi]
-      ,[XaID]
-      ,[SDT]
-      ,[Fax]
-      ,[Email]
-      ,[Website]
-      ,[KhuVucID]
-      ,[ChinhSachVungID]
-      ,[ThuocVungKinhTeKK]
-      ,[DatChuanQG]
-      ,[CoChiBoDang]
-      ,[CoLopHoc2Buoi]
-      ,[CoHSBanTru]
-      ,[CoHSNoiTru]
-      ,[TruongQuocTe]
-      ,[CoHSKhuyetTat]
-      ,[CoDayNghePT]
-      ,[CoPhoBien_HIV_SKSS]
+      ,[TenTruong]     
       ,[PhanMemID]
       ,[upDotDiemID]
       ,[PGDID]

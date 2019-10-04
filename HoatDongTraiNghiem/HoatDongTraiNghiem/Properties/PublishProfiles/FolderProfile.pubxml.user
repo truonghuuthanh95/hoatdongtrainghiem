@@ -37,10 +37,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/06/2019 08:49:10</publishTime>
     </File>
     <File Include="bin/HoatDongTraiNghiem.dll">
-      <publishTime>01/20/2019 15:35:21</publishTime>
+      <publishTime>10/03/2019 13:45:35</publishTime>
     </File>
     <File Include="bin/HoatDongTraiNghiem.pdb">
-      <publishTime>01/20/2019 15:35:21</publishTime>
+      <publishTime>10/03/2019 13:45:35</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>11/30/2016 16:07:42</publishTime>
@@ -433,7 +433,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/09/2019 15:27:49</publishTime>
     </File>
     <File Include="Utils/Files/ds-kynangsong.xlsx">
-      <publishTime>01/20/2019 15:20:48</publishTime>
+      <publishTime>02/27/2019 22:37:35</publishTime>
     </File>
     <File Include="Utils/Files/ds-noidungkhac.xlsx">
       <publishTime>01/16/2019 16:20:56</publishTime>
@@ -443,6 +443,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Contact/Index.cshtml">
       <publishTime>01/17/2019 14:34:20</publishTime>
+    </File>
+    <File Include="Views/HoatDongHocTapTraiNghiem/GetRegistration.cshtml">
+      <publishTime>02/27/2019 22:50:04</publishTime>
+    </File>
+    <File Include="Views/HoatDongHocTapTraiNghiem/Index.cshtml">
+      <publishTime>02/27/2019 22:41:36</publishTime>
+    </File>
+    <File Include="Views/HoatDongNgoaiKhoa/GetHoatDongNgoaiKhoa.cshtml">
+      <publishTime>02/27/2019 22:50:15</publishTime>
+    </File>
+    <File Include="Views/HoatDongNgoaiKhoa/Index.cshtml">
+      <publishTime>02/27/2019 14:09:43</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>01/09/2019 15:17:35</publishTime>
@@ -462,6 +474,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Manager/CreativeExp.cshtml">
       <publishTime>01/20/2019 15:02:34</publishTime>
     </File>
+    <File Include="Views/Manager/HDHocTapTraiNghiem.cshtml">
+      <publishTime>02/27/2019 22:40:53</publishTime>
+    </File>
+    <File Include="Views/Manager/HDNgoaiKhoa.cshtml">
+      <publishTime>02/26/2019 23:34:25</publishTime>
+    </File>
     <File Include="Views/Manager/Index.cshtml">
       <publishTime>01/20/2019 15:26:30</publishTime>
     </File>
@@ -469,28 +487,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/20/2019 15:17:07</publishTime>
     </File>
     <File Include="Views/NgoaiNhaTruong/GetRegisted.cshtml">
-      <publishTime>01/17/2019 14:32:51</publishTime>
+      <publishTime>02/27/2019 22:55:11</publishTime>
     </File>
     <File Include="Views/NgoaiNhaTruong/Index.cshtml">
       <publishTime>01/17/2019 14:11:28</publishTime>
     </File>
     <File Include="Views/SchoolHome/Index.cshtml">
-      <publishTime>01/17/2019 14:32:12</publishTime>
+      <publishTime>02/22/2019 22:10:22</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>01/20/2019 15:28:19</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>01/20/2019 15:27:55</publishTime>
+      <publishTime>02/27/2019 22:51:49</publishTime>
     </File>
     <File Include="Views/Shared/_ManagerLayout.cshtml">
-      <publishTime>01/20/2019 15:28:15</publishTime>
+      <publishTime>10/03/2019 11:05:16</publishTime>
     </File>
     <File Include="Views/SocialLifeSkill/GetSocialLifeSkill.cshtml">
-      <publishTime>01/17/2019 14:32:35</publishTime>
+      <publishTime>02/27/2019 22:51:36</publishTime>
     </File>
     <File Include="Views/SocialLifeSkill/Index.cshtml">
-      <publishTime>01/17/2019 14:11:41</publishTime>
+      <publishTime>02/21/2019 15:06:35</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>01/09/2019 15:17:35</publishTime>
@@ -499,7 +517,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/09/2019 15:17:35</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/20/2019 15:35:22</publishTime>
+      <publishTime>02/27/2019 22:53:37</publishTime>
     </File>
   </ItemGroup>
 </Project>

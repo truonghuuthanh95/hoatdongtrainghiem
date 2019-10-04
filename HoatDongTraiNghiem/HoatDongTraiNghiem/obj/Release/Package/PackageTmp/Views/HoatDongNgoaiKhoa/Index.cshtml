@@ -1,13 +1,14 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Hoạt động trải nghiệm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <div class="col-md-10 col-md-offset-1">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4>Hoạt động học tập trải nghiệm</h4>
+            <h4>Hoạt động ngoại khóa</h4>
         </div><div class="panel-body">
             <p class="text-waring text-warning">Lưu ý! Vui lòng điền thông tin theo thứ tự</p>
             <form id="hoatdongtrainghiem">
@@ -81,59 +82,85 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group has-feedback">
-                            <label for="comment" class="control-label">6.Vị trí kiến thức trong chương trình phổ thông</label>
-                            <textarea class="form-control" rows="5" id="vitrikienthuc" name="vitrikienthuc"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group has-feedback">
-                            <label for="comment" class="control-label">7.Tóm tắt nội dung kiến thức</label>
+                            <label for="comment" class="control-label">6.Tóm tắt mục đích yêu cầu ngoại khóa</label>
                             <textarea class="form-control" rows="5" id="tomtatnoidungthuchien" name="tomtatnoidungthuchien"></textarea>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="comment" class="control-label">8.Xin chọn môn</label>
-                            <div id="subject">
-                                @{
-                                    foreach (var item in ViewBag.Subjects)
-                                    {
-                                        <label class="checkbox-inline"><input type="checkbox" value="@item.Id" id="subject" name="subject">@item.Name</label>
-                                    }
-                                }
-                            </div>
-                        </div>
 
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group has-feedback">
-                            <label for="exampleInputFile" class="control-label">9.File kế hoạch (chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB)</label>
-                            <input type="file" id="filekehoach" name="filekehoach">
+                            <label for="exampleInputFile" class="control-label">7.File kế hoạch tổ chức hoạt động giáo dục ngoài giờ chính khóa (chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB)</label>
+                            <input type="file" id="FileKeHoachToChuc" name="FileKeHoachToChuc">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group has-feedback">
-                            <label for="exampleInputFile" class="control-label">10.File bài kiểm tra, đánh giá (chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB)</label>
-                            <input type="file" id="filebaikiemtra" name="filebaikiemtra">
+                            <label for="exampleInputFile" class="control-label">8.File phương án chi tiết đảm bảo an toàn (chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB)</label>
+                            <input type="file" id="FilePhuongAnChiTietAnToan" name="FilePhuongAnChiTietAnToan">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group has-feedback">
-                            <label for="exampleInputFile" class="control-label">11.File tài liệu cho học sinh (chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB) </label>
-                            <input type="file" id="filetailieuchohocsinh" name="filetailieuchohocsinh">
+                            <label for="exampleInputFile" class="control-label">9.File quyết định thành lập Ban tổ chức (Bắt buộc phải có nhân viên y tế của đơn vị)(chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB) </label>
+                            <input type="file" id="FileQDThanhLapBanToChuc" name="FileQDThanhLapBanToChuc">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback">
+                            <label for="exampleInputFile" class="control-label">10.File hợp đồng ký kết với đơn vị phối hợp tổ chức (chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB) </label>
+                            <input type="file" id="FileHDKKPhoiHopToChuc" name="FileHDKKPhoiHopToChuc">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback">
+                            <label for="exampleInputFile" class="control-label">11.File lịch trình hoạt động ngoài giờ chính khóa(chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB) </label>
+                            <input type="file" id="FileLichTrinhHoatDong" name="FileLichTrinhHoatDong">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback">
+                            <label for="exampleInputFile" class="control-label">12.File bảo hiểm chuyến đi cho ban tổ chức và học sinh(chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB) </label>
+                            <input type="file" id="FileBaoHiemChuyenDi" name="FileBaoHiemChuyenDi">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback">
+                            <label for="exampleInputFile" class="control-label">13.File mẫu thư báo cho cha mẹ học sinh(chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB) </label>
+                            <input type="file" id="FileThuBaoChoChaMe" name="FileThuBaoChoChaMe">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback">
+                            <label for="exampleInputFile" class="control-label">14.File nội quy chuyến đi(chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB) </label>
+                            <input type="file" id="FileNoiQuyChuyenDi" name="FileNoiQuyChuyenDi">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback">
+                            <label for="exampleInputFile" class="control-label">15.File danh sách phân xe và giáo viên phụ trách (đính kèm số điện thoại liên lạc)(chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB) </label>
+                            <input type="file" id="FileDanhSachPhanXeVaGV" name="FileDanhSachPhanXeVaGV">
                         </div>
                     </div>
                 </div>
@@ -141,14 +168,14 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group has-feedback">
                             <label for="formBasicText" class="control-label">
-                                12.Người phụ trách <i>(Ghi rõ họ và tên)</i>
+                                16.Người phụ trách <i>(Ghi rõ họ và tên)</i>
                             </label>
                             <input type="text" name="teacherName" value="" id="teacherName" class="form-control">
                         </div>
                     </div><div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label for="formBasicText" class="control-label">
-                                13.Chức vụ
+                                17.Chức vụ
                             </label><select name="jobTitleSelected" id="jobTitleSelected" class="form-control">
     @{
         foreach (var item in ViewBag.JobTitles)
@@ -156,6 +183,7 @@
             <option value="@item.Id">@item.Name</option>
         }
     }
+
 
 </select>
                         </div>
@@ -165,14 +193,14 @@
                     <div class="col-md-6">
                         <div class="form-group has-feedback">
                             <label for="formBasicText" class="control-label">
-                                14.Email
+                                18.Email
                             </label>
                             <input type="email" value="" name="email" id="email" class="form-control">
                         </div>
                     </div><div class="col-md-6">
                         <div class="form-group has-feedback">
                             <label for="formBasicText" class="control-label">
-                                15.Số điện thoại
+                                19.Số điện thoại
                             </label>
                             <input type="number" name="phoneNumber" value="" id="phoneNumber" class="form-control">
                         </div>
@@ -206,7 +234,7 @@
                     required: true
                 },
                 tomtatnoidungthuchien: 'required',
-                vitrikienthuc: 'required',
+                
                 teacherName: 'required',
                 email: {
                     required: true,
@@ -218,25 +246,52 @@
                     maxlength: 50,
                 },
                 activityTitle: 'required',
-                filebaikiemtra: {
+                
+                FileKeHoachToChuc: {
                     required: true,
                     extension: "pdf",
                     filesize: 1048576,
                 },
-                filetailieuchohocsinh: {
+                FilePhuongAnChiTietAnToan: {
                     required: true,
                     extension: "pdf",
                     filesize: 1048576,
                 },
-                filekehoach: {
+                FileQDThanhLapBanToChuc: {
                     required: true,
                     extension: "pdf",
                     filesize: 1048576,
                 },
-                subject: {
+                FileHDKKPhoiHopToChuc: {
                     required: true,
-                    minlength: 1
-                }
+                    extension: "pdf",
+                    filesize: 1048576,
+                },
+                FileBaoHiemChuyenDi: {
+                    required: true,
+                    extension: "pdf",
+                    filesize: 1048576,
+                },
+                FileNoiQuyChuyenDi: {
+                    required: true,
+                    extension: "pdf",
+                    filesize: 1048576,
+                },
+                FileThuBaoChoChaMe: {
+                    required: true,
+                    extension: "pdf",
+                    filesize: 1048576,
+                },
+                FileDanhSachPhanXeVaGV: {
+                    required: true,
+                    extension: "pdf",
+                    filesize: 1048576,
+                },
+                FileLichTrinhHoatDong: {
+                    required: true,
+                    extension: "pdf",
+                    filesize: 1048576,
+                },
             },
             messages: {
                 dateGo: {
@@ -246,8 +301,7 @@
                     required: 'Vui lòng nhập',
                     number: "Nhập kiểu số"
                 },
-                tomtatnoidungthuchien: 'Vui lòng nhập',
-                vitrikienthuc: 'Vui lòng nhập',
+                tomtatnoidungthuchien: 'Vui lòng nhập',               
                 teacherName: 'Vui lòng nhập',
                 email: {
                     required: 'Vui lòng nhập',
@@ -258,18 +312,50 @@
                     maxlength: 'Tối đa 50 kí tự',
                 },
                 activityTitle: 'Vui lòng nhập',
-                filebaikiemtra: {
+                FileKeHoachToChuc: {
                     required: 'Vui lòng chọn file',
                     extension: "Chỉ chấp nhận file pdf",
                     filesize: 'Chọn file nhỏ 2 MB'
                 },
-                filetailieuchohocsinh: {
+                FilePhuongAnChiTietAnToan: {
                     required: 'Vui lòng chọn file',
                     extension: "Chỉ chấp nhận file pdf",
                     filesize: 'Chọn file nhỏ 2 MB'
                 },
 
-                filekehoach: {
+                FileQDThanhLapBanToChuc: {
+                    required: 'Vui lòng chọn file',
+                    extension: "Chỉ chấp nhận file pdf",
+                    filesize: 'Chọn file nhỏ 2 MB'
+                },
+                FileHDKKPhoiHopToChuc: {
+                    required: 'Vui lòng chọn file',
+                    extension: "Chỉ chấp nhận file pdf",
+                    filesize: 'Chọn file nhỏ 2 MB'
+                },
+                FileBaoHiemChuyenDi: {
+                    required: 'Vui lòng chọn file',
+                    extension: "Chỉ chấp nhận file pdf",
+                    filesize: 'Chọn file nhỏ 2 MB'
+                },
+
+                FileNoiQuyChuyenDi: {
+                    required: 'Vui lòng chọn file',
+                    extension: "Chỉ chấp nhận file pdf",
+                    filesize: 'Chọn file nhỏ 2 MB'
+                },
+                FileThuBaoChoChaMe: {
+                    required: 'Vui lòng chọn file',
+                    extension: "Chỉ chấp nhận file pdf",
+                    filesize: 'Chọn file nhỏ 2 MB'
+                },
+                FileDanhSachPhanXeVaGV: {
+                    required: 'Vui lòng chọn file',
+                    extension: "Chỉ chấp nhận file pdf",
+                    filesize: 'Chọn file nhỏ 2 MB'
+                },
+
+                FileLichTrinhHoatDong: {
                     required: 'Vui lòng chọn file',
                     extension: "Chỉ chấp nhận file pdf",
                     filesize: 'Chọn file nhỏ 2 MB'
@@ -301,26 +387,34 @@
             },
             submitHandler: function (form) {
                 var formData = new FormData();
-                var filekehoach = $('#filekehoach')[0];
-                var filebaikiemtra = $('#filebaikiemtra')[0];
-                var filetailieuchohocsinh = $('#filetailieuchohocsinh')[0];
-                formData.append('filekehoach', filekehoach.files[0]);
-                formData.append('filebaikiemtra', filebaikiemtra.files[0]);
-                formData.append('filetailieuchohocsinh', filetailieuchohocsinh.files[0]);
-                var selectedSubject = [];
-                $('#subject input:checked').each(function () {
-                    selectedSubject.push($(this).attr('value'));
-                });
+                var FileKeHoachToChuc = $('#FileKeHoachToChuc')[0];
+                var FilePhuongAnChiTietAnToan = $('#FilePhuongAnChiTietAnToan')[0];
+                var FileQDThanhLapBanToChuc = $('#FileQDThanhLapBanToChuc')[0];
+                var FileHDKKPhoiHopToChuc = $('#FileHDKKPhoiHopToChuc')[0];
+                var FileLichTrinhHoatDong = $('#FileLichTrinhHoatDong')[0];
+                var FileBaoHiemChuyenDi = $('#FileBaoHiemChuyenDi')[0];
+                var FileNoiQuyChuyenDi = $('#FileNoiQuyChuyenDi')[0];
+                var FileThuBaoChoChaMe = $('#FileThuBaoChoChaMe')[0];
+                var FileDanhSachPhanXeVaGV = $('#FileDanhSachPhanXeVaGV')[0];
+                formData.append('FileKeHoachToChuc', FileKeHoachToChuc.files[0]);
+                formData.append('FilePhuongAnChiTietAnToan', FilePhuongAnChiTietAnToan.files[0]);
+                formData.append('FileQDThanhLapBanToChuc', FileQDThanhLapBanToChuc.files[0]);
+                formData.append('FileHDKKPhoiHopToChuc', FileHDKKPhoiHopToChuc.files[0]);
+                formData.append('FileLichTrinhHoatDong', FileLichTrinhHoatDong.files[0]);
+                formData.append('FileBaoHiemChuyenDi', FileBaoHiemChuyenDi.files[0]);
+                formData.append('FileNoiQuyChuyenDi', FileNoiQuyChuyenDi.files[0]);
+                formData.append('FileThuBaoChoChaMe', FileThuBaoChoChaMe.files[0]);
+                formData.append('FileDanhSachPhanXeVaGV', FileDanhSachPhanXeVaGV.files[0]);               
                 $('#loader').show();
                 $.ajax({
-                    url: '/hoatdonghoctaptrainghiem/postfile',
+                    url: '/hoatdongngoaikhoa/postfile',
                     type: 'POST',
                     data: formData,
                     contentType: false,
                     processData: false,
                     success: function (data) {
                         $('#loader').hide();
-                        if (data.StatusCode == 409) {                           
+                        if (data.StatusCode == 409) {
                             $.confirm({
                                 title: 'Cảnh báo',
                                 content: data.Message,
@@ -334,21 +428,19 @@
                             });
                         }
                         else if (data.StatusCode == 200) {
-                            $.post('/hoatdonghoctaptrainghiem/dangki', {
-                                Id: data.Results,                                
+                            $.post('/hoatdongngoaikhoa/dangki', {
+                                Id: data.Results,
                                 StudentQuantity: $('#studentQuantity').val(),
                                 Creator: $('#teacherName').val(),
-                                JobTitleId: $('#jobTitleSelected').val(),
-                                ProgramName: $('#activityTitle').val(),
-                                DateRegisted: moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD'),                                
+                                JobTitileId: $('#jobTitleSelected').val(),
+                                ActivityName: $('#activityTitle').val(),
+                                DateRegisted: moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD'),
                                 ClassId: $('#gradeSlected').val(),
                                 ProvinceId: $('#province').val(),
                                 Email: $('#email').val(),
-                                PhoneNumber: $('#phoneNumber').val(),
-                                //PhuongAnChoHsThamGia: $('#PhuongAnChoHsThamGia').val(),
-                                ViTriKienThuc: $('#vitrikienthuc').val(),
-                                TomTatNoiDungCT: $('#tomtatnoidungthuchien').val(),
-                                SubjectSelected: selectedSubject.join(),
+                                PhoneNumber: $('#phoneNumber').val(),                                
+                                                               
+                                Summary: $('#tomtatnoidungthuchien').val(),                                
                                 __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
                             }, function (data, status) {
                                 if (status == 'success' && data.StatusCode == 200) {
@@ -359,7 +451,7 @@
                                         typeAnimated: true,
                                         buttons: {
                                             OK: function () {
-                                                window.location.href = '/hoatdonghoctaptrainghiem/danhsach';
+                                                window.location.href = '/hoatdongngoaikhoa/danhsach';
                                             }
                                         }
                                     });

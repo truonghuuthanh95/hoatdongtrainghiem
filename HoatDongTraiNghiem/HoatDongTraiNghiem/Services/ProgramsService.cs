@@ -17,7 +17,7 @@ namespace HoatDongTraiNghiem.Services
         {
             using (var _db = new HoatDongTraiNghiemDB())
             {
-                var programs = _db.Programs.Where(s => s.IsActive == true).ToList();
+                var programs = _db.Programs.AsNoTracking().Where(s => s.IsActive == true).ToList();
                 return programs;
             }
         }
@@ -25,7 +25,7 @@ namespace HoatDongTraiNghiem.Services
         {
             using (var _db = new HoatDongTraiNghiemDB())
             {
-                var programs = _db.Programs.ToList();
+                var programs = _db.Programs.AsNoTracking().ToList();
                 return programs;
             }
         }
@@ -33,7 +33,7 @@ namespace HoatDongTraiNghiem.Services
         {
             using (var _db = new HoatDongTraiNghiemDB())
             {
-                var listProgramPermission = _db.ProgramPermissions.Where(s => s.AccountId == accountId).Select(s => s.ProgramId).ToList();
+                var listProgramPermission = _db.ProgramPermissions.AsNoTracking().Where(s => s.AccountId == accountId && s.Program.IsActive == true).Select(s => s.ProgramId).ToList();
                 var listProgarm = _db.Programs.Where(s => listProgramPermission.Contains(s.Id)).ToList();
                 return listProgarm;
             }

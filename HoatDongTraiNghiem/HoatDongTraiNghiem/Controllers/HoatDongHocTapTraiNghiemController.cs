@@ -21,6 +21,11 @@ namespace HoatDongTraiNghiem.Controllers
         [Route("index")]
         public ActionResult Index()
         {
+            var school = (T_DM_Truong)Session[Constant.SCHOOL_SESSION];
+            if (school == null)
+            {
+                return RedirectToRoute("login");
+            }
             using (var province = new ProvinceSerivce())
             {
                 ViewBag.Provinces = province.GetProvinces();
@@ -109,6 +114,10 @@ namespace HoatDongTraiNghiem.Controllers
                 return Json(new ReturnFormat(400, "failed", null), JsonRequestBehavior.AllowGet);
             }
             var school = (T_DM_Truong)Session[Constant.SCHOOL_SESSION];
+            if (school == null)
+            {
+                return Json(new ReturnFormat(400, "failed", null), JsonRequestBehavior.AllowGet);
+            }
             using (var registrationService = new HDHocTapTraiNghiemService())
             {
                 Registration registration = registrationService.GetRegistrationsById(registrationDTO.Id);

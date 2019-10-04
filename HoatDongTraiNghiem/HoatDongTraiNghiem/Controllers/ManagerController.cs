@@ -46,6 +46,7 @@ namespace HoatDongTraiNghiem.Controllers
                     if (programs.Where(s => s.Id == programId).SingleOrDefault() == null)
                     {
                         ViewBag.Creatives = creative.GetRegistrationCreativeExpsByProgramIdAndDateRange(programs[0].Id, dateFrom, dateTo);
+                        programId = programs[0].Id;
                     }
                     else
                     {
@@ -53,7 +54,7 @@ namespace HoatDongTraiNghiem.Controllers
                     }
                     
                 }
-                ViewBag.ProgramId = programs[0].Id;
+                ViewBag.ProgramId = programId;
             }           
             return View();
         }
@@ -153,9 +154,8 @@ namespace HoatDongTraiNghiem.Controllers
         [HttpGet]
         public async Task<ActionResult> ExportSocialLifeSkill(DateTime dateFrom, DateTime dateTo)
         {
-            Account account = (Account)Session[Utils.Constant.MANAGER_SESSION];
-            var school = (T_User)Session[Utils.Constant.SCHOOL_SESSION];
-            if (account == null && school == null)
+            Account account = (Account)Session[Utils.Constant.MANAGER_SESSION];            
+            if (account == null )
             {
                 return RedirectToRoute("login");
             }
@@ -166,9 +166,58 @@ namespace HoatDongTraiNghiem.Controllers
                 string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Utils/Files/" + fileName);
                 await Utils.ExportExcel.GenerateXLSSocialLifeSkill(socialLifeSkills, dateFrom, dateTo, filePath);
                 return File(filePath, "application/vnd.ms-excel", fileName);
-            }
-            
+            }           
         }
+        [Route("xuatexcelhdngoaikhoa/{dateFrom}/{dateTo}")]
+        [HttpGet]
+        public async Task<ActionResult> ExportHDNgoaiKhoa(DateTime dateFrom, DateTime dateTo)
+        {
+            Account account = (Account)Session[Utils.Constant.MANAGER_SESSION];           
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
+            using (var social = new HoatDongNgoaiKhoaService())
+            {
+                List<HoatDongNgoaiKhoa> hoatDongNgoaiKhoas = social.GetHoatDongNgoaiKhoasByRange(dateFrom, dateTo);
+                string fileName = string.Concat("ds-hdngoaikhoa.xlsx");
+                string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Utils/Files/" + fileName);
+                await Utils.ExportExcel.GenerateXLSHoatDongNgoaiKhoa(hoatDongNgoaiKhoas, dateFrom, dateTo, filePath);
+                return File(filePath, "application/vnd.ms-excel", fileName);
+            }
 
+        }
+        [Route("xuatexcelhdhoctaptrainghiem/{dateFrom}/{dateTo}")]
+        [HttpGet]
+        public async Task<ActionResult> ExportHDHocTapTraiNghiem(DateTime dateFrom, DateTime dateTo)
+        {
+            Account account = (Account)Session[Utils.Constant.MANAGER_SESSION];           
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
+            using (var social = new HDHocTapTraiNghiemService())
+            {
+                List<Registration> registrations = social.GetRegistrations(dateFrom, dateTo);
+                string fileName = string.Concat("ds-hdhoctaptrainghiem.xlsx");
+                string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Utils/Files/" + fileName);
+                List<SubjectsRegisted> subjectsRegisteds = new List<SubjectsRegisted>();
+                foreach (var item in registrations)
+                {
+                    using (var subjectRegistedService = new SubjectRegistedService())
+                    {
+                        List<SubjectsRegisted> subjectsRegistedsTmp = subjectRegistedService.GetSubjectsRegistedsByRegistrationId(item.Id);
+                        foreach (var item01 in subjectsRegistedsTmp)
+                        {
+                            subjectsRegisteds.Add(item01);
+                        }
+                    }
+                   
+                }
+                await Utils.ExportExcel.GenerateXLSHoatDongHocTapTraiNghiem(registrations,subjectsRegisteds, dateFrom, dateTo, filePath);
+                return File(filePath, "application/vnd.ms-excel", fileName);
+            }
+
+        }
     }
 }

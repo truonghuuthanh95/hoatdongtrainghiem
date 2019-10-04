@@ -285,7 +285,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -312,7 +314,6 @@
     <Content Include="Views\SocialLifeSkill\GetSocialLifeSkill.cshtml" />
     <Content Include="Views\Manager\SocialLifeskill.cshtml" />
     <Content Include="Utils\Files\ds-kynangsong.xlsx" />
-    <Content Include="Utils\Files\ds-noidungkhac.xlsx" />
     <Content Include="Utils\Files\ds-trainghiemsangtao.xlsx" />
     <Content Include="Views\HoatDongHocTapTraiNghiem\Index.cshtml" />
     <Content Include="Views\HoatDongHocTapTraiNghiem\GetRegistration.cshtml" />
