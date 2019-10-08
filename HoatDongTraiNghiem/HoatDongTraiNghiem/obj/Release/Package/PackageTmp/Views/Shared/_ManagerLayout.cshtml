@@ -1,5 +1,6 @@
 ﻿@{ 
     var account = (HoatDongTraiNghiem.Models.DAO.Account)Session[HoatDongTraiNghiem.Utils.Constant.MANAGER_SESSION];
+    var accountPermission = (List<HoatDongTraiNghiem.Models.DAO.UserPermission>)Session[HoatDongTraiNghiem.Utils.Constant.MANAGER_PERMISSION_SESSION];
 }
 <!DOCTYPE html>
 <html>
@@ -40,10 +41,28 @@
 
         <ul class="nav menu">
             <li><a href="/quanly/index"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-            <li><a href="/quanly/hoatdongtrainghiem/1/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddDays(30).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> Trải nghiem sáng tạo</a></li>
-            <li><a href="/quanly/kynangxahoikynangsong/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddDays(30).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> Kỹ năng xã hội</a></li>
-            <li><a href="/quanly/hoatdonghoctaptrainghiem/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddDays(30).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> HĐ học tập trải nghiệm</a></li>
-            <li><a href="/quanly/hoatdongtrainghiem/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddDays(30).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> Hoạt động ngoại khóa</a></li>
+            @{
+        if (accountPermission.Where(s => s.PermissionId == 1) != null)
+        {
+            <li><a href="/quanly/hoatdongtrainghiem/1/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddDays(30).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> Tiết học ngoài nhà trường</a></li>
+
+}
+if (accountPermission.Where(s => s.PermissionId == 3) != null)
+{
+        <li><a href="/quanly/kynangxahoikynangsong/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddDays(30).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> Kỹ năng xã hội</a></li>
+
+}
+if (accountPermission.Where(s => s.PermissionId == 5) != null)
+{
+        <li><a href="/quanly/hoatdonghoctaptrainghiem/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddDays(30).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> HĐ học tập trải nghiệm</a></li>
+
+}
+if (accountPermission.Where(s => s.PermissionId == 7) != null)
+{
+        <li><a href="/quanly/hoatdongtrainghiem/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddDays(30).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> Hoạt động ngoại khóa</a></li>
+
+}
+            }
             <li><a href="/logout"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
         </ul>
     </div><!--/.sidebar-->

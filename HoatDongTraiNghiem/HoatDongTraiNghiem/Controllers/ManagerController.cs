@@ -55,7 +55,9 @@ namespace HoatDongTraiNghiem.Controllers
                     
                 }
                 ViewBag.ProgramId = programId;
-            }           
+            }
+            ViewBag.DateFrom = dateFrom.ToString("dd-MM-yyyy");
+            ViewBag.DateTo = dateTo.ToString("dd-MM-yyyy");
             return View();
         }
         [Route("kynangxahoikynangsong/{dateFrom}/{dateTo}")]
