@@ -8,7 +8,7 @@ namespace HoatDongTraiNghiem.Models.DAO
     public partial class HoatDongTraiNghiemDB : DbContext
     {
         public HoatDongTraiNghiemDB()
-            : base("name=HoatDongTraiNghiemDB2")
+            : base("name=HoatDongTraiNghiemDB4")
         {
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
@@ -19,6 +19,8 @@ namespace HoatDongTraiNghiem.Models.DAO
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<HoatDongNgoaiKhoa> HoatDongNgoaiKhoas { get; set; }
         public virtual DbSet<Jobtitle> Jobtitles { get; set; }
+        public virtual DbSet<KHKTLinhVucThamGia> KHKTLinhVucThamGias { get; set; }
+        public virtual DbSet<KhoaHocKiThuat> KhoaHocKiThuats { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
         public virtual DbSet<Program> Programs { get; set; }
         public virtual DbSet<ProgramPermission> ProgramPermissions { get; set; }

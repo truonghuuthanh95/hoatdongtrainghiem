@@ -1,4 +1,5 @@
 ﻿using HoatDongTraiNghiem.Models.DAO;
+using HoatDongTraiNghiem.Models.DTO;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System;
@@ -325,6 +326,105 @@ namespace HoatDongTraiNghiem.Utils
                         rng.Style.Font.Color.SetColor(Color.Red);
                     }
                     using (ExcelRange rng = ws.Cells["A6:O6"])
+                    {
+                        rng.Style.Font.Bold = true;
+                        rng.Style.Fill.PatternType = ExcelFillStyle.Solid;        //Set Pattern for the background to Solid 
+                        rng.Style.Fill.BackgroundColor.SetColor(Color.SkyBlue);  //Set color to blue 
+                        rng.Style.Font.Color.SetColor(Color.Black);
+                        rng.AutoFitColumns();
+                    }
+
+
+                    pck.SaveAs(new FileInfo(filePath));
+                }
+            });
+        }
+        public static Task GenerateXLSKhoaHocKiThuat(List<KhoaHocKiThuatDetailDTO> khkt, string filePath)
+        {
+            return Task.Run(() =>
+            {
+                using (ExcelPackage pck = new ExcelPackage())
+                {
+                    //Create the worksheet 
+                    ExcelWorksheet ws = pck.Workbook.Worksheets.Add("khoahockithuat");
+                    ws.Cells[2, 1].Value = "DANH SÁCH ĐĂNG KÍ KHOA HỌC KỸ THUẬT";
+                    ws.Cells["A2:I2"].Merge = true;
+                    ws.Cells[6, 1].Value = "STT";
+                    ws.Cells[6, 2].Value = "LĨNH VỰC";
+                    ws.Cells[6, 3].Value = "TÊN ĐỀ TÀI";
+                    ws.Cells[6, 4].Value = "THỂ LOẠI";
+                    ws.Cells[6, 5].Value = "TÊN HỌC SINH 1";
+                    ws.Cells[6, 6].Value = "NGÀY";
+                    ws.Cells[6, 7].Value = "THÁNG";
+                    ws.Cells[6, 8].Value = "NĂM";
+                    ws.Cells[6, 9].Value = "TRƯỜNG";
+                    ws.Cells[6, 10].Value = "LỚP";
+                    ws.Cells[6, 11].Value = "ĐÓNG GÓP";
+                    ws.Cells[6, 12].Value = "TÊN HỌC SINH 2";
+                    ws.Cells[6, 13].Value = "NGÀY";
+                    ws.Cells[6, 14].Value = "THÁNG";
+                    ws.Cells[6, 15].Value = "NĂM";
+                    ws.Cells[6, 16].Value = "TRƯỜNG";
+                    ws.Cells[6, 17].Value = "LỚP";
+                    ws.Cells[6, 18].Value = "ĐÓNG GÓP";
+                    ws.Cells[6, 19].Value = "GVHD";
+                    ws.Cells[6, 20].Value = "SDT";
+                    ws.Cells[6, 21].Value = "EMAIL";
+                    ws.Cells[6, 22].Value = "ĐƠN VỊ CÔNG TÁC";
+                    ws.Cells[6, 23].Value = "MÃ TÀI LIỆU";
+                    //ws.Cells[6, 24].Value = "PGD";
+                    for (int i = 0; i < khkt.Count(); i++)
+                    {
+                        ws.Cells[i + 7, 1].Value = i + 1;
+                        ws.Cells[i + 7, 2].Value = khkt.ElementAt(i).KHKTLinhVucThamGia.Name;
+                        ws.Cells[i + 7, 3].Value = khkt.ElementAt(i).KhoaHocKiThuat.TenDeTai;
+                        ws.Cells[i + 7, 4].Value = khkt.ElementAt(i).KhoaHocKiThuat.IsCaNhan == true ? "Cá nhân" : "Nhóm";
+                        ws.Cells[i + 7, 5].Value = khkt.ElementAt(i).HocSinhLopTruong1.Ho + " " + khkt.ElementAt(i).HocSinhLopTruong1.Ten;
+                        ws.Cells[i + 7, 6].Value = khkt.ElementAt(i).HocSinhLopTruong1.NgaySinh.Day.ToString();
+                        ws.Cells[i + 7, 7].Value = khkt.ElementAt(i).HocSinhLopTruong1.NgaySinh.Month.ToString();
+                        ws.Cells[i + 7, 8].Value = khkt.ElementAt(i).HocSinhLopTruong1.NgaySinh.Year.ToString();
+                        ws.Cells[i + 7, 9].Value = khkt.ElementAt(i).HocSinhLopTruong1.TenTruong;
+                        ws.Cells[i + 7, 10].Value = khkt.ElementAt(i).HocSinhLopTruong1.TenLop;
+                        ws.Cells[i + 7, 11].Value = khkt.ElementAt(i).KhoaHocKiThuat.DongGopHs1;
+                        if (khkt.ElementAt(i).KhoaHocKiThuat.HocSinh2 != null)
+                        {
+                            ws.Cells[i + 7, 12].Value = khkt.ElementAt(i).HocSinhLopTruong2.Ho + " " + khkt.ElementAt(i).HocSinhLopTruong2.Ten;
+                            ws.Cells[i + 7, 13].Value = khkt.ElementAt(i).HocSinhLopTruong2.NgaySinh.Day.ToString();
+                            ws.Cells[i + 7, 14].Value = khkt.ElementAt(i).HocSinhLopTruong2.NgaySinh.Month.ToString();
+                            ws.Cells[i + 7, 15].Value = khkt.ElementAt(i).HocSinhLopTruong2.NgaySinh.Year.ToString();
+                            ws.Cells[i + 7, 16].Value = khkt.ElementAt(i).HocSinhLopTruong2.TenTruong;
+                            ws.Cells[i + 7, 17].Value = khkt.ElementAt(i).HocSinhLopTruong2.TenLop;
+                            ws.Cells[i + 7, 18].Value = khkt.ElementAt(i).KhoaHocKiThuat.DongGopHs2;
+                        }
+                        ws.Cells[i + 7, 19].Value = khkt.ElementAt(i).KhoaHocKiThuat.GVHD;
+                        ws.Cells[i + 7, 20].Value = khkt.ElementAt(i).KhoaHocKiThuat.SDT;
+                        ws.Cells[i + 7, 21].Value = khkt.ElementAt(i).KhoaHocKiThuat.Email;
+                        ws.Cells[i + 7, 22].Value = khkt.ElementAt(i).KhoaHocKiThuat.DVCongTac;
+                        ws.Cells[i + 7, 23].Value = String.Format("{0:00}", khkt.ElementAt(i).KHKTLinhVucThamGia.Id) + "-" + khkt.ElementAt(i).KhoaHocKiThuat.Id;
+                        //ws.Cells[i + 7, 24].Value = khkt.ElementAt(i).T_DM_PGDTruong.TenPGD;
+                    }
+                    using (ExcelRange rng = ws.Cells["A2:X2"])
+                    {
+                        rng.Style.Font.Bold = true;
+                        rng.Style.Font.Size = 18;
+                        rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        rng.Style.Font.Color.SetColor(Color.Red);
+                    }
+                    using (ExcelRange rng = ws.Cells["A3:X3"])
+                    {
+                        rng.Style.Font.Bold = true;
+                        rng.Style.Font.Size = 14;
+                        rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        rng.Style.Font.Color.SetColor(Color.Red);
+                    }
+                    using (ExcelRange rng = ws.Cells["A4:X4"])
+                    {
+                        rng.Style.Font.Bold = true;
+                        rng.Style.Font.Size = 14;
+                        rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        rng.Style.Font.Color.SetColor(Color.Red);
+                    }
+                    using (ExcelRange rng = ws.Cells["A6:X6"])
                     {
                         rng.Style.Font.Bold = true;
                         rng.Style.Fill.PatternType = ExcelFillStyle.Solid;        //Set Pattern for the background to Solid 

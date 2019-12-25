@@ -5,10 +5,13 @@ using HoatDongTraiNghiem.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using HoatDongTraiNghiem.Models.DTO;
+using System.IO.Compression;
 
 namespace HoatDongTraiNghiem.Controllers
 {
@@ -220,6 +223,115 @@ namespace HoatDongTraiNghiem.Controllers
                 return File(filePath, "application/vnd.ms-excel", fileName);
             }
 
+        }
+        [Route("dskhoahockithuat")]
+        [HttpGet]
+        public ActionResult DsKhoaHocKiThuat()
+        {
+            var manager = (Account)Session[Constant.MANAGER_SESSION];
+            if (manager == null)
+            {
+                return RedirectToRoute("quanlylogin");
+            }
+
+            var managerPersmission = (List<UserPermission>)Session[Constant.MANAGER_PERMISSION_SESSION];
+            //var permission = 9;
+            if (managerPersmission.Where(s => s.PermissionId == 9).FirstOrDefault() == null)
+            {
+                return RedirectToRoute("quanlylogin");
+            }
+            using (var kHKTKhoaHocKiThuatRepository = new KHKTKhoaHocKiThuatService())
+            {
+                using (var kHHTLinhVucRepository = new KHHTLinhVucService())
+                {
+                    List<KHKTLinhVucThamGia> linhVucThamGias = kHHTLinhVucRepository.GetKHKTLinhVucThamGias();
+                    List<KhoaHocKiThuatDetailDTO> khoaHocKiThuatDetailDTOs = kHKTKhoaHocKiThuatRepository.GetKhoaHocKiThuats();
+                    ViewBag.KHKT = khoaHocKiThuatDetailDTOs;
+                    ViewBag.LinhVucs = linhVucThamGias;
+                    return View();
+                }
+                
+            }
+        }
+        [Route("taidskhoahockithuat")]
+        [HttpGet]
+        public async Task<ActionResult> TaoDsKhoaHocKithuat()
+        {
+            Account account = (Account)Session[Utils.Constant.MANAGER_SESSION];
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
+            using (var kHKTKhoaHocKiThuatRepository = new KHKTKhoaHocKiThuatService())
+            {
+                List<KhoaHocKiThuatDetailDTO> khoaHocKiThuatDetailDTOs = kHKTKhoaHocKiThuatRepository.GetKhoaHocKiThuats();
+                ViewBag.KHKT = khoaHocKiThuatDetailDTOs;
+                string fileName = string.Concat("ds-khoahockythuat.xlsx");
+                string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Utils/Files/" + fileName);
+                await Utils.ExportExcel.GenerateXLSKhoaHocKiThuat(khoaHocKiThuatDetailDTOs, filePath);
+                return File(filePath, "application/vnd.ms-excel", fileName);
+            }
+            
+
+        }
+        [Route("taifiletailieukhkt/{id}")]
+        [HttpGet]
+        public ActionResult TaiFileTaiLieuKHKT(int id)
+        {
+            Account account = (Account)Session[Utils.Constant.MANAGER_SESSION];
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
+            using (var kHKTKhoaHocKiThuatRepository = new KHKTKhoaHocKiThuatService())
+            {
+                KhoaHocKiThuat khoaHocKiThuat = kHKTKhoaHocKiThuatRepository.GetKhoaHocKiThuatById(id);
+                string filePath = System.Web.HttpContext.Current.Server.MapPath("~/UploadedFiles/KhoaHocKiThuat/" + khoaHocKiThuat.FileTaiLieu.Trim());
+                if (khoaHocKiThuat.FileTaiLieu.Contains(".docx"))
+                {
+                    return File(filePath, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", khoaHocKiThuat.FileTaiLieu);
+                }
+                else if (khoaHocKiThuat.FileTaiLieu.Contains(".xlsx"))
+                {
+                    return File(filePath, "application/vnd.ms-excel", khoaHocKiThuat.FileTaiLieu);
+                }
+                return File(filePath, "application/msword", khoaHocKiThuat.FileTaiLieu);
+            }
+            
+        }
+        [Route("downloadzipfile/{deTaiId}")]
+        [HttpGet]
+        public ActionResult DownloadZipFile(int detaiId)
+        {
+            Account account = (Account)Session[Utils.Constant.MANAGER_SESSION];
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
+            using (var kHHTLinhVucRepository = new KHHTLinhVucService())
+            {
+                using (var kHKTKhoaHocKiThuatRepository = new KHKTKhoaHocKiThuatService())
+                {
+                    KHKTLinhVucThamGia kHKTLinhVucThamGia = kHHTLinhVucRepository.GetHKTLinhVucThamGiaById(detaiId);
+                    List<KhoaHocKiThuat> khoaHocKiThuats = kHKTKhoaHocKiThuatRepository.GetKhoaHocKiThuatByDeTaiId(detaiId);
+
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        using (var ziparchive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                        {
+                            for (int i = 0; i < khoaHocKiThuats.Count; i++)
+                            {
+                                if (khoaHocKiThuats[i].FileTaiLieu != null)
+                                {
+                                    ziparchive.CreateEntryFromFile(System.Web.HttpContext.Current.Server.MapPath("~/UploadedFiles/KhoaHocKiThuat/" + khoaHocKiThuats[i].FileTaiLieu), khoaHocKiThuats[i].FileTaiLieu);
+                                }
+                            }
+                        }
+                        return File(memoryStream.ToArray(), "application/zip", kHKTLinhVucThamGia.Name.Trim() + ".zip");
+                    }
+                }
+            }
+            
         }
     }
 }

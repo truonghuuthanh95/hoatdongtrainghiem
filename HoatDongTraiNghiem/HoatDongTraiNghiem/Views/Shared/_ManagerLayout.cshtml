@@ -42,26 +42,36 @@
         <ul class="nav menu">
             <li><a href="/quanly/index"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
             @{
-                if (accountPermission.Where(s => s.PermissionId == 1).SingleOrDefault() != null)
-                {
-                    <li><a href="/quanly/hoatdongtrainghiem/1/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> Tiết học ngoài nhà trường</a></li>
+        if (accountPermission.Where(s => s.PermissionId == 1).SingleOrDefault() != null)
+        {
+            <li><a href="/quanly/hoatdongtrainghiem/1/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> Tiết học ngoài nhà trường</a></li>
 
-                }
-                if (accountPermission.Where(s => s.PermissionId == 3).SingleOrDefault() != null)
-                {
-                    <li><a href="/quanly/kynangxahoikynangsong/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> Kỹ năng xã hội</a></li>
+}
+if (accountPermission.Where(s => s.PermissionId == 3).SingleOrDefault() != null)
+{
+        <li><a href="/quanly/kynangxahoikynangsong/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> Kỹ năng xã hội</a></li>
 
-                }
-                if (accountPermission.Where(s => s.PermissionId == 5).SingleOrDefault() != null)
-                {
-                    <li><a href="/quanly/hoatdonghoctaptrainghiem/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> HĐ học tập trải nghiệm</a></li>
+}
+if (accountPermission.Where(s => s.PermissionId == 5).SingleOrDefault() != null)
+{
+        <li><a href="/quanly/hoatdonghoctaptrainghiem/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> HĐ học tập trải nghiệm</a></li>
 
-                }
-                if (accountPermission.Where(s => s.PermissionId == 7).SingleOrDefault() != null)
-                {
-                    <li><a href="/quanly/hoatdongtrainghiem/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> Hoạt động ngoại khóa</a></li>
+}
+if (accountPermission.Where(s => s.PermissionId == 7).SingleOrDefault() != null)
+{
+        <li><a href="/quanly/hoatdongtrainghiem/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> Hoạt động ngoại khóa</a></li>
 
-                }
+}
+if (accountPermission.Where(s => s.PermissionId == 7).SingleOrDefault() != null)
+{
+        <li><a href="/quanly/hoatdongtrainghiem/@DateTime.Now.ToString("yyyy-MM-dd")/@DateTime.Now.AddMonths(1).ToString("yyyy-MM-dd")"><em class="fa fa-plus">&nbsp;</em> Hoạt động ngoại khóa</a></li>
+
+}
+if (accountPermission.Where(s => s.PermissionId == 9).SingleOrDefault() != null)
+{
+        <li><a href="/quanly/dskhoahockithuat"><em class="fa fa-plus">&nbsp;</em> Khoa học kĩ thuật</a></li>
+
+}
             }
             <li><a href="/logout"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
         </ul>

@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="text-center text-primary text-uppercase">danh sách đề tài Đã đăng kí</h3>
+<p><button class="btn btn-primary" onclick="downloadExcel();"><span class="glyphicon glyphicon-download-alt"></span>  XUẤT EXCEL</button></p>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên Đề Tài</th>
+                    <th>Lĩnh Vực</th>
+                    <th>Tên học sinh 1</th>
+                    <th>Trường</th>
+                    <th>Lớp</th>
+                    <th>Tên học sinh 2</th>
+                    <th>Trường</th>
+                    <th>Lớp</th>
+                    <th>GVHD</th>
+                    <th>Tài liệu</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int index = 1;
+                    foreach (var item in ViewBag.DSKHKT)
+                    {
+                <tr>
+                    <td>@index</td>
+                    <td>@item.KhoaHocKiThuat.TenDeTai</td>
+                    <td>@item.KHKTLinhVucThamGia.Name</td>
+                    <td>@item.HocSinhLopTruong1.Ho @item.HocSinhLopTruong1.Ten</td>
+                    <td>@item.HocSinhLopTruong1.TenTruong</td>
+                    <td>@item.HocSinhLopTruong1.TenLop</td>
+                    @{
+        if (item.KhoaHocKiThuat.HocSinh2 != null)
+        {
+                <td>@item.HocSinhLopTruong2.Ho @item.HocSinhLopTruong2.Ten</td>
+                <td>@item.HocSinhLopTruong2.TenTruong</td>
+                <td>@item.HocSinhLopTruong2.TenLop</td>                
+}
+else
+{
+                <td></td>
+                <td></td>
+                <td></td>
+}
+                    }
+                    <td>@item.KhoaHocKiThuat.GVHD</td>
+                    @{
+        if (@item.KhoaHocKiThuat.FileTaiLieu != null)
+        {
+                <td><label class="label label-success">Đã nộp file</label></td>
+}
+else
+{
+                <td><label class="label label-danger">Tải lên thất bại</label></td>
+}
+                    }
+                    <td><button class="btn btn-danger btn-sm" onclick="deleteKHKT(@item.KhoaHocKiThuat.Id);">Xóa</button></td>
+                </tr>
+                        index++;
+                    }
+                }
+            </tbody>
+        </table>
+        <p class="text-right"><a role="button" href="/khoahockithuat/dangki" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> TẠO MỚI</a></p>
+    </div>
+</div>
+
+<script>
+    function downloadExcel() {
+        window.location.href = '/khoahockithuat/taidsdangkibyschool'
+    }
+    function deleteKHKT(id) {
+        $.get("/khoahockithuat/deletekhktbyid/" + id, function (data, status) {
+            if (status == 'success' && data.StatusCode == 200) {
+                window.location.reload();
+            }
+        });
+    }
+</script>

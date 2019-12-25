@@ -35,5 +35,14 @@ namespace HoatDongTraiNghiem.Services
             }
            
         }
+
+        public T_DM_Truong GetTruongBySchoolId(string schoolId)
+        {
+            using (var _db = new HoatDongTraiNghiemDB())
+            {
+                var school = _db.Database.SqlQuery<T_DM_Truong>($"SELECT * FROM [Server_VS].[CSDL].[dbo].[T_DM_Truong] WHERE [SchoolID] = '${schoolId}'").SingleOrDefault();
+                return school;
+            }
+        }
     }
 }
