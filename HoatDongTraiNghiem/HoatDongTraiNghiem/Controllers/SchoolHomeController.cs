@@ -15,5 +15,11 @@ namespace HoatDongTraiNghiem.Controllers
         {
             return View();
         }
+        [Route("maintain")]
+        public ActionResult Maintain()
+        {
+            return View();
+        }
+
     }
 }

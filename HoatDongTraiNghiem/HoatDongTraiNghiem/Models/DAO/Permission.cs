@@ -15,6 +15,7 @@ namespace HoatDongTraiNghiem.Models.DAO
             UserPermissions = new HashSet<UserPermission>();
         }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [StringLength(50)]

@@ -20,31 +20,7 @@ namespace HoatDongTraiNghiem.Services
             {
                 var schools = _db.Database.SqlQuery<T_DM_Truong>(@"SELECT [ID]
       ,[SchoolID]
-      ,[TenTruong]
-      ,[LoaiHinhTruongID]
-      ,[LoaiTruongID]
-      ,[HieuTruong]
-      ,[DT_HieuTruong]
-      ,[DiaChi]
-      ,[XaID]
-      ,[SDT]
-      ,[Fax]
-      ,[Email]
-      ,[Website]
-      ,[KhuVucID]
-      ,[ChinhSachVungID]
-      ,[ThuocVungKinhTeKK]
-      ,[DatChuanQG]
-      ,[CoChiBoDang]
-      ,[CoLopHoc2Buoi]
-      ,[CoHSBanTru]
-      ,[CoHSNoiTru]
-      ,[TruongQuocTe]
-      ,[CoHSKhuyetTat]
-      ,[CoDayNghePT]
-      ,[CoPhoBien_HIV_SKSS]
-      ,[PhanMemID]
-      ,[upDotDiemID]
+      ,[TenTruong]               
       ,[PGDID]
       ,[PGDID_C12]
       ,[Cap1]
@@ -58,6 +34,15 @@ namespace HoatDongTraiNghiem.Services
                 return schools;
             }
            
+        }
+
+        public T_DM_Truong GetTruongBySchoolId(string schoolId)
+        {
+            using (var _db = new HoatDongTraiNghiemDB())
+            {
+                var school = _db.Database.SqlQuery<T_DM_Truong>($"SELECT * FROM [Server_VS].[CSDL].[dbo].[T_DM_Truong] WHERE [SchoolID] = '${schoolId}'").SingleOrDefault();
+                return school;
+            }
         }
     }
 }

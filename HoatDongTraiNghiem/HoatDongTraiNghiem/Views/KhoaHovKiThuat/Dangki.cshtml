@@ -1,0 +1,391 @@
+﻿
+@{
+    ViewBag.Title = "Dangki";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="text-center text-primary text-uppercase">đăng kí khoa học kỹ thuật</h3>
+<div class="col-sm-10 col-sm-offset-1">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Lĩnh vực</label>
+                            <select class="form-control" id="linhvuc">
+                                @{
+                                    foreach (var item in ViewBag.LinhVuc)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Thể loại</label>
+                            <select class="form-control" id="theloai">
+                                <option value="true">Cá nhân</option>
+                                <option value="false">Nhóm</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" id="errorTenDeTai">
+                    <label for="exampleInputEmail1" class="control-label">Tên đề tài <span style="color: red; font-size: 20px">*</span></label>
+                    <input type="email" class="form-control" id="tendetai">
+                    <span class="help-block help-block-true" id="errorTenDeTaiMessage"></span>
+                </div>
+            </form>
+            <label for="exampleInputPassword1">
+                Học sinh tham gia <span style="color: red; font-size: 20px">*</span> &nbsp;&nbsp;&nbsp;
+                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </label>
+
+            <table class="table table-hover" id="hocsinhdachon">
+                <thead>
+                    <tr>
+                        <th>Họ</th>
+                        <th>Tên</th>
+                        <th>Lớp</th>
+                        <th>Đóng góp [<= 100%]</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr></tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group" id="errorGVHD">
+                        <label for="exampleInputEmail1" class="control-label">Giáo viên hướng dẫn (Ghi rõ họ tên) <span style="color: red; font-size: 20px">*</span></label>
+                        <input type="email" class="form-control" id="gvhd">
+                        <span class="help-block help-block-true" id="errorGVHDMessage"></span>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="form-group" id="errordvct">
+                        <label for="exampleInputEmail1" class="control-label">Đơn vị công tác <span style="color: red; font-size: 20px">*</span></label>
+                        <input type="email" class="form-control" id="dvct">
+                        <span class="help-block help-block-true" id="errorDvctMessage"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group" id="errorEmail">
+                        <label for="exampleInputEmail1" class="control-label">Email <span style="color: red; font-size: 20px">*</span></label>
+                        <input type="email" class="form-control" id="email">
+                        <span class="help-block help-block-true" id="errorEmailMessage"></span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group" id="errorSdt">
+                        <label for="exampleInputEmail1" class="control-label">Số điện thoại <span style="color: red; font-size: 20px">*</span></label>
+                        <input type="email" class="form-control" id="sdt">
+                        <span class="help-block help-block-true" id="errorSdtMessage"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group" id="errorFileTaiLieu">
+                        <label for="exampleInputFile" class="control-label">File tài liệu đề tài <span style="color: red; font-size: 20px">*</span></label>
+                        <input type="file" id="filetailieu">
+                        <p class="help-block text-warning">Dung lượng nhỏ hơn 25M (.doc, .docx, .pdf)</p>
+                        <span class="help-block help-block-true" id="errorFileTaiLieuMessage"></span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-danger" id="errorDangKi" style="font-size: 17px;"></p>
+            <p class="text-center text-danger" id="errorSoLuongToiDa" style="font-size: 17px;"></p>
+            <p class="text-center text-danger" id="errorSoLuongToiDaNhom" style="font-size: 17px;"></p>
+            <div class="col-sm-4 col-sm-offset-4">
+                <button type="button" class="btn btn-success btn-block" id="submit" onclick="submitDangKi();">ĐĂNG KÍ</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Học sinh tham gia</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="exampleInputName2">Lớp</label>
+                        <select class="form-control" id="lopId">
+                            @{
+                                foreach (var item in ViewBag.Lop)
+                                {
+                                    <option value="@item.LopID">@item.TenLop</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <table class="table table-hover" id="hocsinh">
+                <thead>
+                    <tr>
+                        <th>Họ</th>
+                        <th>Tên</th>
+                        <th>Giới tính</th>
+                        @*<th>Ngày sinh</th>*@
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in ViewBag.HocSinh)
+                        {
+                            <tr>
+
+                                <td>@item.Ho</td>
+                                <td>@item.Ten</td>
+                                @{
+                                    if (item.GioiTinh == true)
+                                    {
+                                        <td>Nữ</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Nam</td>
+                                    }
+                                }
+                                @*<td>@String.Format("{0:dd/MM/yyyy}", item.NgaySinh)</td>*@
+                                <td><button class="btn btn-primary btn-sm" ho="@item.Ho" ten="@item.Ten" value="@item.HocSinhID" onclick="chonHocSinh(this);">Chọn</button></td>
+
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div data-backdrop="static" data-keyboard="false" id="dangkithanhcong" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <h4 class="text-center text-success">Đăng kí thành công!</h4>
+            <div class="modal-footer">
+                <a href="/khoahockithuat/index" role="button" class="btn btn-success btn-block">Xác nhận</a>
+            </div>
+        </div>
+    </div>
+</div>
+<span class="loader" id="loader" hidden></span>
+<script>
+    $('#lopId').change(function () {
+        $.get('/khoahockithuat/gethocsinhbylopid/' + $(this).val().trim(), function (data, status) {
+            if (data.StatusCode == 403) {
+                window.location.replace('khoahockithuat/dangnhap');
+            }
+            $("#hocsinh > tbody").html("");
+            for (var i = 0; i < data.Results.length; i++) {
+                $('#hocsinh').append('<tr><td>'
+                    + data.Results[i].Ho + '</td><td>'
+                    + data.Results[i].Ten + '</td><td>'
+                    + (data.Results[i].GioiTinh == true ? 'Nữ' : 'Nam') + '</td><td><button class="btn btn-sm btn-primary" ho="' + data.Results[i].Ho + '" ten="' + data.Results[i].Ten + '" value="' + data.Results[i].HocSinhID + '" onclick="chonHocSinh(this);">Chọn</button></td ></tr>');
+            }
+        })
+    })
+    var hsThamGia = [];
+    function chonHocSinh(hocsinhId) {
+        hsThamGia.push({ 'hocSinhId': hocsinhId.value, 'ho': hocsinhId.getAttribute("ho"), 'ten': hocsinhId.getAttribute("ten"), 'lop': $('#lopId option:selected').text(), "lopId": $('#lopId').val() });
+        $("#hocsinhdachon > tbody").html("");
+        for (var i = 0; i < hsThamGia.length; i++) {
+            $('#hocsinhdachon').append('<tr><td>'
+                + hsThamGia[i].ho + '</td><td>' + hsThamGia[i].ten + '</td><td>' + hsThamGia[i].lop + '</td><td style="width: 100px;"><input type="text" class="form-control donggop" /><td><button class="btn btn-sm btn-danger" value="' + hsThamGia[i].hocSinhId.trim() + '" onclick="xoahocsinhthamgia(this);">Xóa</button></td</td></tr>');
+        }
+        //<td><button class="btn btn-sm btn-danger value="' + hsThamGia[i].hocSinhId + '" onclick="xoahocsinhthamgia(this);"">Xóa</button></td >
+        $('#myModal').modal('toggle');
+    }
+
+    function xoahocsinhthamgia(hocsinhId) {
+        hsThamGia.some(function (entry, i) {
+            if (entry.hocSinhId == hocsinhId.value.trim()) {
+                hsThamGia.splice(i, 1);
+                return true;
+            }
+        })
+        $("#hocsinhdachon > tbody").html("");
+        for (var i = 0; i < hsThamGia.length; i++) {
+            $('#hocsinhdachon').append('<tr><td>'
+                + hsThamGia[i].ho + '</td><td>' + hsThamGia[i].ten + '</td><td>' + hsThamGia[i].lop + '<td style="width: 100px;"><input type="text" class="form-control donggop" /></td><td><button class="btn btn-sm btn-danger" value="' + hsThamGia[i].hocSinhId.trim() + '" onclick="xoahocsinhthamgia(this);">Xóa</button></td</td></tr>');
+        }
+    }
+    function submitDangKi() {
+        if ($('#filetailieu').val() == '') {
+
+            $('#errorFileTaiLieu').addClass("has-error");
+            $('#errorFileTaiLieuMessage').text("Vui lòng chọn file");
+
+        }
+        else {
+            var fileExtention = $('#filetailieu').val().split('.').pop();
+            var filetailieu = $('#filetailieu')[0];
+            if (fileExtention != 'doc' && fileExtention != 'docx' && fileExtention != 'pdf') {
+                $('#errorFileTaiLieu').addClass("has-error");
+                $('#errorFileTaiLieuMessage').text("Chỉ chấp nhận file .doc, .docx, .pdf");
+            }
+            else {
+                if (filetailieu.files[0].size / (1024 * 1024) > 25) {
+                    $('#errorFileTaiLieu').addClass("has-error");
+                    $('#errorFileTaiLieuMessage').text("Chọn file dung lượng nhở hơn 25MB");
+                }
+                else {
+                    $('#errorFileTaiLieu').removeClass("has-error");
+                    $('#errorFileTaiLieuMessage').text("");
+                }
+            }
+
+
+        }
+        if ($('#email').val() == '') {
+            $('#errorEmail').addClass("has-error");
+            $('#errorEmailMessage').text("Vui lòng nhập");
+
+        }
+        else {
+            $('#errorEmail').removeClass("has-error");
+            $('#errorEmailMessage').text("");
+        }
+        if ($('#sdt').val() == '') {
+            $('#errorSdt').addClass("has-error");
+            $('#errorSdtMessage').text("Vui lòng nhập");
+
+        }
+        else {
+            $('#errorSdt').removeClass("has-error");
+            $('#errorSdtMessage').text("");
+        }
+        if ($('#tendetai').val() == '') {
+            $('#errorTenDeTai').addClass("has-error");
+            $('#errorTenDeTaiMessage').text("Vui lòng nhập");
+
+        }
+        else {
+            $('#errorTenDeTai').removeClass("has-error");
+            $('#errorTenDeTaiMessage').text("");
+        }
+        if ($('#gvhd').val() == '') {
+            $('#errorGVHD').addClass("has-error");
+            $('#errorGVHDMessage').text("Vui lòng nhập");
+
+        }
+        else {
+            $('#errorGVHD').removeClass("has-error");
+            $('#errorGVHDMessage').text("");
+        }
+        if ($('#dvct').val() == '') {
+            $('#errordvct').addClass("has-error");
+            $('#errorDvctMessage').text("Vui lòng nhập");
+
+        }
+        else {
+            $('#errordvct').removeClass("has-error");
+            $('#errorDvctMessage').text("");
+        }
+        if (hsThamGia.length < 1) {
+            $('#errorDangKi').addClass("has-error");
+            $('#errorDangKi').text("Vui lòng chọn học sinh tham gia");
+        }
+        else {
+            $('#errorDangKi').removeClass("has-error");
+            $('#errorDangKi').text("");
+        }
+        if (hsThamGia.length > 1 && $('#theloai').val() == 'true') {
+            $('#errorSoLuongToiDa').addClass("has-error");
+            $('#errorSoLuongToiDa').text("1 học sinh cho thể loại cá nhân");
+        }
+        else {
+            $('#errorSoLuongToiDa').removeClass("has-error");
+            $('#errorSoLuongToiDa').text("");
+        }
+        if (hsThamGia.length > 2 || hsThamGia.length == 1 && $('#theloai').val() == 'false') {
+            $('#errorSoLuongToiDaNhom').addClass("has-error");
+            $('#errorSoLuongToiDaNhom').text("2 học sinh cho thể loại nhóm");
+        }
+        else {
+            $('#errorSoLuongToiDaNhom').removeClass("has-error");
+            $('#errorSoLuongToiDaNhom').text("");
+        }
+
+        $(".donggop").each(function () {
+            if ($(this).val() == '') {
+                $('#errorDangKi').addClass("has-error");
+                $('#errorDangKi').text("Vui lòng điền mức độ đóng góp của học sinh");
+            } else {
+                $('#errorDangKi').removeClass("has-error");
+                $('#errorDangKi').text("");
+            }
+        });
+
+        if (!$('#errorTenDeTai').hasClass("has-error") &&
+            !$('#errorDangKi').hasClass("has-error") &&
+            !$('#errorSoLuongToiDa').hasClass("has-error") &&
+            !$('#errorGVHD').hasClass("has-error") &&
+            !$('#errorEmail').hasClass("has-error") &&
+            !$('#errorSdt').hasClass("has-error") &&
+            !$('#errorFileTaiLieu').hasClass("has-error") &&
+            !$('#errordvct').hasClass("has-error")) {
+            var donggopArray = document.getElementsByClassName('donggop');
+            $('#loader').show();
+            $('#submit').hide();
+            $.post("/khoahockithuat/submitdangki",
+                {
+                    LinhVucId: $('#linhvuc').val().trim(),
+                    TenDeTai: $('#tendetai').val().trim(),
+                    IsCaNhan: $('#theloai').val().trim(),
+                    HocSinh1: hsThamGia.length > 0 ? hsThamGia[0].hocSinhId : null,
+                    HocSinh2: hsThamGia.length > 1 ? hsThamGia[1].hocSinhId : null,
+                    LopIdHocSinh1: hsThamGia.length > 0 ? hsThamGia[0].lopId : null,
+                    LopIdhocSinh2: hsThamGia.length > 1 ? hsThamGia[1].lopId : null,
+                    DongGopHs1: donggopArray.length > 0 ? donggopArray[0].value : null,
+                    DongGopHs2: donggopArray.length > 1 ? donggopArray[1].value : null,
+                    GVHD: $('#gvhd').val().trim(),
+                    Email: $('#email').val().trim(),
+                    SDT: $('#sdt').val().trim(),
+                    DVCongTac: $('#dvct').val().trim(),
+                },
+                function (data, status) {
+                    if (data.StatusCode == 200 && status == 'success') {
+                        var formData = new FormData();
+                        var fileTaiLieu = $('#filetailieu')[0];
+                        formData.append('fileTaiLieu', fileTaiLieu.files[0]);
+                        formData.append('id', data.Results);
+                        $.ajax({
+                            url: '/khoahockithuat/uploadfiletailieu',
+                            type: 'POST',
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            success: function (data) {
+                                if (data.StatusCode == 200) {
+                                    $('#dangkithanhcong').modal('toggle');
+                                    $('#loader').hide();
+                                }
+                            }
+                        });
+                    }
+                    else if (data.StatusCode == 403) {
+                        window.location.replace('/khoahockithuat/dangnhap')
+                    }
+                });
+        }
+
+    }
+
+</script>

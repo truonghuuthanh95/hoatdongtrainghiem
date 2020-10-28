@@ -12,6 +12,8 @@ namespace HoatDongTraiNghiem.Models.DAO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Province()
         {
+            Districts = new HashSet<District>();
+            HoatDongNgoaiKhoas = new HashSet<HoatDongNgoaiKhoa>();
             Registrations = new HashSet<Registration>();
         }
 
@@ -41,6 +43,12 @@ namespace HoatDongTraiNghiem.Models.DAO
         public bool? IsDeleted { get; set; }
 
         public virtual Country Country { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<District> Districts { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HoatDongNgoaiKhoa> HoatDongNgoaiKhoas { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Registration> Registrations { get; set; }

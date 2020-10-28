@@ -1,0 +1,405 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>Hoạt động học tập trải nghiệm</h4>
+        </div><div class="panel-body">
+            <p class="text-waring text-warning">Lưu ý! Vui lòng điền thông tin theo thứ tự</p>
+            <form id="hoatdongtrainghiem">
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="formBasicText" class="control-label">
+                                1.Khối lớp
+                            </label>
+                            <select name="gradeSlected" id="gradeSlected" class="form-control">
+                                <option value="1">Lớp 1</option>
+                                <option value="2">Lớp 2</option>
+                                <option value="3">Lớp 3</option>
+                                <option value="4">Lớp 4</option>
+                                <option value="5">Lớp 5</option>
+                                <option value="5">Lớp 6</option>
+                                <option value="5">Lớp 7</option>
+                                <option value="5">Lớp 8</option>
+                                <option value="5">Lớp 9</option>
+                                <option value="5">Lớp 10</option>
+                                <option value="5">Lớp 11</option>
+                                <option value="5">Lớp 12</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback">
+                            <label for="formControlsSelect" class="control-label">
+                                2.Nội dung thực hiện hoạt động
+                            </label>
+                            <input type="text" name="activityTitle" value="" id="activityTitle" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group has-feedback">
+                            <label for="formBasicText" class="control-label">
+                                3.Địa điểm
+                            </label>
+                            <select name="province" id="province" class="form-control">
+                                @{
+                                    foreach (var item in ViewBag.Provinces)
+                                    {
+                                        <option value="@item.Id">@item.Type @item.Name</option>
+                                    }
+                                }
+
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group has-feedback">
+                            <label for="exampleInputEmail1" class="control-label">
+                                4.Ngày thực hiện
+                            </label>
+                            <input type="text" class="form-control datepicker" id="dateGo" name="dateGo">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group has-feedback">
+                            <label for="formBasicText" class="control-label">
+                                5.Số lượng hoc sinh tham gia
+                            </label>
+                            <input type="number" placeholder="Số lượng" name="studentQuantity" value="" id="studentQuantity" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback">
+                            <label for="comment" class="control-label">6.Vị trí kiến thức trong chương trình phổ thông</label>
+                            <textarea class="form-control" rows="5" id="vitrikienthuc" name="vitrikienthuc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback">
+                            <label for="comment" class="control-label">7.Tóm tắt nội dung kiến thức</label>
+                            <textarea class="form-control" rows="5" id="tomtatnoidungthuchien" name="tomtatnoidungthuchien"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="comment" class="control-label">8.Xin chọn môn</label>
+                            <div id="subject">
+                                @{
+                                    foreach (var item in ViewBag.Subjects)
+                                    {
+                                        <label class="checkbox-inline"><input type="checkbox" value="@item.Id" id="subject" name="subject">@item.Name</label>
+                                    }
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback">
+                            <label for="exampleInputFile" class="control-label">9.File kế hoạch (chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB)</label>
+                            <input type="file" id="filekehoach" name="filekehoach">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback">
+                            <label for="exampleInputFile" class="control-label">10.File bài kiểm tra, đánh giá (chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB)</label>
+                            <input type="file" id="filebaikiemtra" name="filebaikiemtra">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback">
+                            <label for="exampleInputFile" class="control-label">11.File tài liệu cho học sinh (chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB) </label>
+                            <input type="file" id="filetailieuchohocsinh" name="filetailieuchohocsinh">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group has-feedback">
+                            <label for="formBasicText" class="control-label">
+                                12.Người phụ trách <i>(Ghi rõ họ và tên)</i>
+                            </label>
+                            <input type="text" name="teacherName" value="" id="teacherName" class="form-control">
+                        </div>
+                    </div><div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="formBasicText" class="control-label">
+                                13.Chức vụ
+                            </label><select name="jobTitleSelected" id="jobTitleSelected" class="form-control">
+    @{
+        foreach (var item in ViewBag.JobTitles)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    }
+
+</select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group has-feedback">
+                            <label for="formBasicText" class="control-label">
+                                14.Email
+                            </label>
+                            <input type="email" value="" name="email" id="email" class="form-control">
+                        </div>
+                    </div><div class="col-md-6">
+                        <div class="form-group has-feedback">
+                            <label for="formBasicText" class="control-label">
+                                15.Số điện thoại
+                            </label>
+                            <input type="number" name="phoneNumber" value="" id="phoneNumber" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success btn-block" id="submitCreativeExp">Đăng kí</button>
+            </form>
+        </div>
+    </div>
+    <span hidden="" class="loader" id="loader"></span>
+
+</div>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#dateGo').datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+
+        })
+        $.validator.addMethod('filesize', function (value, element, param) {
+            return this.optional(element) || (element.files[0].size <= param)
+        }, 'File size must be less than {0}');
+        $('#hoatdongtrainghiem').validate({
+            rules: {
+                studentQuantity: {
+                    required: true,
+                    number: true
+                },
+                dateGo: {
+                    required: true
+                },
+                tomtatnoidungthuchien: 'required',
+                vitrikienthuc: 'required',
+                teacherName: 'required',
+                email: {
+                    required: true,
+                    email: true,
+                    maxlength: 100,
+                },
+                phoneNumber: {
+                    required: true,
+                    maxlength: 50,
+                },
+                activityTitle: 'required',
+                filebaikiemtra: {
+                    required: true,
+                    extension: "pdf",
+                    filesize: 1048576,
+                },
+                filetailieuchohocsinh: {
+                    required: true,
+                    extension: "pdf",
+                    filesize: 1048576,
+                },
+                filekehoach: {
+                    required: true,
+                    extension: "pdf",
+                    filesize: 1048576,
+                },
+                subject: {
+                    required: true,
+                    minlength: 1
+                }
+            },
+            messages: {
+                dateGo: {
+                    required: 'Vui lòng nhập'
+                },
+                studentQuantity: {
+                    required: 'Vui lòng nhập',
+                    number: "Nhập kiểu số"
+                },
+                tomtatnoidungthuchien: 'Vui lòng nhập',
+                vitrikienthuc: 'Vui lòng nhập',
+                teacherName: 'Vui lòng nhập',
+                email: {
+                    required: 'Vui lòng nhập',
+                    email: 'Mail không hợp lệ',
+                },
+                phoneNumber: {
+                    required: 'Vui lòng nhập',
+                    maxlength: 'Tối đa 50 kí tự',
+                },
+                activityTitle: 'Vui lòng nhập',
+                filebaikiemtra: {
+                    required: 'Vui lòng chọn file',
+                    extension: "Chỉ chấp nhận file pdf",
+                    filesize: 'Chọn file nhỏ 2 MB'
+                },
+                filetailieuchohocsinh: {
+                    required: 'Vui lòng chọn file',
+                    extension: "Chỉ chấp nhận file pdf",
+                    filesize: 'Chọn file nhỏ 2 MB'
+                },
+
+                filekehoach: {
+                    required: 'Vui lòng chọn file',
+                    extension: "Chỉ chấp nhận file pdf",
+                    filesize: 'Chọn file nhỏ 2 MB'
+                },
+                subject: "Vui lòng chọn môn"
+            },
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                // Add the `help-block` class to the error element
+                error.addClass("help-block");
+
+                // Add `has-feedback` class to the parent div.form-group
+                // in order to add icons to inputs
+                element.parent().addClass("has-error");
+
+                if (element.prop("type") === "checkbox") {
+                    error.insertAfter(element.parent("label"));
+                } else {
+                    error.insertAfter(element);
+                }
+
+                // Add the span element, if doesn't exists, and apply the icon classes to it.
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).parent().addClass("has-error");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parent().removeClass("has-error");
+            },
+            submitHandler: function (form) {
+                var formData = new FormData();
+                var filekehoach = $('#filekehoach')[0];
+                var filebaikiemtra = $('#filebaikiemtra')[0];
+                var filetailieuchohocsinh = $('#filetailieuchohocsinh')[0];
+                formData.append('filekehoach', filekehoach.files[0]);
+                formData.append('filebaikiemtra', filebaikiemtra.files[0]);
+                formData.append('filetailieuchohocsinh', filetailieuchohocsinh.files[0]);
+                var selectedSubject = [];
+                $('#subject input:checked').each(function () {
+                    selectedSubject.push($(this).attr('value'));
+                });
+                $('#loader').show();
+                $.ajax({
+                    url: '/hoatdonghoctaptrainghiem/postfile',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        $('#loader').hide();
+                        if (data.StatusCode == 409) {                           
+                            $.confirm({
+                                title: 'Cảnh báo',
+                                content: data.Message,
+                                type: 'yellow',
+                                typeAnimated: true,
+                                buttons: {
+                                    OK: function () {
+
+                                    }
+                                }
+                            });
+                        }
+                        else if (data.StatusCode == 200) {
+                            $.post('/hoatdonghoctaptrainghiem/dangki', {
+                                Id: data.Results,                                
+                                StudentQuantity: $('#studentQuantity').val(),
+                                Creator: $('#teacherName').val(),
+                                JobTitleId: $('#jobTitleSelected').val(),
+                                ProgramName: $('#activityTitle').val(),
+                                DateRegisted: moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD'),                                
+                                ClassId: $('#gradeSlected').val(),
+                                ProvinceId: $('#province').val(),
+                                Email: $('#email').val(),
+                                PhoneNumber: $('#phoneNumber').val(),
+                                //PhuongAnChoHsThamGia: $('#PhuongAnChoHsThamGia').val(),
+                                ViTriKienThuc: $('#vitrikienthuc').val(),
+                                TomTatNoiDungCT: $('#tomtatnoidungthuchien').val(),
+                                SubjectSelected: selectedSubject.join(),
+                                __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
+                            }, function (data, status) {
+                                if (status == 'success' && data.StatusCode == 200) {
+                                    $.confirm({
+                                        title: 'Thành công!',
+                                        content: 'Đăng kí thành công!',
+                                        type: 'green',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            OK: function () {
+                                                window.location.href = '/hoatdonghoctaptrainghiem/danhsach';
+                                            }
+                                        }
+                                    });
+                                }
+                                else {
+                                    $.confirm({
+                                        title: 'Thất bại. Có lỗi xảy ra',
+                                        content: "Lỗi",
+                                        type: 'red',
+                                        typeAnimated: true,
+                                        buttons: {
+                                            OK: function () {
+
+                                            }
+                                        }
+                                    });
+                                }
+                            })
+                        }
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        $('#loader').hide();
+                        $.confirm({
+                            title: 'Thất bại. Có lỗi xảy ra',
+                            content: data.Message,
+                            type: 'red',
+                            typeAnimated: true,
+                            buttons: {
+                                OK: function () {
+
+                                }
+                            }
+                        });
+                    }
+                });
+
+
+
+            }
+        })
+    })
+</script>

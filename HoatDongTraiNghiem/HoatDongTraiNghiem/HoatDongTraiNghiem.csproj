@@ -66,6 +66,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -162,7 +164,10 @@
     <Compile Include="App_Start\MappingProfile.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\HoatDongHocTapTraiNghiemController.cs" />
+    <Compile Include="Controllers\HoatDongNgoaiKhoaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KhoaHovKiThuatController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\NgoaiNhaTruongController.cs" />
@@ -173,12 +178,18 @@
     </Compile>
     <Compile Include="Models\DAO\Account.cs" />
     <Compile Include="Models\DAO\Country.cs" />
+    <Compile Include="Models\DAO\District.cs" />
     <Compile Include="Models\DAO\HCM_EDU_DATA\HCM_EDU_DATA.cs" />
+    <Compile Include="Models\DAO\HCM_EDU_DATA\T_DM_HocSinh.cs" />
+    <Compile Include="Models\DAO\HCM_EDU_DATA\T_DM_Lop.cs" />
     <Compile Include="Models\DAO\HCM_EDU_DATA\T_DM_PGD.cs" />
     <Compile Include="Models\DAO\HCM_EDU_DATA\T_DM_Truong.cs" />
     <Compile Include="Models\DAO\HCM_EDU_DATA\T_User.cs" />
+    <Compile Include="Models\DAO\HoatDongNgoaiKhoa.cs" />
     <Compile Include="Models\DAO\HoatDongTraiNghiemDB.cs" />
     <Compile Include="Models\DAO\Jobtitle.cs" />
+    <Compile Include="Models\DAO\KHKTLinhVucThamGia.cs" />
+    <Compile Include="Models\DAO\KhoaHocKiThuat.cs" />
     <Compile Include="Models\DAO\Permission.cs" />
     <Compile Include="Models\DAO\Program.cs" />
     <Compile Include="Models\DAO\ProgramPermission.cs" />
@@ -190,10 +201,20 @@
     <Compile Include="Models\DAO\Subject.cs" />
     <Compile Include="Models\DAO\SubjectsRegisted.cs" />
     <Compile Include="Models\DAO\UserPermission.cs" />
+    <Compile Include="Models\DAO\Ward.cs" />
     <Compile Include="Models\DTO\CreativeExpDTO.cs" />
+    <Compile Include="Models\DTO\HoatDongNgoaiKhoaDTO.cs" />
+    <Compile Include="Models\DTO\HocSinhLopTruongDTO.cs" />
+    <Compile Include="Models\DTO\KhoaHocKiThuatDetailDTO.cs" />
+    <Compile Include="Models\DTO\KhoaHocKithuatDTO.cs" />
+    <Compile Include="Models\DTO\RegistrationDTO.cs" />
     <Compile Include="Models\DTO\SocialLifeSkillDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\HDHocTapTraiNghiemService.cs" />
+    <Compile Include="Services\HoatDongNgoaiKhoaService.cs" />
     <Compile Include="Services\JobtitlesService.cs" />
+    <Compile Include="Services\KHHTLinhVucService.cs" />
+    <Compile Include="Services\KHKTKhoaHocKiThuatService.cs" />
     <Compile Include="Services\ProgramsService.cs" />
     <Compile Include="Services\ProvinceSerivce.cs" />
     <Compile Include="Services\RegistrationReativeExpService.cs" />
@@ -201,6 +222,8 @@
     <Compile Include="Services\SocialLifeSkillService.cs" />
     <Compile Include="Services\SubjectRegistedService.cs" />
     <Compile Include="Services\SubjectService.cs" />
+    <Compile Include="Services\T_DM_HocSinhService.cs" />
+    <Compile Include="Services\T_DM_LopService.cs" />
     <Compile Include="Services\T_DM_PGDService.cs" />
     <Compile Include="Services\T_DM_TruongService.cs" />
     <Compile Include="Services\T_UserService.cs" />
@@ -276,7 +299,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -303,11 +328,33 @@
     <Content Include="Views\SocialLifeSkill\GetSocialLifeSkill.cshtml" />
     <Content Include="Views\Manager\SocialLifeskill.cshtml" />
     <Content Include="Utils\Files\ds-kynangsong.xlsx" />
-    <Content Include="Utils\Files\ds-noidungkhac.xlsx" />
     <Content Include="Utils\Files\ds-trainghiemsangtao.xlsx" />
+    <Content Include="Views\HoatDongHocTapTraiNghiem\Index.cshtml" />
+    <Content Include="Views\HoatDongHocTapTraiNghiem\GetRegistration.cshtml" />
+    <Content Include="Views\Manager\HDHocTapTraiNghiem.cshtml" />
+    <Content Include="Views\HoatDongNgoaiKhoa\Index.cshtml" />
+    <Content Include="Views\HoatDongNgoaiKhoa\GetHoatDongNgoaiKhoa.cshtml" />
+    <Content Include="Views\Manager\HDNgoaiKhoa.cshtml" />
+    <Content Include="Views\KhoaHovKiThuat\Index.cshtml" />
+    <Content Include="Views\KhoaHovKiThuat\Dangki.cshtml" />
+    <Content Include="Views\SchoolHome\Maintain.cshtml" />
+    <Content Include="Views\Manager\DsKhoaHocKiThuat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadedFiles\HoatDongHocTapTraiNghiem\FileBaiKiemTra\" />
+    <Folder Include="UploadedFiles\HoatDongHocTapTraiNghiem\FileKeHoach\" />
+    <Folder Include="UploadedFiles\HoatDongHocTapTraiNghiem\FileTaiLieuChoHS\" />
+    <Folder Include="UploadedFiles\HoatDongNgoaiKhoa\FileBaoHiemChuyenDi\" />
+    <Folder Include="UploadedFiles\HoatDongNgoaiKhoa\FileDanhSachPhanXeVaGV\" />
+    <Folder Include="UploadedFiles\HoatDongNgoaiKhoa\FileHDKKPhoiHopToChuc\" />
+    <Folder Include="UploadedFiles\HoatDongNgoaiKhoa\FileKeHoachToChuc\" />
+    <Folder Include="UploadedFiles\HoatDongNgoaiKhoa\FileLichTrinhHoatDong\" />
+    <Folder Include="UploadedFiles\HoatDongNgoaiKhoa\FileNoiQuyChuyenDi\" />
+    <Folder Include="UploadedFiles\HoatDongNgoaiKhoa\FilePhuongAnChiTietAnToan\" />
+    <Folder Include="UploadedFiles\HoatDongNgoaiKhoa\FileQDThanhLapBanToChuc\" />
+    <Folder Include="UploadedFiles\HoatDongNgoaiKhoa\FileThuBaoChoChaMe\" />
+    <Folder Include="UploadedFiles\KhoaHocKiThuat\" />
     <Folder Include="UploadedFiles\SocialSkill\" />
   </ItemGroup>
   <ItemGroup>

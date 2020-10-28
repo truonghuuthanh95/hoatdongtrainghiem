@@ -6,14 +6,25 @@ using System.Web;
 
 namespace HoatDongTraiNghiem.Services
 {
-    public class SubjectRegistedService
+    public class SubjectRegistedService : IDisposable
     {
-        public IQueryable<SubjectsRegisted> GetSubjectsRegistedsByRegistrationId(int id)
+        public List<SubjectsRegisted> GetSubjectsRegistedsByRegistrationId(int id)
         {
             using (HoatDongTraiNghiemDB _db = new HoatDongTraiNghiemDB())
             {
-                var subjectsRegisteds = _db.SubjectsRegisteds.Include("Subject").Where(s => s.RegistrationId == id);
+                var subjectsRegisteds = _db.SubjectsRegisteds.Include("Subject").Where(s => s.RegistrationId == id).ToList();
                 return subjectsRegisteds;
+            }
+            
+        }
+
+        public SubjectsRegisted CreateSubjectRegisted(SubjectsRegisted subjectsRegisted)
+        {
+            using (HoatDongTraiNghiemDB _db = new HoatDongTraiNghiemDB())
+            {
+                var subjectRegisted = _db.SubjectsRegisteds.Add(subjectsRegisted);
+                _db.SaveChanges();
+                return subjectsRegisted;
             }
             
         }
@@ -37,6 +48,11 @@ namespace HoatDongTraiNghiem.Services
                 return false;
             }
             return true;
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }
