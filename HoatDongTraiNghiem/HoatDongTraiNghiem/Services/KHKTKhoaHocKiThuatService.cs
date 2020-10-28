@@ -59,7 +59,7 @@ namespace HoatDongTraiNghiem.Services
         {
             using (var _db = new HoatDongTraiNghiemDB())
             {
-                List<KhoaHocKiThuat> khoaHocKiThuats = _db.KhoaHocKiThuats.Where(s => s.LinhVucId == id).ToList();
+                List<KhoaHocKiThuat> khoaHocKiThuats = _db.KhoaHocKiThuats.Where(s => s.LinhVucId == id && s.CreatedAt.Value.Year == DateTime.Now.Year).ToList();
                 return khoaHocKiThuats;
             }
         }
@@ -79,7 +79,7 @@ namespace HoatDongTraiNghiem.Services
             using (var _db = new HoatDongTraiNghiemDB())
             {
 
-                List<KhoaHocKiThuat> dsDaDangKi = _db.KhoaHocKiThuats.ToList();
+                List<KhoaHocKiThuat> dsDaDangKi = _db.KhoaHocKiThuats.Where(s => s.CreatedAt.Value.Year == DateTime.Now.Year).ToList();
                 List<KhoaHocKiThuatDetailDTO> khoaHocKiThuatDetailDTOs = new List<KhoaHocKiThuatDetailDTO>();
                 if (dsDaDangKi.Count() > 0)
                 {
@@ -124,7 +124,7 @@ namespace HoatDongTraiNghiem.Services
         {
             using (var _db = new HoatDongTraiNghiemDB())
             {
-                List<KhoaHocKiThuat> dsDaDangKi = _db.KhoaHocKiThuats.Where(s => s.SchoolId == schoolId).ToList();
+                List<KhoaHocKiThuat> dsDaDangKi = _db.KhoaHocKiThuats.Where(s => s.SchoolId == schoolId && s.CreatedAt.Value.Year == DateTime.Now.Year).ToList();
                 List<KhoaHocKiThuatDetailDTO> khoaHocKiThuatDetailDTOs = new List<KhoaHocKiThuatDetailDTO>();
                 if (dsDaDangKi.Count() > 0)
                 {

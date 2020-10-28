@@ -75,8 +75,8 @@ namespace HoatDongTraiNghiem.Controllers
       ,[ForceChangePass]
       ,[InitialPassword]
   FROM [Server_VS].[CSDL].[dbo].[T_User]
-  WHERE [DonViID] = @DonViID AND [AccountType] = 'Trg'
-", new SqlParameter("@DonViID", schoolId)).SingleOrDefault();
+  WHERE [DonViID] = @DonViID AND [AccountType] = 'Trg' AND [UserName] = @Username
+", new SqlParameter("@DonViID", schoolId), new SqlParameter("@Username", username.Trim())).FirstOrDefault();
                 if (user == null)
                 {
                     return Json(new ReturnFormat(400, "Không tồn tại trường", null), JsonRequestBehavior.AllowGet);
