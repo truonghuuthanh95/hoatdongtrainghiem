@@ -35,7 +35,7 @@ namespace HoatDongTraiNghiem.Services
         {
             using (var _db = new HCM_EDU_DATA())
             {
-                var hocsinhloptruong = _db.Database.SqlQuery<HocSinhLopTruongDTO>($"SELECT TOP 1 s1.[HocSinhID], s1.[SchoolID], s4.[TenTruong], s2.[Ho], s2.[Ten], s2.[GioiTinh], s2.[NgaySinh], s3.[LopID], s3.[TenLop] FROM[Server_VS].[CSDL].[dbo].[T_BienDong_Cache] as s1, [Server_VS].[CSDL].[dbo].[T_DM_HocSinh] as s2, [Server_VS].[CSDL].[dbo].[T_DM_Lop] as s3, [Server_VS].[CSDL].[dbo].[T_DM_Truong] as s4 WHERE s1.[HocSinhID] = s2.[HocSinhID] AND s1.[HocSinhID] = '{hocSinhid}' AND DOTDIEMID = 8 AND s1.[LopID] = s3.[LopID] AND s1.[SchoolID] = s4.[SchoolID]").SingleOrDefault();
+                var hocsinhloptruong = _db.Database.SqlQuery<HocSinhLopTruongDTO>($"SELECT TOP 1 s1.[HocSinhID], s1.[SchoolID], s4.[TenTruong], s2.[Ho], s2.[Ten], s2.[GioiTinh], s2.[NgaySinh], s3.[LopID], s3.[TenLop] FROM[Server_VS].[CSDL].[dbo].[T_BienDong_Cache] as s1, [Server_VS].[CSDL].[dbo].[T_DM_HocSinh] as s2, [Server_VS].[CSDL].[dbo].[T_DM_Lop] as s3, [Server_VS].[CSDL].[dbo].[T_DM_Truong] as s4 WHERE s1.[HocSinhID] = s2.[HocSinhID] AND s1.[HocSinhID] = '{hocSinhid}' AND DOTDIEMID = 12 AND s1.[LopID] = s3.[LopID] AND s1.[SchoolID] = s4.[SchoolID] ORDER BY s1.[BienDongID]").SingleOrDefault();
                 return hocsinhloptruong;
             }
         }
