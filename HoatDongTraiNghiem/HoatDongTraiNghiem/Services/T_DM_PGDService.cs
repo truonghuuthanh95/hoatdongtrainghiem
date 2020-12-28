@@ -23,7 +23,7 @@ namespace HoatDongTraiNghiem.Services
       ,[TenPGD]
       ,[ID_Parent]
       ,[TenPGD_rep]
-  FROM [Server_VS].[CSDL].[dbo].[T_DM_PGD]").ToList();
+  FROM [115.74.212.98,2424].[CSDL].[dbo].[T_DM_PGD]").ToList();
                 return PGDs;
             }
         }

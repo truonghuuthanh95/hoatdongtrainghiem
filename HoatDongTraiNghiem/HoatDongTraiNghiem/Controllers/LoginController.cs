@@ -74,7 +74,7 @@ namespace HoatDongTraiNghiem.Controllers
       ,[Disabled]
       ,[ForceChangePass]
       ,[InitialPassword]
-  FROM [Server_VS].[CSDL].[dbo].[T_User]
+  FROM [115.74.212.98,2424].[CSDL].[dbo].[T_User]
   WHERE [DonViID] = @DonViID AND [AccountType] = 'Trg' AND [UserName] = @Username
 ", new SqlParameter("@DonViID", schoolId), new SqlParameter("@Username", username.Trim())).FirstOrDefault();
                 if (user == null)
@@ -95,7 +95,7 @@ namespace HoatDongTraiNghiem.Controllers
       ,[Cap2]
       ,[Cap3]
       ,[IsTestOnly]
-  FROM [Server_VS].[CSDL].[dbo].[T_DM_Truong] WHERE [SchoolID] = @SchoolId", new SqlParameter("@SchoolId", schoolId)).SingleOrDefault();
+  FROM [115.74.212.98,2424].[CSDL].[dbo].[T_DM_Truong] WHERE [SchoolID] = @SchoolId", new SqlParameter("@SchoolId", schoolId)).SingleOrDefault();
                     Session.Add(Constant.SCHOOL_SESSION, school);
                     return Json(new ReturnFormat(200, "success", null), JsonRequestBehavior.AllowGet);
                 }

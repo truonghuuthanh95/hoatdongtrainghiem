@@ -16,7 +16,7 @@ namespace HoatDongTraiNghiem.Services
         {
             using (var _db = new HCM_EDU_DATA())
             {
-                List<T_DM_Lop> t_DM_Lops = _db.T_DM_Lop.SqlQuery($"SELECT [LopID] ,[SchoolID] ,[NamHocID],[ClientLopID],[Khoi],[TenLop],[PGDID], [LopHoc2Buoi],[CreateBy],[CreateTime],[ModifyTime],[STT],[LogID],[SiSoHS] FROM [Server_VS].[CSDL].[dbo].[T_DM_Lop] WHERE SCHOOLID = '{schoolId}' AND NAMHOCID = {DateTime.Now.Year}").ToList();
+                List<T_DM_Lop> t_DM_Lops = _db.T_DM_Lop.SqlQuery($"SELECT [LopID] ,[SchoolID] ,[NamHocID],[ClientLopID],[Khoi],[TenLop],[PGDID], [LopHoc2Buoi],[CreateBy],[CreateTime],[ModifyTime],[STT],[LogID],[SiSoHS] FROM [115.74.212.98,2424].[CSDL].[dbo].[T_DM_Lop] WHERE SCHOOLID = '{schoolId}' AND NAMHOCID = {DateTime.Now.Year}").ToList();
                 return t_DM_Lops;
             }
             
@@ -25,7 +25,7 @@ namespace HoatDongTraiNghiem.Services
         {
             using (var _db = new HCM_EDU_DATA())
             {
-                T_DM_Lop t_DM_Lops = _db.T_DM_Lop.SqlQuery($"SELECT * FROM [Server_VS].[CSDL].[dbo].[T_DM_Lop] WHERE LopId = '{classId}'").SingleOrDefault();
+                T_DM_Lop t_DM_Lops = _db.T_DM_Lop.SqlQuery($"SELECT * FROM [115.74.212.98,2424].[CSDL].[dbo].[T_DM_Lop] WHERE LopId = '{classId}'").SingleOrDefault();
                 return t_DM_Lops;
             }
 

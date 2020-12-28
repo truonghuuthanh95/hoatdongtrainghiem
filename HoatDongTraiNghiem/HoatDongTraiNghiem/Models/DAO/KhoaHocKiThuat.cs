@@ -13,7 +13,7 @@ namespace HoatDongTraiNghiem.Models.DAO
 
         public int? LinhVucId { get; set; }
 
-        [StringLength(200)]
+        [StringLength(500)]
         public string TenDeTai { get; set; }
 
         public bool? IsCaNhan { get; set; }

@@ -81,13 +81,30 @@ namespace HoatDongTraiNghiem.Services
 
                 List<KhoaHocKiThuat> dsDaDangKi = _db.KhoaHocKiThuats.Where(s => s.CreatedAt.Value.Year == DateTime.Now.Year).ToList();
                 List<KhoaHocKiThuatDetailDTO> khoaHocKiThuatDetailDTOs = new List<KhoaHocKiThuatDetailDTO>();
+                List<string> hocSinhIds = new List<string>() ;
+                foreach (var item in dsDaDangKi)
+                {
+                    hocSinhIds.Add(item.HocSinh1);
+                    if (item.HocSinh2 != null)
+                    {
+                        hocSinhIds.Add(item.HocSinh2);
+                    }
+
+                }
+
+                
+               
                 if (dsDaDangKi.Count() > 0)
                 {
-                    foreach (var item in dsDaDangKi)
+                    using (var _dbhocsinh = new T_DM_HocSinhService())
                     {
-                        KhoaHocKiThuatDetailDTO khoaHocKiThuatDetailDTO = new KhoaHocKiThuatDetailDTO();
-                        using (var _dbhocsinh = new T_DM_HocSinhService())
+                        var hocSinhs = _dbhocsinh.GetHocSinhByListId(hocSinhIds);
+
+                        foreach (var item in dsDaDangKi)
                         {
+                            KhoaHocKiThuatDetailDTO khoaHocKiThuatDetailDTO = new KhoaHocKiThuatDetailDTO();
+
+
                             using (var _dblop = new T_DM_LopService())
                             {
                                 using (var _dbSchool = new T_DM_TruongService())
@@ -98,22 +115,22 @@ namespace HoatDongTraiNghiem.Services
 
                                         khoaHocKiThuatDetailDTO.KhoaHocKiThuat = item;
                                         khoaHocKiThuatDetailDTO.KHKTLinhVucThamGia = _db.KHKTLinhVucThamGias.Where(s => s.Id == item.LinhVucId).SingleOrDefault();
-                                        khoaHocKiThuatDetailDTO.HocSinhLopTruong1 = _dbhocsinh.GetHocSinhById(item.HocSinh1);
-                                        khoaHocKiThuatDetailDTO.HocSinhLopTruong2 = _dbhocsinh.GetHocSinhById(item.HocSinh2);
+                                        khoaHocKiThuatDetailDTO.HocSinhLopTruong1 = hocSinhs.Where(s => s.HocSinhID == item.HocSinh1).SingleOrDefault();
+                                        khoaHocKiThuatDetailDTO.HocSinhLopTruong2 = hocSinhs.Where(s => s.HocSinhID == item.HocSinh2).SingleOrDefault();
                                         khoaHocKiThuatDetailDTOs.Add(khoaHocKiThuatDetailDTO);
                                     }
                                     else
                                     {
                                         khoaHocKiThuatDetailDTO.KhoaHocKiThuat = item;
                                         khoaHocKiThuatDetailDTO.KHKTLinhVucThamGia = _db.KHKTLinhVucThamGias.Where(s => s.Id == item.LinhVucId).SingleOrDefault();
-                                        khoaHocKiThuatDetailDTO.HocSinhLopTruong1 = _dbhocsinh.GetHocSinhById(item.HocSinh1);
+                                        khoaHocKiThuatDetailDTO.HocSinhLopTruong1 = hocSinhs.Where(s => s.HocSinhID == item.HocSinh1).SingleOrDefault();
                                         khoaHocKiThuatDetailDTOs.Add(khoaHocKiThuatDetailDTO);
                                     }
                                 }
                             }
+
                         }
                     }
-
 
                 }
                 return khoaHocKiThuatDetailDTOs;

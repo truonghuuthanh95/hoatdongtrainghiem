@@ -27,8 +27,8 @@ namespace HoatDongTraiNghiem.Services
       ,[Cap2]
       ,[Cap3]
       ,[IsTestOnly]
-  FROM [Server_VS].[CSDL].[dbo].[T_DM_Truong]
-  WHERE [PGDID] = @PGDID AND [IsTestOnly] = 0
+  FROM [115.74.212.98,2424].[CSDL].[dbo].[T_DM_Truong]
+  WHERE [PGDID] = @PGDID
   ORDER BY [TenTruong]
 ", new SqlParameter("@PGDID", id)).ToList();
                 return schools;
@@ -40,7 +40,7 @@ namespace HoatDongTraiNghiem.Services
         {
             using (var _db = new HoatDongTraiNghiemDB())
             {
-                var school = _db.Database.SqlQuery<T_DM_Truong>($"SELECT * FROM [Server_VS].[CSDL].[dbo].[T_DM_Truong] WHERE [SchoolID] = '${schoolId}'").SingleOrDefault();
+                var school = _db.Database.SqlQuery<T_DM_Truong>($"SELECT * FROM [115.74.212.98,2424].[CSDL].[dbo].[T_DM_Truong] WHERE [SchoolID] = '${schoolId}'").SingleOrDefault();
                 return school;
             }
         }
